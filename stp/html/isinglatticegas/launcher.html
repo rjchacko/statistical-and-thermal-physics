@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+<title>Simulations for Statistical and
+Thermal Physics</title>
+
+<link href="../default.css" type="text/css" rel="stylesheet">
+
+</head>
+
+<body>
+<h3 style="text-align:center;">Diffusive Equilibrium</h3>
+
+<p class="header_title">Introduction</p>
+
+<p>When two systems in thermal contact are maintained at different temperatures, energy is transported from the hotter system to the colder system. Similarly, when two systems are maintained at different chemical potentials, particles are transported from the system with a higher chemical potential to the one with a lower chemical potential.</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;In this Monte Carlo simulation we consider a two-dimensional lattice gas with the Hamiltonian</p>
+<p class="center">
+<img src="latticegas.jpg" alt="" align="middle" >
+</p>
+<p>A site is occupied if n<sub>i</sub> = 1 and is empty if n<sub>i</sub> = 0. The restriction of a site to at most one particle is analogous to the strongly repulsive interactions between particles in a more realistic model of a gas and a liquid. The first sum is over all sites that are nearest neighbors and J is a positive constant. This term implies that particles within a certain distance are attracted to one another. Hence, this lattice gas model mimics the potential in a continuum fluid. The second term in H involves the chemical potential &#956;; the second sum is over all sites.</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;In our simulations the total number of particles in the system is fixed, and the two halves of the system can have different chemical potentials.</p>
+
+<p class="header_title">Monte Carlo Algorithm</p>
+
+<ol>
+
+<li>Input the temperature, the lattice size L, the initial number of particles on the left and right halves of the lattice, and the chemical potential on the left and right halves. The particles are placed at random locations on their respective sides. There are periodic boundary conditions in the vertical direction. The left and right boundary columns are maintained with no particles.</li>
+
+<li>Choose a particle at random and a direction to move at random. If the lattice site in this direction is empty, then compute the change in energy &#916;E to move the particle. If the move crosses the boundary between the left and right sides of the lattice, then &#916;E includes the difference in the chemical potential.</li>
+
+<li>If &#916;E &#60; 0 or exp(-&#916;E/kT) is greater than a uniform random number between 0 and 1, then accept the move. (The temperature T is in units where J/k = 1.) </li>
+
+<li>Repeat steps 2 and 3 many times.</li>
+
+<li>Plot the number of particles on the left and on the right as a function of time.</li>
+
+</ol>
+
+<p class="header_title">Problems</p>
+
+<ol>
+
+<li>Run the simulation with the default parameters. Describe what happens. Do particles move on average to the side with higher or lower chemical potential? Because the chemical potential is negative, explain the meaning of "higher" chemical potential.</li>
+
+<li>Without initializing a new system, reverse the chemical potential so that the right side has a higher chemical potential. Do the particles move in the opposite direction?</li>
+
+<li>Repeat the simulation in Problem 1 for different size lattices. Try 64 &#215; 64 and 128 &#215; 128. Estimate the time to reach equilibrium in each case. How do you know when equilibrium is reached? How does this time depend on L? Increase the number of particles on each side and repeat your analysis.</li>
+
+<li> Repeat the simulation in Problem 1 for different temperatures. What is the effect of increasing the temperature?</li>
+
+<li>Repeat the simulation in Problem 1, but set the chemical potential on each side to be the same. What happens?</li>
+
+<li>Suppose that once equilibrium has been established there are N<sub>L</sub> particles on the left-hand side and N<sub>R</sub> particles on the right-hand side. The total density is &#961; = N/L<sup>2</sup>. Plot the difference |N<sub>L</sub> - N_<sub>R</sub>|/N as a function of &#916;&#956; = |&#956;<sub>L</sub> - &#956;<sub>R</sub>|. Generate similar plots for various temperatures and different size lattices keeping the total density fixed. Interpret your results in the limit of small and large &#916;&#956;.</li>
+
+<li>Discuss the relation of the lattice gas to the ising model.</li>
+</ol>
+
+<p class="header_title">Java Classes</p>
+
+<ul>
+
+<li>IsingLG2</li>
+<li>IsingLG2App</li>
+</ul>
+
+<p class = "small">Updated 27 February 2007.</p>
+</body>
+</html>

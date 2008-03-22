@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+<title>Simulations for Statistical and Thermal Physics</title>
+
+<link href="../default.css" type="text/css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<h3 style="text-align:center;">Demon simulation of the Einstein solid</h3>
+
+<p class="header_title">Introduction</p>
+
+<p>Consider an extra degree of
+freedom called the <i>demon</i> that interacts with a system of noninteracting particles whose energies are restricted to the positive integers. That is, each particle may have energy 0, 1, 2, &#8230;. The only relevant coordinate is the integer characterizing each particle.</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Such a system of (distinguishable) particles is sometimes called an Einstein or harmonic solid. The particles are equivalent to the
+quanta of the harmonic oscillator, which have energy
+&#949;<sub>n</sub> = (n + 1/2) h&#957;. If we measure the energies from the
+lowest energy state, h&#957;/2, and choose units
+such that
+h&#957; = 1, we have &#949;<sub>n</sub> = n.</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;The demon exchanges energy with the particles in the system by choosing a particle at random and making a random change of &#177;1 in its energy. If the energy change of the particle is positive, the "extra" energy is given to the demon and the trial change is accepted. If the energy change of the particle is negative, the trial change is accepted if the demon has sufficient energy to give to the system. The only constraint is that E<sub>d</sub>, the energy of the demon, must be greater than or equal to zero.</p>
+
+<center>
+<applet
+ code="org.opensourcephysics.davidson.applets.ApplicationApplet.class"
+ archive="./stp.jar" codebase="../" align="top" height="40"
+ hspace="0" vspace="0" width="150"> <param name="target"
+ value="org.opensourcephysics.stp.einsteinsolid.DemonEinsteinSolidApp"> <param name="title"
+ value="Applet"> <param name="singleapp" value="true">
+</applet>
+</center>
+
+<p class="header_title">Algorithm</p>
+
+<ol>
+
+<li>Set up an initial microstate with the desired total energy
+and assign an initial energy to the demon. For simplicity, we will choose the initial
+demon
+energy to be zero and assign the total desired energy (which must be an integer) to one of the particles.</li>
+
+<li>Choose a particle at random and increase or decrease its
+energy by &#177;1. If &#916;E = -1, we accept the change, and give energy
++1 to the demon so that the total energy of the system plus the
+demon is constant. If &#916; E = 1, we accept the change if the demon has
+enough energy to give to the system, and reduce the demon's energy
+by 1. If the trial change is not accepted, the existing
+microstate is counted in the averages.</li>
+
+<li>Repeat step 2 many times.</li>
+
+<li>Compute the averages of the quantities of interest once
+the system and the demon have reached equilibrium.</li>
+
+</ol>
+
+<p class="header_title">Problems</p>
+
+<ol>
+
+<li>Run the simulation using the default parameters. Does the average energy of the demon approach a well-defined value after a sufficient number of exchanges with the system? (One Monte Carlo step per particle (mcs) is equivalent to N trial changes, where N is the number of particles in the system.)</li>
+
+<li>What is &lt;E<sub>d</sub>&gt;, the mean energy of the demon, and &lt;E&gt;, the mean energy of the system? Compare the values of &lt;E<sub>d</sub>&gt; and &lt;E&gt;/N, the mean energy per particle of the system.</li>
+
+<li>In what ways does the demon act like an ideal thermometer? Why should we expect the demon to act like a system (of one particle) in equilibrium with a heat bath? In what sense is the Einstein solid a heat bath if N is sufficiently large? Discuss why the energy of the demon characterizes its microstate.</li>
+
+<li>We know that the probability that a system in equilibrium with a heat bath at temperature T is in microstate s with energy E<sub>s</sub> is the Boltzmann
+distribution:
+<p class="center">
+P<sub>s</sub>(E<sub>s</sub>) &#8733; exp(-E<sub>s</sub>/kT).
+</p>
+Run for a sufficient number of trials so that the form of P(E<sub>d</sub>) is well defined. Use the <tt>Enable log scale</tt> button to verify the exponential form of P(E<sub>d</sub>). Estimate T from the inverse slope of ln P(E<sub>d</sub>) versus E<sub>d</sub>. (The units are such that the Boltzmann constant k = 1.)</li>
+
+<li>Are the quantities &lt;E<sub>d</sub>&gt; and &lt;E&gt;/N proportional to the temperature T that you found in Problem 5? Increase the total energy E for fixed N and plot &lt;E<sub>d</sub>&gt; versus T. Discuss the qualitative behavior of the plot.</li>
+
+<li>What are the possible values of the energy of the demon? What are the possible values of the energy of each particle in the system? Show that &lt;E<sub>d</sub>&gt; can be expressed as
+<p class="center">
+&lt;E<sub>d</sub>&gt; = (1/Z) &#931;<sub>n</sub> n e<sup>-n/kT </sup>,
+</p>
+where
+<p class="center">
+Z = &#931;<sub>n</sub> e<sup>-n/kT</sup>.
+</p>
+Evaluate Z and &lt;E<sub>d</sub>&gt;. (It is necessary to do the sum only for Z.) Is &lt;E<sub>d</sub>&gt; &#8733; T in this case? Why is the dependence of &lt;E<sub>d</sub>&gt; on T different than it is for an ideal gas?</li> 
+
+</ol>
+
+<p class="header_title">Java Classes</p>
+
+<ul>
+
+<li>DemonEinsteinSolidApp</li>
+
+</ul>
+
+<p class = "small">Updated 27 February 2007.</p>
+</body>
+</html>

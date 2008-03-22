@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Simulations for Statistical and Thermal Physics</title>
+<link href="../default.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+
+<h3 style="text-align: center;">Approach to Equilibrium: Molecular Dynamics</h3>
+
+<p class="header_title">Introduction</p>
+
+<p>The program implements a molecular dynamics simulation of a
+Lennard-Jones fluid
+in two dimensions. The particles are initialized in the middle third of
+the simulation cell. The number of particles in each of the three cells
+is plotted.</p>
+
+<center>
+<applet
+ code="org.opensourcephysics.davidson.applets.ApplicationApplet.class"
+ archive="./stp.jar" codebase="../" align="top" height="40"
+ hspace="0" vspace="0" width="150"> <param name="target"
+ value="org.opensourcephysics.stp.approach.LJgasApp"> <param name="title"
+ value="Applet"> <param name="singleapp" value="true">
+</applet>
+</center>
+
+<p class="header_title">Algorithm</p>
+
+<p>The algorithm for simulating the evolution of the model can be
+summarized by the following steps:</p>
+
+<ol>
+
+<li>The particles are placed at random in the center of the box with the constraint that no
+two particles can be closer than the length &#963; = 1 in the Lennard-Jones potential. This constraint
+prevents the initial force between any two particles from being too big,
+which would lead to the breakdown of the numerical method used to solve the
+differential equations. The
+velocity of each particle is assigned at random and then the velocity of the
+center of mass is set to zero.</li>
+
+<li>The total force on each particle is computed and the positions and velocities are updated according to the Verlet algorithm.</li>
+
+<li> The time is increased by the time step &#916;t.</li>
+
+</ol>
+
+<p class="header_title">Problems</p>
+<ol>
+
+<li>Choose N = 27, n<sub>1</sub> = 0, n<sub>2</sub> = N, and n<sub>3</sub> = 0. What
+is the qualitative behavior of
+n<sub>1</sub>, n<sub>2</sub>, and n<sub>3</sub>, the number of particles in each third of
+the box, as a function of the time t? Does the system
+appear to show a direction of time? Choose various values of N
+that are multiples of three up to
+N = 270. Is the direction of time better defined for larger
+N?</li>
+
+<li>Suppose that we made a video of the motion of the particles
+considered in Problem 1. Would
+you be able to tell if the video were played forward or backward for the
+various values of N? 
+Would you be willing to make an even bet about the direction
+of time? Does your conclusion about the direction of
+time become more certain as N increases?</li>
+
+<li>How long
+does it take before the system appears to be in equilibrium? What is
+your criterion for equilibrium?</li>
+
+<li>From watching the motion of the particles, describe the
+nature of the boundary conditions that are used in the
+simulation.</li>
+
+<li>*Run the system with N = 270 until t = 5. Then press the <tt>Reverse</tt> button, which reverse all the velocities, and continue the simulation. Does the system return to its initial state? Repeat for other times. Is there a time at which the system does not return to its initial state? Repeat for N = 27. What can you conclude about the N dependence of reversibility?</li>
+
+</ol>
+
+<p class="header_title">Java Classes Used</p>
+<ul>
+
+<li>LJgas</li>
+
+<li>LJgasApp</li>
+</ul>
+
+<p class="small">Updated 27 February 2007.</p>
+</body>
+</html>
