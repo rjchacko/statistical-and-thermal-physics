@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+<title>Simulations for Statistical and Thermal Physics</title>
+
+<link href="../default.css" type="text/css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<h3 style="text-align:center;">Diffusion on a Lattice</h3>
+
+
+<p class="header_title">Introduction</p>
+
+<p>A simple Monte Carlo simulation of N particles on a lattice with a maximum
+of one particle per site.</p>
+
+<center>
+<applet
+ code="org.opensourcephysics.davidson.applets.ApplicationApplet.class"
+ archive="./stp.jar" codebase="../" align="top" height="40"
+ hspace="0" vspace="0" width="150"> <param name="target"
+ value="org.opensourcephysics.stp.diffusion.LatticeGasApp"> <param name="title"
+ value="Applet"> <param name="singleapp" value="true">
+</applet>
+</center>
+
+<p class="header_title">Algorithm</p>
+
+<p>The algorithm for simulating the model is
+summarized by the following steps:</p>
+
+<ol>
+
+<li>A particle is chosen at random.</li>
+
+<li>One of the four nearest neighbor sites of the particle is chosen at random.</li>
+
+<li>If the site is empty, 
+the particle is moved to that site; otherwise it remains where it is. In either case the time advances by 1/N.</li>
+
+<li>The mean square displacement &#60;R<sup>2</sup>&#62; is computed after one Monte Carlo per particle, that is, after N particles have been chosen at random. (In one Monte Carlo step per particle, some particles may be chosen
+more than once and some not chosen at all.)</li>
+
+</ol>
+
+<p class="header_title">Problems</p>
+
+<ol>
+
+<li>Run the simulation and compute the slope of the plot of &lt;R<sup>2</sup>&gt; versus time. The slope of this plot (divided by 4) 
+is the diffusion coefficient D.</li>
+
+<li> Repeat the simulation for different densities and plot the diffusion
+coefficient D as a function of the density &#961. Discuss the dependence of D on &#961.</li>
+
+<li>Is &lt;R<sup>2</sup>&gt; always approximately linear in time for any density?</li>
+
+</ol>
+
+<p class="header_title">Java Classes</p>
+
+<ul>
+
+<li>LatticeGas</li>
+<li>LatticeGasApp</li>
+
+</ul>
+
+<p class = "small">Updated 27 February 2007.</p>
+
+</body>
+</html>

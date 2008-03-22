@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+
+<title>Simulations for Statistical and Thermal Physics</title>
+
+<link href="../default.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+
+<h3 style="text-align: center;">The Binomial Distribution</h3>
+
+<p class="header_title">Introduction</p>
+
+<p>The binomial distribution is the result of  a <i>Bernoulli process</i>. In such a process each trial has only two outcomes and the result of each trial is independent of all
+previous trials. Examples of a Bernoulli process are the flips of a coin, the random walk of a drunken sailor in one dimension, and a system of noninteracting magnetic moments with spin 1/2.</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;To be specific we consider a system of N noninteracting magnetic moments (spins). Each spin has a probability p of being up and a probability q = 1 - p of pointing down. What is the probability that n spins are up? The answer is given by the 
+binomial distribution:</p>
+<p class="center">
+<img src="binomial.jpg" alt="" align="middle" >
+</p>
+<p>P<sub>N</sub>(n) is the probability that n spins are up out of N spins.</p>
+
+<center>
+<applet
+ code="org.opensourcephysics.davidson.applets.ApplicationApplet.class"
+ archive="./stp.jar" codebase="../" align="top" height="40"
+ hspace="0" vspace="0" width="150"> <param name="target"
+ value="org.opensourcephysics.stp.binomial.BinomialApp"> <param name="title"
+ value="Applet"> <param name="singleapp" value="true">
+</applet>
+</center>
+
+<p class="header_title">The Applet/Application</p>
+
+<p>Because P<sub>N</sub>(n) involves factorials, it is not easy to evaluate P<sub>N</sub> for large N. To handle N &#62; 20, the program uses Stirling's approximation:</p>
+<p class="center">
+<img src="stirling.jpg" alt="" align="middle" >
+</p>
+
+<p class="header_title">Questions</p>
+
+<ol>
+
+<li>Calculate the form of P<sub>N</sub>(n) for N = 3 and arbitrary p by enumerating the eight possible microstates (configurations) and compare your result to the results of the program. (You can obtain the numerical results by selecting <tt>Data Table</tt> under the <tt>Views</tt> menu.)</li>
+
+<li>Plot P<sub>N</sub>(n) for increasing values 
+of
+N with p = 1/2. What is the qualitative dependence of the width of P<sub>N</sub>(n) on N? Also
+compare the relative heights of the maximum of P<sub>N</sub>(n).</li>
+
+<li>The program plots P<sub>N</sub>(n) for various values of N in the same size window. Does the width of the distribution appear to become larger or smaller as N is increased?</li>
+
+<li>Compare the plots of P<sub>N</sub>(n) versus n to the plots of P<sub>N</sub>(n) versus n/&#60;n&#62;. What can you conclude about the N-dependence of the width of P<sub>N</sub>?</li>
+
+<li>Plot ln P<sub>N</sub>(n) versus n for N = 16. (Choose <tt>Log Axes</tt> under the <tt>Views</tt> menu.)
+Describe the behavior of ln P<sub>N</sub>(n). Can it be fitted to
+a parabola?</li>
+
+</ol>
+
+<p class="header_title">Java Classes</p>
+
+<ul>
+
+<li>BinomialApp</li>
+
+</ul>
+
+<p class = "small">Updated 27 February 2007.</p>
+
+</body>
+</html>

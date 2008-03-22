@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+<title>Simulations for Statistical and Thermal Physics</title>
+
+<link href="../default.css" type="text/css" rel="stylesheet">
+
+</head>
+
+<body>
+<h3 style="text-align:center;">Ideal Bose gas</h3>
+
+<p class="header_title">Introduction</p>
+
+<p>The motivation for discussing the ideal Bose
+gas is that it exhibits
+Bose-Einstein condensation. The original prediction of
+Bose-Einstein condensation by Satyendra Nath Bose and Albert
+Einstein in 1924 was considered by some to be a mathematical
+artifact. In the 1930s Fritz London realized
+that superfluid liquid helium could be understood in terms of
+Bose-Einstein condensation. However, the analysis of superfluid
+liquid helium is complicated by the fact
+that the helium atoms in a liquid strongly interact with one
+another. In 1995 several
+groups used laser and magnetic traps to create a
+Bose-Einstein condensate of alkali atoms at approximately
+10<sup>-6</sup>K. In these systems the interaction between the
+atoms is very weak so that the ideal Bose gas is a good
+approximation and is no longer only a textbook
+example.</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;The behavior of an ideal Bose gas can be understood by calculating
+N(T,V,&#956;), the mean number of particles for given values of the temperature T, volume V, and chemical potential &#956;. In the grand canonical ensemble N is given by</p>
+<p class="center">
+<img src="nbarbose.jpg" alt="" align="middle" >,
+</p><p>
+where n(&#949;) is the mean number of particles with energy &#949; and g(&#949;) is the density of states. For a system of particles in three dimensions we know that g(&#949;) &#8733; &#949;<sup>1/2</sup>. We substitute the form of g(&#949;) for bosons and the form of n(&#949;) and write N(T,V,&#956;) as</p>
+<p class="center">
+<img src="nbarbose2.jpg" alt="" align="middle" >,
+</p><p>
+where D = 2(2m)<sup>3/2</sup>&#960;/h<sup>3</sup>.</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;To
+understand the nature of an ideal Bose gas at low temperatures,
+suppose that the mean density of the system is fixed and consider the
+effect of lowering the temperature. The
+correct choice of &#956; gives the desired value of
+&#961; when substituted into</p>
+<p class="center">
+<img src="rhobose.jpg" alt="" align="middle" >.
+</p>
+<p>Let us define &#961;* = &#961;/D so that</p>
+<p class="center">
+<img src="rhobose2.jpg" alt="" align="middle" >.
+</p>
+<p>
+We will study the behavior of &#956; as a function of the temperature T for a particular value of &#961;*.</p>
+<center>
+<applet
+ code="org.opensourcephysics.davidson.applets.ApplicationApplet.class"
+ archive="./stp.jar" codebase="../" align="top" height="40"
+ hspace="0" vspace="0" width="150"> <param name="target"
+ value="org.opensourcephysics.stp.idealgasintegrals.bose.ComputeBoseIntegralApp"> <param name="title"
+ value="Applet"> <param name="singleapp" value="true">
+</applet>
+</center>
+
+
+<p class="header_title">Problems</p>
+
+<ol>
+<li>In the high temperature limit, the chemical potential &#956; must be given by its classical value, which is negative and large in magnitude. Investigate numerically how &#956; changes as you decrease the temperature. The program evaluates the integral for &#961;* for a given value of &#946; and &#956;. The goal is to find the value of &#956; for a given value of T that yields the desired value of &#961;*.
+
+<br>&nbsp; &nbsp;&nbsp;&nbsp;Choose  &#961;* = 1 and  T = 10 and first choose &#956; = -10. What is the computed value of the integral? Do you have to increase or decrease the value of &#956; to make the computed value of the integral closer to &#961;* = 1? By trial and error, you should find that &#956; &#8776 -33.4. Next choose T = 5 and find the value of &#956; needed to keep &#961;* fixed at &#961;* = 1. Does &#956; increase or decrease in magnitude? You can generate a plot of &#956; versus T by clicking on the <tt>Accept parameters</tt> button.</br></li>
+
+<li>As T is decreased at constant density, does the magnitude of &#956; increase or decrease? What is the implication of this dependence as T is lowered further?</li>
+</ol>
+
+<p class="header_title">References</p>
+
+<ul>
+
+<li>The 2001 Nobel Prize for Physics was awarded to
+Eric Cornell, <a href="http://cua.mit.edu/ketterle_group/">Wolfgang Ketterle</a>, and <a href="http://www.colorado.edu/physics/2000/bec/">Carl Wieman</a> for achieving
+Bose-Einstein condensation in dilute gases of alkali atoms and for
+early fundamental studies of the properties of the condensate. Another excellent resource is at <a href="http://bec.nist.gov/">NIST</a>.</li>
+
+</ul>
+
+<p class = "small">Updated 2 May 2007.</p>
+</body>
+</html>

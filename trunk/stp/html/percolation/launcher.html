@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+<title>Simulations for Statistical and Thermal Physics</title>
+
+<link href="../default.css" type="text/css" rel="stylesheet">
+
+</head>
+
+<body>
+<h3 style="text-align:center;">Geometric Phase Transition</h3>
+
+<p class="header_title">Introduction</p>
+
+<p>The goal of this program is to demonstrate some of the important properties of percolation, especially near the geometrical phase transition. The key idea is the non-existence 
+of a spanning path for p &lt; p<sub>c</sub> and the existence of a spanning path for p &#8805; p<sub>c</sub>, where p<sub>c</sub> is the percolation threshold.</p>
+
+<center>
+<applet
+ code="org.opensourcephysics.davidson.applets.ApplicationApplet.class"
+ archive="./stp.jar" codebase="../" align="top" height="40"
+ hspace="0" vspace="0" width="150"> <param name="target"
+ value="org.opensourcephysics.stp.percolation.ClustersApp"> <param name="title"
+ value="Applet"> <param name="singleapp" value="true">
+</applet>
+</center>
+
+<p class="header_title">Algorithm</p>
+<ol>
+<li>An empty lattice is generated and sites are occupied with probability p. (The occupancy of a given site is independent of the occupancy of all other sites.)</li>
+
+<li>The Newman-Ziff algorithm is used to identify the clusters.</li>
+
+<li>Cluster properties are computed as a function of p. They include the probability of a site being in the spanning cluster, 
+the probability that there is a spanning cluster, and the mean cluster size.</li>
+
+<li>The cluster size distribution is computed at p = p<sub>c</sub> &#8773; 0.5927, the percolation threshold for the square lattice.</li>
+
+<li>Repeat steps 1&#8211;4 and average over the trials and plot results.</li>
+
+</ol>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;A key property of systems undergoing a continuous phase transition is that 
+there exist clusters (such as the clusters of occupied sites in site percolation) of all sizes at the transition. 
+For p &#8800; p<sub>c</sub> there are only small clusters in the nonspanning ("disordered") phase and only 
+the one spanning cluster and small clusters in the "ordered" phase. The small clusters can be characterized by a typical 
+length (called the correlation length in thermal systems and the connectedness length in percolation problems) which diverges
+as a power law as the transition is approached. Other quantities also follow a power law near the transition.</p>
+
+<p class="header_title">Problems</p>
+
+<ol>
+
+<li>Run the program and look at the percolation configurations. The program only shows configurations near the percolation threshold,
+p<sub>c</sub> &#8773; 0.5927. Note that clusters appear at many different sizes. Because the system is close to the transition, there is sometimes a 
+spanning cluster and sometimes not. Increase the lattice linear size to 256 or greater and qualitatively describe the distribution of cluster sizes.</li>
+
+<li>Run the program again and after about 100 trials stop the program and look at the cluster size distribution (a log-log plot). Do you
+ see a linear plot for at least part of the data? What functional form does this linear dependence imply? Use the <tt>Data Table</tt> menu item under
+<tt>Views</tt> and copy the data into a plotting or spreadsheet program and estimate the slope of the linear part of the data. The exact result for this
+slope for an infinite system is -&#964; = -187/91 &#8773; 2.05. How does your result compare?</li>
+
+<li>A spanning cluster is defined in the program to be one that touches both the left and right edge of the lattice. As soon as a cluster spans horizontally
+we say there is a spanning cluster. In the infinite lattice limit clusters that span horizontally will always span vertically. For L = 128 estimate the value 
+of p<sub>c</sub> as the value of p where half the trials span. How does your estimate compare with 0.5927? How would you expect your estimate to change if 
+the spanning rule was that a cluster had to span both horizontally and vertically to be labeled a spanning cluster? How would you expect your estimate to change if 
+the spanning rule was that a cluster that spanned either horizontally or vertically?</li>
+
+<li>Choose L = 128 and do at least 100 trials (1000 is better). Copy the data for the mean cluster size and the probability P<sub>&#8734;</sub> that an occupied site is in the spanning cluster (P<sub>&#8734;</sub> is called the order parameter). 
+Make a log-log plot of P<sub>&#8734;</sub> versus |p-p<sub>c</sub>| with p<sub>c</sub> &#8773; 0.5927. There should be a region of 
+your plot that is linear on this log-log graph, indicating a power law. Estimate the slopes. For the mean cluster size the exact result for an infinite lattice 
+is -&#947; = -43/18 and
+for the order parameter it is &#946; = 5/36.</li>
+
+<li>It is likely that your results for the slopes in Problem 4 are not very accurate. Another approach, called finite size scaling, is to recognize that the correlation
+length also follows a power law with an exponent &#957; = 4/3. We can replace |p-p<sub>c</sub>| by L<sup>-1/&#957;</sup>, and log-log plots of the
+order parameter versus L at the transition should be linear with a slope of -&#946;/&#957;. Similarly, the mean cluster size should scale as L<sup>&#947;/&#957;</sup>. Use the program to compute
+&#946;/&#957; and &#947;/&#957; for L = 10, 20, 40, 80, and 160, and compare with the exact results for &#946; and &#947;. Use the exact result &#957; = 4/3. Because &#946; is so small, your results for &#946;/&#957; are likely to have
+a large percentage error.</li>
+
+</ol>
+
+<p class="header_title">References</p>
+
+<ul>
+
+<li>Dietrich Stauffer and Ammon Aharony, <i>Introduction To Percolation Theory,</i>
+Taylor &#38; Francis (1985).</li>
+
+<li>H. Gould, J. Tobochnik, and W. Christian, <i>An Introduction to Computer Simulation Methods</i> (Addison-Wesley, 2006), 3rd ed., Chapter 12.</li>
+</ul>
+
+<p class="header_title">Java Classes</p>
+
+<ul>
+
+<li>ClustersApp</li>
+<li>Clusters</li>
+
+</ul>
+
+
+<p class = "small">Updated 27 February 2007.</p>
+</body>
+</html>

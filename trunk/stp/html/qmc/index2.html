@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+<title>Simulations for Statistical and
+Thermal Physics</title>
+
+<link href="../default.css" type="text/css" rel="stylesheet">
+
+</head>
+
+<body>
+<h3 style="text-align:center;">Ideal Quantum Gases</h3>
+
+<p class="header_title">Introduction</p>
+
+<p>The program implements a Monte Carlo simulation of the ideal gas in 1, 2, or 3 dimensions in equilibrium with a heat bath at temperature T. We assume that the single particle energies have the form &#949; = k<sup>p</sup> where k is the wavevector. The user can choose Fermi-Dirac (FD), Bose-Einstein (BE), or Maxwell-Boltzmann (MB) statistics. The output includes plots of the following quantities:</p>
+
+<ul>
+<li>The density of states (the number of states per energy level).</li>
+
+<li>The particle distribution function n(&#949;), the mean number of particles in a particular microstate with energy &#949;.</li>
+
+<li>The energy occupancy diagram which shows the energy of a state versus particle label.</li>
+
+<li> A k-space plot that shows which sites in phase space are occupied.</li>
+
+</ul> 
+
+<p>An an example of the relation &#949; = k<sup>p</sup> with p = 2, we know that the energy of a non-relativistic particle of mass m in three dimensions is given by</p>
+<p class="center">
+<img src="energy3.jpg" alt="" align="middle" >,
+</p>
+<p>where</p>
+<p class="center">
+k<sub>x</sub> = 2&#960;n<sub>x</sub>/L
+</p>
+<p>and n<sub>x</sub> = 0, &#177;1, &#177;2, &#8230;. We have adopted periodic boundary conditions so that the quantum numbers are the positive and negative integers. In the following we will choose units such that we can express the energy as</p>
+<p class="center">
+<img src="epsilon_n.jpg" alt="" align="middle" >,
+</p>
+
+<p>For simplicity, we will take the ground state to be (0,0,0) in order that there be only one ground state. Note that the ground state has zero energy. Then the six first excited states are (1,0,0), (-1,0,0), (0,1,0), (0,-1,0),(0,0,1), and (0,0,-1).</p>
+
+
+<p class="header_title">Algorithm</p>
+
+<p>According to quantum mechanics, particles of the same type are indistinguishable, and thus swapping two particles does not change the state of the system. To enforce this requirement the particles are labeled and the states are ordered according to their energy. Trial moves are made such that the order of the particles on this list cannot change. For example, particle number 3 is always in an energy state that is the same (possible for BE) or lower in the list than particle number 4. The Pauli exclusion principle for FD statistics is enforced by allowing only one particle per state (spin is ignored). The only MC moves are for a particle to move up or down one state in the list of states. The algorithm is given by the 
+following steps:</p>
+
+<ol>
+
+<li>Set up a discrete number-space in 1, 2, or 3 dimensions with maximum quantum number n<sub>max</sub>. Order each state in this space by its energy.</li>
+
+<li>Initially place the N particles in the lowest energy configuration.</li>
+
+<li>Choose a particle at random and randomly move it up or down in the list. If the move is allowable, that is, if the state is unoccupied for FD statistics and if the order of the particles is unchanged, then compute the trial change in the energy &#916;E that would occur if the particle were moved.</li>
+
+<li>Use the Metropolis algorithm to accept or reject a move. If &#916;E &#60; 0, accept the move. If not, then if exp(-&#916;E/T) &#62; r, where r is an uniform random number between 0 and 1, accept the trial
+move; otherwise the move is rejected.</li>
+
+<li>Repeat steps 3 and 4 for N attempted moves (one Monte Carlo step per particle (mcs).</li>
+
+<li>Accumulate data for the mean number of particles in each state, the total energy, and the square of the total energy (the latter two quantities will be used to compute the specific heat).</li>
+</ol>
+
+<p class="header_title">Questions</p>
+
+<ol>
+<li>Initialize the program using the default parameters. First focus on the density of states window. If 
+n<sub>max</sub> is large, we expect the density of states, g(&#949;), to be proportional to &#949;<sup>(d/p - 1)</sup>. Try various values of the spatial dimension d and exponent p, and determine whether your results are consistent with this relation. If your results are not smooth, you can change the energy interval &#916;&#949; and choose a larger value of n<sub>max</sub> if your computer is sufficiently fast. Also you can change the steps per display to 100 or 1000 to speed up the simulation.</li>
+
+<li>Does g(&#949;) depend on the statistics? Does it depend on the temperature? Does g(&#949;) change with the number of Monte Carlo steps per particle? Explain your answers.</li>
+
+<li>Now focus on the energy occupancy diagram. Note that the width of each horizontal line gives the number of particles with a particular energy. Use the default values of the parameters and run the simulation for FD, BE, and then MB statistics. How does the energy occupancy diagram change with the number of Monte Carlo steps per particle? Explain the differences for the three cases. Why is it possible for more than one particle to have the same energy? As discussed, there is only one ground state and 6 first excited states with the same energy in three dimensions. How many states are there in the next energy level (&#949; = 2)? Repeat for p = 1 which is relevant for photons or highly relativistic particles. Do your conclusions change?</li>
+
+<li>The program outputs the phase space diagram whenever the user clicks <tt>Stop</tt>. The diagram is not continuously updated during the simulation. What is the shape of the region in phase space that is occupied for FD statistics in 1, 2, and 3 dimensions? What happens as the temperature is increased? How does the occupied region vary between the three statistics at low temperatures and at high temperatures?</li>
+
+<li>Now consider the distribution function plot of n(&#949;). Note that n(&#949;) gives the mean number of particles in a particular microstate with energy &#949;. It is not the probability that a particle has energy &#949;. In principle, each data point corresponding to a different single particle microstate with the same energy should be on top of each other, but because the simulation only visits each state a finite number of times, there are sampling errors. (How is the error in each data point related to the number of times that a particular state has been visited?) Use the default parameters with FD, but start with temperature T = 1. Describe the distribution function n(&#949;) and explain why it has the form it does. Run for thousands of mcs (displayed on the phase space diagram), and reset the data after a few thousand mcs to equilibrate the system. What happens if the temperature is increased? Now take more accurate data for the energy and specific heat at T = 0.5 and T = 1.0. Note the width of n(&#949;). Is it roughly proportional to T for low temperatures? If so, the specific heat should be proportional to T because this width is a measure of the change in energy of particle during a trial move. Compare &#916;E/&#916;T as an estimate for the specific heat with the two values you obtained at T = 0.5 and 1.0. They should be comparable. The program estimates the specific heat from the fluctuations in the energy.</li>
+
+<li>Now consider BE statistics. Start at T = 1. What do you notice? At very low temperatures the ground state contains most of the particles. At what temperature does the ground state cease to be a significant fraction of the particles (say less than 10%)? In the limit of an infinite system this temperature would correspond to a phase transition. Plot the specific heat as a function of temperature at low temperatures. The peak in the specific heat occurs at the phase transition in the thermodynamic limit.</li>
+
+<li>Repeat the simulations for BE statistics for d = 1 and 2. In the thermodynamic limit there is no phase transition in one and two dimensions.</li>
+
+<li>Consider BE statistics with p = 1. This value of p is equivalent to a gas of photons. In such a system the number of photons is not fixed as it is in our simulation. However, we can consider photons that reach the ground state as being lost to the system. The energy distribution function is what would be the blackbody spectrum. In the thermodynamic limit the location of the peak in this spectrum is proportional to the temperature. How well does the simulation produce this result for a finite system?</li>
+
+<li>The energy distribution function is the number of particles with energy &#949; between &#949; and &#949; + &#916;&#949;. Note this is not the same as n(&#949;). Explain why this function is proportional to the density of states g(&#949;) times the distribution function n(&#949;). This function is not plotted. (What is plotted is &#949;g(&#949;)n(&#949;).) Is there any difference in the energy distribution function between the different statistics at low temperatures or at high temperatures?</li>
+
+<li>The chemical potential &#956; can be extracted from the (equilibrium) particle distribution function n(&#949;). For FD statistics &#956; is the energy where the distribution function n(&#949;) equals 1/2. At T = 0 this energy is called the Fermi energy &#949;<sub>F</sub>, and is where the step function drops from unity to zero. For low temperatures T &#60;&#60; T<sub>F</sub>, &#956; - &#949;<sub>F</sub> is proportional to T<sup>2</sup>. Collect data for &#956; between T = 0 and 4, and determine how your results compare.</li>
+
+<li>For BE statistics the chemical potential &#956; can be found from the value of the ground state occupancy n(&#949; = 0), and is given by &#956;/T = -ln[1 + 1/n(0)] for temperatures above the Bose-Einstein condensation temperatures T<sub>c</sub>. Note that &#956; is negative. How does &#956; behave near and above T<sub>c</sub>? Would it be negative for FD or MB statistics? Does the chemical potential depend on the nature of the statistics at high temperatures (where quantum effects are negligible) and at low temperatures?</li>
+
+</ol>
+
+<p class="header_title">References</p>
+
+<ul>
+
+<li>Harvey Gould, Lynna Spornick, and Jan Tobochnik, <i>Thermal and Statistical Physics Simulations,</i> John Wiley &#38; Sons (1995), Chapter 5.</li>
+
+</ul>
+
+<p class="header_title">Java Classes Used</p>
+
+<ul>
+
+<li>QMC</li>
+
+<li>QMCApp</li>
+
+</ul>
+
+<p class = "small">Updated 13 February 2007.</p>
+</body>
+</html>
+

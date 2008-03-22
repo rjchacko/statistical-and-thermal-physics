@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+<title>Simulations for Statistical and Thermal Physics</title>
+
+<link href="../default.css" type="text/css" rel="stylesheet">
+
+</head>
+
+<body>
+<h3 style="text-align:center;">One-Dimensional Random Walk with Variable Step Length</h3>
+
+<p class="header_title">Introduction</p>
+
+<p>An example of a continuous random variable is the displacement from the origin of a one-dimensional
+random walker that steps at random to the right with
+probability p, but with a step length that is chosen at <i>random</i>
+between zero and the maximum step length a. The continuous
+nature of the step length means that the displacement x of
+the walker is a continuous variable.</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;We can record the number of
+times
+H(x) that the displacement of the walker from the origin after N steps is in a bin of width
+&#916;x between x and x + &#916;x. If the number of walkers that
+is sampled is sufficiently large, we would find that
+H(x) is proportional to the estimated probability that a
+walker is in a bin of width &#916;x a distance x from the origin
+after N steps. To obtain the probability, we divide H(x) by
+the total number of walkers.</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;In practice, the choice of the bin width is a compromise. If &#916;x
+is too big, the features of the histogram would be lost. If &#916;x is
+too small, many of the bins would be
+empty for a given number of walkers, and our estimate of
+the number of walkers in each bin would be less accurate.</p>
+
+<center>
+<applet
+ code="org.opensourcephysics.davidson.applets.ApplicationApplet.class"
+ archive="./stp.jar" codebase="../" align="top" height="40"
+ hspace="0" vspace="0" width="150"> <param name="target"
+ value="org.opensourcephysics.stp.randomwalk.randomwalkcontinuous.VariableStepLengthWalkApp"> <param name="title"
+ value="Applet"> <param name="singleapp" value="true">
+</applet>
+</center>
+
+<p class="header_title">Problems</p>
+
+<ol>
+
+
+<li>Describe the qualitative features of the histogram for the displacement x after N steps. Does the qualitative features of the histogram change as the number of walkers is increased?</li>
+
+<li>How does the variance depend on N for fixed p?</li>
+
+<li>The simulation uses a step length with a uniform probability between 0 and 1. Calculate analytically the mean displacement and the variance for one step. (Remember that a step can be either to the left or the right and is of variable length.) Compare your analytical result to the result of the simulation for N = 1.</li>
+
+<li>How does the variance found in the simulation after N steps compare to the variance for one step?</li>
+
+<li>Explore the dependence of the histogram on the bin width. What is a reasonable choice of the bin width for N = 100?</li>
+
+</ol>
+
+<p class="header_title">References</p>
+
+<ul>
+
+<li>Harvey Gould and Jan Tobochnik, <i>Thermal and Statistical Physics,</i> Chapter 3.</li>
+
+</ul>
+
+<p class="header_title">Java Classes</p>
+
+<ul>
+
+<li>VariableStepLengthWalkApp</li>
+
+</ul>
+
+<p class = "small">Updated 18 March 2007.</p>
+
+</body>
+</html>

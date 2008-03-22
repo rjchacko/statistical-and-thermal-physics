@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+<title>Simulations for Statistical and Thermal Physics</title>
+
+<link href="../default.css" type="text/css" rel="stylesheet">
+
+</head>
+
+<body>
+<h3 style="text-align:center;">Identification of the temperature</h3>
+
+<p class="header_title">Introduction</p>
+
+<p>Consider the molecular dynamics simulation of two solids that are initially separated by an insulating wall. Each system has fixed values of its energy, volume, and number of particles. Hence in general, the two systems will not be in thermal equilibrium and will have different temperatures in general. What happens when we relax the internal constraint and allow the two systems to exchange energy with one another? That is, what changes when we allow the particles in the two systems to interact with one another?</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;To do the simulation we consider two systems of particles that interact via the Lennard-Jones potential. We write the latter in the form</p>
+<p class="center">
+V<sub>ab</sub>(r) = 4 
+&#949;<sub>ab</sub>[(&#963;<sub>ab</sub>/r)<sup>12</sup> - (&#963;<sub>ab</sub>/r)<sup>6</sup>].
+</p>
+<p>We will assume that there are two kinds of particles (red and green) and their associated parameters are</p>
+<p class="center">
+&#963;<sub>RR</sub> = 1, &#963;<sub>GG</sub> = 1.2, &#963;<sub>RG</sub> = 1.1,
+</p>
+<p class="center">
+&#949;<sub>RR</sub> = 1, &#949;<sub>GG</sub> 
+= 1.5, &#949;<sub>RG</sub> = 1.25.
+</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;In this simulation periodic boundary conditions are not used
+and the particles also interact with fixed particles (with
+infinite mass) that make up the walls (&#949; = 1 and &#963; = 1 for the wall particles). 
+To ensure that we can continue to
+identify which particle belongs to system A and system B, we have
+added a spring to each particle so that it cannot wander too far
+from its original lattice site. Initially, the two systems are isolated from each other and from their
+surroundings.</p>
+
+<center>
+<applet
+ code="org.opensourcephysics.davidson.applets.ApplicationApplet.class"
+ archive="./stp.jar" codebase="../" align="top" height="40"
+ hspace="0" vspace="0" width="150"> <param name="target"
+ value="org.opensourcephysics.stp.thermalcontact.ThermalContactApp"> <param name="title"
+ value="Applet"> <param name="singleapp" value="true">
+</applet>
+</center>
+
+<p class="header_title">Problems</p>
+
+<ol>
+
+<li>Run the simulation using the default parameters until each system appears to be in
+equilibrium. Initially the particles in the two solids do not 
+interact with each other. Does the mean kinetic energy and potential energy of each system
+change with time? What is the mean potential and
+kinetic energy of each system? Is the total energy of each system fixed (to
+within numerical error)? Before contact describe the relation between the potential energy and kinetic energy for each solid. Are these quantities the same for each solid?</li>
+
+<li>Click the <tt>Contact</tt> button. When this button is clicked, the particles in the two solids are allowed to interact. What quantity is exchanged between the two systems? (The
+volume of each system is fixed.) Describe how the potential energy and kinetic  change after contact.</li>
+
+<li>We are looking for a quantity that is the same in both
+systems after equilibrium has been established. We can associate this quantity with the temperature. Are the average
+kinetic and potential energies the same? If not, think about what
+would happen if you doubled the number of particles and the area of each system. Would the temperature change? Does it
+make more sense to compare the average kinetic and potential
+energies or the average kinetic and potential energies per particle? What
+quantity does become the same once the two systems are in equilibrium? Do
+any other quantities become approximately equal? What can you conclude about
+the possible identification of the temperature?</li>
+</ol>
+
+<p class="header_title">Java Classes</p>
+
+<ul>
+<li>LJSimulation</li>
+<li>ParticleBoard</li>
+<li>ThermalContactApp</li>
+
+</ul>
+
+<p class = "small">Updated 27 February 2007.</p>
+</body>
+</html>
