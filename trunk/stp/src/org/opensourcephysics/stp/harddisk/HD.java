@@ -25,6 +25,8 @@ public class HD implements Drawable
 	int N;
 	double Lx;
 	double Ly;
+	public String initialConfiguration;
+	
 	static double TIME_BIG = 1000000;
 	int minimumCollisionI;
 	int minimumCollisionJ;
@@ -96,8 +98,15 @@ public class HD implements Drawable
 
 	public void initialize()
 	{
-		setLatticeSpacing();
-		checkOverlap();
+		if (initialConfiguration.equals("crystal"))
+		{
+			setCrystalPositions();
+		}
+		else
+		{
+			setRandomPositions();
+		}
+		
 		adjustMomentum();
 		initializeAuxiliaryArrays();
 		clearData();
@@ -108,7 +117,79 @@ public class HD implements Drawable
 			positionY[k] = pbc(positionY[k], Ly);
 		}
 	}
+	
+	public void setRandomPositions()
+	{
+		// particles placed at random, but not closer than rMinimumSquared
+		
+		boolean overlap;
+		for (int i = 0; i < N; ++i)
+		{
+			do
+			{
+				overlap = false;
+				positionX[i] = Lx * Math.random();
+				positionY[i] = Ly * Math.random();
+				int j = 0;
+				while (j < i && !overlap)
+				{
+					double dx = seperation(positionX[i] - positionX[j], Lx);
+					double dy = seperation(positionY[i] - positionY[j], Ly);
+					if (dx * dx + dy * dy < 1)
+					{
+						overlap = true;
+					}
+					j++;
+				}
+			}
+			while (overlap);
+		}
+		for(int i=0;i<N;i++){
+			double th = 2*Math.PI*random.nextDouble();
+			velocityX[i] = velocityMax*Math.cos(th);
+			velocityY[i] = velocityMax*Math.sin(th);
+			timeOfLastCollision[i] = 0;
+		}
+	}
 
+	public void setCrystalPositions()
+	{
+		// place particles on triangular lattice
+		double dnx = Math.sqrt(N);
+		int ns = (int) dnx;
+		if (dnx - ns > 0.001)
+		{
+			ns++;
+		}
+		double ax = Lx / ns;
+		double ay = Ly / ns;
+		int i = 0;
+		int iy = 0;
+		while (i < N)
+		{
+			for (int ix = 0; ix < ns; ++ix)
+			{
+				if (i < N)
+				{
+					positionY[i] = ay * (iy + 0.5);
+					if (iy % 2 == 0)
+						positionX[i] = ax * (ix + 0.25);
+					else
+						positionX[i] = ax * (ix + 0.75);
+					i++;
+				}
+			}
+			iy++;
+		}
+		
+		for(int i1=0;i1<N;i1++){
+			double th = 2*Math.PI*random.nextDouble();
+			velocityX[i1] = velocityMax*Math.cos(th);
+			velocityY[i1] = velocityMax*Math.sin(th);
+			timeOfLastCollision[i1] = 0;
+		}
+	}
+	
 	public void step()
 	{
 	    tenCollisionTime = 0;
@@ -478,7 +559,8 @@ public class HD implements Drawable
 				if (r2 < 1)
 				{
 					double r = Math.sqrt(r2);
-					if (1 - r > tol)
+					double dist=1 - r;
+					if ( dist > tol)
 					{
 						System.err.println("particles " + i + "  " + j
 								+ " overlap");
