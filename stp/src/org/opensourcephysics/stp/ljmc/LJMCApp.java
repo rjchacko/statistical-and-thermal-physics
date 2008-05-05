@@ -9,6 +9,7 @@ import org.opensourcephysics.frames.DisplayFrame;
 import org.opensourcephysics.frames.PlotFrame;
 import org.opensourcephysics.frames.Scalar2DFrame;
 import org.opensourcephysics.numerics.FFT2D;
+import org.opensourcephysics.stp.util.Rdf;
 
 /**
  * LJParticlesApp simulates a two-dimensional system of interacting particles
@@ -22,10 +23,8 @@ import org.opensourcephysics.numerics.FFT2D;
 public class LJMCApp extends AbstractSimulation {
   LJMC mc = new LJMC();
   DisplayFrame display = new DisplayFrame("x", "y", "Lennard-Jones system");
-  PlotFrame structurePeak = new PlotFrame("t", "S(k_max(t))", "Peak of Structure Function");
-  PlotFrame structure = new PlotFrame("k", "S", "Structure Function");
-  double wavevector[] = new double[mc.resolution];
-  
+  PlotFrame grFrame = new PlotFrame("r", "g(r)", "Radial distribution function");
+  Rdf gr = new Rdf();
   int timestep=0;
   /**
    * Initializes the model by reading the number of particles.
@@ -38,11 +37,10 @@ public class LJMCApp extends AbstractSimulation {
     mc.initialConfiguration = control.getString("initial configuration");
     mc.stepSize=control.getDouble("Step Size");
     mc.initialize();
+    gr.initialize(mc.Lx,mc.Lx,0.1);
     display.addDrawable(mc);
     display.setPreferredMinMax(0, mc.Lx, 0, mc.Ly); 
-    for(int k=0; k<mc.resolution; k++){
-    		wavevector[k]=k*(2./mc.resolution)+2*Math.PI/mc.Lx;
-    }
+ 
   }
 
   /**
@@ -50,12 +48,11 @@ public class LJMCApp extends AbstractSimulation {
    */
   public void doStep() {
 	  mc.step(); 
-	  if(mc.steps % super.stepsPerDisplay==0) control.println("Number of steps = " + mc.steps);
-	  if(mc.steps%10000==0) {
-		  structurePeak.append(0, mc.steps/10000., mc.S[]);
-		  structure.clearDataAndRepaint();
-		  structure.append(0,wavevector,mc.S);
-	  }
+	  gr.append(mc.x, mc.y);
+	  gr.normalize();
+	  grFrame.clearData();
+	  grFrame.append(2, gr.rx, gr.ngr);	   
+	  grFrame.render();
   }
 
   /**
@@ -97,6 +94,7 @@ public class LJMCApp extends AbstractSimulation {
     enableStepsPerDisplay(true);
     super.setStepsPerDisplay(10);  // draw configurations every 10 steps
     display.setSquareAspect(true); // so particles will appear as circular disks
+    gr.reset();
   }
 
   /**
