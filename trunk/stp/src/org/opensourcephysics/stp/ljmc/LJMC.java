@@ -28,10 +28,7 @@ public class LJMC implements Drawable{
   public double T;
   public double beta;
   public double stepSize;
-  public int resolution=100;
-  public double reS[];
-  public double imS[];
-  public double S[];
+  
   Random r=new Random();
   
   public void initialize() {
@@ -41,9 +38,7 @@ public class LJMC implements Drawable{
     beta=1/T;
     x = new double[N];
     y = new double[N];
-    reS = new double[resolution];
-    imS = new double[resolution];
-    S = new double[resolution];
+    
     
     if(initialConfiguration.equals("triangular")) {
       setTriangularLattice();
@@ -76,9 +71,7 @@ public class LJMC implements Drawable{
     }
   }
 
-  // end break
-  // start break
-  // setRectangularLattice
+ 
   public void setRectangularLattice() { // place particles on a rectangular lattice
     double dx = Lx/nx; // distance between columns
     double dy = Ly/ny; // distance between rows
@@ -91,9 +84,7 @@ public class LJMC implements Drawable{
     }
   }
 
-  // end break
-  // start break
-  // setTriangularLattice
+ 
   public void setTriangularLattice() { // place particles on triangular lattice
     double dx = Lx/nx; // distance between particles on same row
     double dy = Ly/ny; // distance between rows
@@ -111,9 +102,7 @@ public class LJMC implements Drawable{
   }
 
  
-  // end break
-  // start break
-  // computePE
+
   public void computePE() {
     for(int i = 0;i<N-1;i++) {
       for(int j = i+1;j<N;j++) {
@@ -142,9 +131,6 @@ public class LJMC implements Drawable{
 	  return trialPE;
   }
 
-  // end break
-  // start break
-  // pbcSeparation
   private double pbcSeparation(double ds, double L) {
     if(ds>0) {
       while(ds>0.5*L) {
@@ -171,79 +157,39 @@ public class LJMC implements Drawable{
     }
     return s;
   }
-
-  public void perturbParticles() {
-	  double dx[],dy[];
-	  dx = new double[N];
-	  dy = new double[N];
-	  for(int i=0;i<N;i++){
-		  dx[i]=0;
-		  dy[i]=0;
-	  }
-      for (int iter = 0; iter < N/10; iter++) {
-         // Find an arbitrary perturbation
-         int n = r.nextInt(N);       // Random particle index
-         dx[n]=2*stepSize*(Math.random()-0.5);
-         dy[n]=2*stepSize*(Math.random()-0.5);
-         x[n]=x[n]+dx[n];
-	 	 y[n]=y[n]+dy[n];
-      }
-      double newPE=computeTrialPE();
-      double dE=newPE-pe;
-      if( dE<0 || Math.exp(-dE/T)>Math.random() ) pe=newPE;
-      else{
-    	  	for(int i=0;i<N;i++){
-    	  		x[i]=x[i]-dx[i];
-    	  		y[i]=y[i]-dy[i];
-    	  	}
-      }
-   }
   
-  public void calcStructureFunction(){
-	  double kmax=2;
-	  double kmin=2*Math.PI/Lx;
-	  double dx, dy;
-	  reS = new double[resolution];
-	  imS = new double[resolution];
-	  S = new double[resolution];
-	  
-	  for(int k=0;k<resolution;k++){
-		  double K=k*(kmax/resolution)+kmin;
-		  for(int i=0; i<N; i++){
-			  for(int j=0; j<N; j++){
-				  for(double theta=0; theta<1; theta+=2*Math.PI/100.0){
-					  double kx1 = K*(x[i]*Math.cos(theta)+y[i]*Math.sin(theta));
-					  double kx2 = K*(x[j]*Math.cos(theta)+y[j]*Math.sin(theta));
-					  reS[k] += Math.cos(kx1)*Math.cos(kx2)+Math.sin(kx1)*Math.sin(kx2);
-					  imS[k] += Math.sin(kx1)*Math.cos(kx2)-Math.sin(kx2)*Math.cos(kx1);
-				  }			  
-			  }
-		  }
-	  }
-	  
-	  for(int k=0; k<resolution; k++){
-		 S[k]=Math.sqrt(reS[k]*reS[k]+imS[k]*imS[k]); 
-	  }
-	  
+  public class TrialMove{
+	  int n;
+	  double dx, dy;  
+	  double dE;  
   }
   
+  public TrialMove makeTrial(){
+	  TrialMove tm=new TrialMove();
+	  
+	  tm.n = r.nextInt(N);
+	  tm.dx=2*stepSize*(Math.random()-0.5);
+      tm.dy=2*stepSize*(Math.random()-0.5);
+	  x[tm.n]=pbcPosition(x[tm.n]+=tm.dx,Lx);
+	  y[tm.n]=pbcPosition(y[tm.n]+=tm.dy,Ly);
+      tm.dE=computeTrialPE()-pe;
+      return tm;
+  }
+
   public void step() {
-   
-    perturbParticles();
+	TrialMove tm=makeTrial();
+	
+	if( tm.dE<0 || Math.exp(-tm.dE/T)>Math.random() ){
+		pe+=tm.dE;		
+	}
+	else{
+		x[tm.n]-=tm.dx;
+		y[tm.n]-=tm.dy;
+	}
     
-    for(int i = 0;i<N;i++) {
-      x[i] = pbcPosition(x[i], Lx);
-      y[i] = pbcPosition(y[i], Ly);
-    }
-    
- //   if(steps%10000==0) calcStructureFunction();
-    steps++;
-    
+    steps++; 
   }
 
-  // end break
-  // start break
-  // draw
   public void draw(DrawingPanel panel, Graphics g) {
     if(x==null||y==null) {
       return;
@@ -264,7 +210,7 @@ public class LJMC implements Drawable{
     int ly = panel.yToPix(0)-panel.yToPix(Ly);
     g.drawRect(xpix, ypix, lx, ly);
   }
-  // end break
+ 
 }
 
 /* 
