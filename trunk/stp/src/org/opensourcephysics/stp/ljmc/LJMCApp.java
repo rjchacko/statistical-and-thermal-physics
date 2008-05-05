@@ -26,6 +26,25 @@ public class LJMCApp extends AbstractSimulation {
   PlotFrame grFrame = new PlotFrame("r", "g(r)", "Radial distribution function");
   Rdf gr = new Rdf();
   int timestep=0;
+  
+  /**
+   * Resets the LJ model to its default state.
+   */
+  public void reset() {
+    control.setValue("nx", 8);
+    control.setValue("ny", 8);
+    control.setAdjustableValue("Lx", 18);
+    control.setAdjustableValue("Ly", 18);
+    control.setValue("Step Size", 0.1);
+    control.setValue("T", 0.1);
+    OSPCombo combo = new OSPCombo(new String[] {"triangular","rectangular","random"},0);  // second argument is default
+    control.setValue("initial configuration", combo);
+    enableStepsPerDisplay(true);
+    super.setStepsPerDisplay(10);  // draw configurations every 10 steps
+    display.setSquareAspect(true); // so particles will appear as circular disks
+    gr.reset();
+  }
+  
   /**
    * Initializes the model by reading the number of particles.
    */
@@ -44,6 +63,22 @@ public class LJMCApp extends AbstractSimulation {
   }
 
   /**
+   * Reads adjustable parameters before the program starts running.
+   */
+  public void startRunning() {
+    double Lx = control.getDouble("Lx");
+    double Ly = control.getDouble("Ly");
+    mc.T=control.getDouble("T");
+    if((Lx!=mc.Lx)||(Ly!=mc.Ly)) {
+      mc.Lx = Lx;
+      mc.Ly = Ly;
+      mc.computePE();
+      display.setPreferredMinMax(0, Lx, 0, Ly);
+      resetData();
+    }
+  }
+  
+  /**
    * Does a simulation step and appends data to the views.
    */
   public void doStep() {
@@ -61,40 +96,6 @@ public class LJMCApp extends AbstractSimulation {
   public void stop() {
     control.println("Density = "+decimalFormat.format(mc.rho));
     control.println("Number of time steps = "+mc.steps);
-  }
-
-  /**
-   * Reads adjustable parameters before the program starts running.
-   */
-  public void startRunning() {
-    double Lx = control.getDouble("Lx");
-    double Ly = control.getDouble("Ly");
-    mc.T=control.getDouble("T");
-    if((Lx!=mc.Lx)||(Ly!=mc.Ly)) {
-      mc.Lx = Lx;
-      mc.Ly = Ly;
-      mc.computePE();
-      display.setPreferredMinMax(0, Lx, 0, Ly);
-      resetData();
-    }
-  }
-
-  /**
-   * Resets the LJ model to its default state.
-   */
-  public void reset() {
-    control.setValue("nx", 8);
-    control.setValue("ny", 8);
-    control.setAdjustableValue("Lx", 18);
-    control.setAdjustableValue("Ly", 18);
-    control.setValue("Step Size", 0.1);
-    control.setValue("T", 0.1);
-    OSPCombo combo = new OSPCombo(new String[] {"triangular","rectangular","random"},0);  // second argument is default
-    control.setValue("initial configuration", combo);
-    enableStepsPerDisplay(true);
-    super.setStepsPerDisplay(10);  // draw configurations every 10 steps
-    display.setSquareAspect(true); // so particles will appear as circular disks
-    gr.reset();
   }
 
   /**

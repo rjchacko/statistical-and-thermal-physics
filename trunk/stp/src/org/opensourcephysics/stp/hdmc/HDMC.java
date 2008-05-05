@@ -1,12 +1,9 @@
-package org.opensourcephysics.stp.ljmc;
+package org.opensourcephysics.stp.hdmc;
 
 import java.awt.*;
 import java.util.Random;
 
 import org.opensourcephysics.display.*;
-import org.opensourcephysics.frames.*;
-import org.opensourcephysics.numerics.*;
-
 /**
  * LJParticlesApp evolves a two-dimensional system of interacting particles
  * via the Lennard-Jones potential using a Verlet ODESolver.
@@ -14,10 +11,9 @@ import org.opensourcephysics.numerics.*;
  * @author Jan Tobochnik, Wolfgang Christian, Harvey Gould
  * @version 1.0 revised 03/28/05
  */
-public class LJMC implements Drawable{
+public class HDMC implements Drawable{
   public double x[];
   public double y[];
-  public double pe;
   public int N, nx, ny; // number of particles, number per row, number per column
   public double Lx, Ly;
   public double rho = N/(Lx*Ly);
@@ -47,7 +43,6 @@ public class LJMC implements Drawable{
     } else {
       setRandomPositions();
     }
-    computePE();
   }
 
   public void setRandomPositions() { // particles placed at random, but not closer than rMinimumSquared
@@ -103,34 +98,26 @@ public class LJMC implements Drawable{
 
  
 
-  public void computePE() {
-    for(int i = 0;i<N-1;i++) {
-      for(int j = i+1;j<N;j++) {
-        double dx = pbcSeparation(x[i]-x[j], Lx);
-        double dy = pbcSeparation(y[i]-y[j], Ly);
-        double r2 = dx*dx+dy*dy;
-        double oneOverR2 = 1.0/r2;
-        double oneOverR6 = oneOverR2*oneOverR2*oneOverR2;       
-        pe+=4.0*(oneOverR6*oneOverR6-oneOverR6);
-      }
-    }
+  public boolean checkOverlap(){
+	boolean overlap = false;
+	double tol = .00001;		
+	for (int i = 0; i < N - 1; i++){
+		for (int j = i + 1; j < N; j++){
+			double dx = pbcSeparation(x[i] - x[j], Lx);
+			double dy = pbcSeparation(y[i] - y[j], Ly);
+			double r2 = dx * dx + dy * dy;
+			if (r2 < 1){
+				double r = Math.sqrt(r2);
+				double dist=1 - r;
+				if ( dist > tol){
+					overlap=true;
+				}
+			}
+		}
+	}
+	return overlap;
   }
   
-  public double computeTrialPE() {
-	  double trialPE=0; 
-	  for(int i=0;i<N-1;i++){
-		  for(int j=i+1;j<N;j++){
-			 double dx = pbcSeparation(x[i]-x[j], Lx);
-			 double dy = pbcSeparation(y[i]-y[j], Ly);
-			 double r2 = dx*dx+dy*dy;
-			 double oneOverR2 = 1.0/r2;
-			 double oneOverR6 = oneOverR2*oneOverR2*oneOverR2;       
-			 trialPE+=4.0*(oneOverR6*oneOverR6-oneOverR6); 
-		  }
-	  }
-	  return trialPE;
-  }
-
   private double pbcSeparation(double ds, double L) {
     if(ds>0) {
       while(ds>0.5*L) {
@@ -161,7 +148,7 @@ public class LJMC implements Drawable{
   public class TrialMove{
 	  int n;
 	  double dx, dy;  
-	  double dE;  
+	  boolean overlap;  
   }
   
   public TrialMove makeTrialMove(){
@@ -172,19 +159,16 @@ public class LJMC implements Drawable{
       tm.dy=2*stepSize*(Math.random()-0.5);
 	  x[tm.n]=pbcPosition(x[tm.n]+=tm.dx,Lx);
 	  y[tm.n]=pbcPosition(y[tm.n]+=tm.dy,Ly);
-      tm.dE=computeTrialPE()-pe;
+      tm.overlap=checkOverlap();;
       return tm;
   }
 
   public void step() {
 	TrialMove tm=makeTrialMove();
 	
-	if( tm.dE<0 || Math.exp(-tm.dE/T)>Math.random() ){
-		pe+=tm.dE;		
-	}
-	else{
+	if(tm.overlap){
 		x[tm.n]-=tm.dx;
-		y[tm.n]-=tm.dy;
+		y[tm.n]-=tm.dy;	
 	}
     
     steps++; 
