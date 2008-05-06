@@ -28,7 +28,7 @@ public class SecondVirialApp extends AbstractCalculation implements Function{
 	}
 	
 	public void calculate() {
-		double x_low = 0.0001, x_high = 10, tolerance = 0.00001;
+		double x_low = 0.0001, x_high = 10, tolerance = 0.001;
 		initialize();
 		System.out.println("beginning calculation");
 		for(int i=0;i<points;i++){
