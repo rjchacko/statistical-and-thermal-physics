@@ -21,20 +21,21 @@ public class HDMC implements Drawable{
   public double t;
   public String initialConfiguration;
   public double radius = 0.5; // radius of particles on screen
-  public double T;
+
   public double beta;
   public double stepSize;
-  
+  public double minSeparation;
   Random r=new Random();
+  public double s;
   
   public void initialize() {
     N = nx*ny;
     t = 0;
     rho = N/(Lx*Ly);
-    beta=1/T;
     x = new double[N];
     y = new double[N];
-    
+    minSeparation=Lx;
+    steps=0;
     
     if(initialConfiguration.equals("triangular")) {
       setTriangularLattice();
@@ -46,7 +47,7 @@ public class HDMC implements Drawable{
   }
 
   public void setRandomPositions() { // particles placed at random, but not closer than rMinimumSquared
-    double rMinimumSquared = Math.pow(2.0, 1.0/3.0);
+    double rMinimumSquared = 1;
     boolean overlap;
     for(int i = 0;i<N;++i) {
       do {
@@ -57,7 +58,8 @@ public class HDMC implements Drawable{
         while((j<i)&&!overlap) {
           double dx = x[i]-x[j];
           double dy = y[i]-y[j];
-          if(dx*dx+dy*dy<rMinimumSquared) {
+          double r2=dx*dx+dy*dy;
+          if(r2<rMinimumSquared) {
             overlap = true;
           }
           j++;
@@ -96,8 +98,6 @@ public class HDMC implements Drawable{
     }
   }
 
- 
-
   public boolean checkOverlap(){
 	boolean overlap = false;
 	double tol = .00001;		
@@ -106,17 +106,27 @@ public class HDMC implements Drawable{
 			double dx = pbcSeparation(x[i] - x[j], Lx);
 			double dy = pbcSeparation(y[i] - y[j], Ly);
 			double r2 = dx * dx + dy * dy;
-			if (r2 < 1){
-				double r = Math.sqrt(r2);
-				double dist=1 - r;
-				if ( dist > tol){
-					overlap=true;
-				}
+			double r = Math.sqrt(r2);
+			
+			double d=2*radius;
+			if(r<d){			
+				overlap=true;
 			}
+			else if(r<minSeparation)minSeparation=r;
 		}
 	}
 	return overlap;
   }
+  
+  public void compress(){
+	  if(minSeparation<0)System.out.println("Negative separation!");
+	  double oldRadius=radius;
+	  radius=0.5*(1-s)*minSeparation+s*radius;
+	  if(radius<oldRadius){
+		  System.out.println("Decompressing!");
+	  }
+  }
+  
   
   private double pbcSeparation(double ds, double L) {
     if(ds>0) {
@@ -170,7 +180,7 @@ public class HDMC implements Drawable{
 		x[tm.n]-=tm.dx;
 		y[tm.n]-=tm.dy;	
 	}
-    
+	else if(steps%(1*N)==0) compress();
     steps++; 
   }
 
