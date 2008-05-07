@@ -28,9 +28,12 @@ public class LJfluid implements Drawable
 	public String initialConfiguration;
 	Histogram velocityHistogram = new Histogram();
 	public double radius = 0.5; // radius of particles on screen
-
+	boolean potential=true;
+	
+	
 	public LJfluid()
 	{
+	
 	}
 
 	public void setArrays()
@@ -235,6 +238,9 @@ public class LJfluid implements Drawable
 
 	public void accel()
 	{
+		double cutoff;
+		if(potential) cutoff=rCutoff2;
+		else cutoff=Math.pow(2, 1./6.);
 		virial = 0;
 		double dx, dy, fx, fy, r2, fOverR, oneOverR2, oneOverR6;
 		totalPotentialEnergy = 0;
@@ -250,7 +256,7 @@ public class LJfluid implements Drawable
 				dx = pbc(x[i] - x[j], Lx);
 				dy = pbc(y[i] - y[j], Ly);
 				r2 = dx * dx + dy * dy;
-				if (r2 < rCutoff2)
+				if (r2 < cutoff)
 				{
 					oneOverR2 = 1.0 / r2;
 					oneOverR6 = oneOverR2 * oneOverR2 * oneOverR2;
@@ -261,7 +267,8 @@ public class LJfluid implements Drawable
 					ay[i] += fy;
 					ax[j] -= fx;
 					ay[j] -= fy;
-					totalPotentialEnergy += 4.0 * (oneOverR6 * oneOverR6 - oneOverR6);
+					if(potential)totalPotentialEnergy += 4.0 * (oneOverR6 * oneOverR6 - oneOverR6);
+					else totalPotentialEnergy += 4.0 * (oneOverR6 * oneOverR6 - oneOverR6)+1;
 					virial += dx * fx + dy * fy;
 				}
 			}
