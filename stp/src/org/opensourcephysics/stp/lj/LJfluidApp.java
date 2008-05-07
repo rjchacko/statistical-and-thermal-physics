@@ -66,6 +66,10 @@ public class LJfluidApp extends AbstractSimulation
 		lj.Lx = control.getDouble("Lx");
 		//lj.Ly = control.getDouble("Ly");
 		lj.initialConfiguration = control.getString("initial configuration");
+		
+		if(control.getString("initial configuration")=="Lennard-Jones") lj.potential=true;
+		else lj.potential=false;
+		
 		lj.dt = control.getDouble("dt");
 		double tmax = 2.0;//control.getDouble("Maximum for temperature axis");
 		double pmax = 2.0;//control.getDouble("Maximum for pressure axis");
@@ -150,6 +154,8 @@ public class LJfluidApp extends AbstractSimulation
 		control.setAdjustableValue("dt", 0.01);
 		OSPCombo combo = new OSPCombo(new String[] {"crystal",  "random"},0);  // second argument is default
 	    control.setValue("initial configuration", combo);
+	    OSPCombo combo2 = new OSPCombo(new String[] {"Lennard-Jones",  "Weeks-Chandler-Andersen"},0);  // second argument is default
+	    control.setValue("potential type", combo2);
 		//control.setValue("initial configuration", "crystal");
 		//control.setValue("Maximum for temperature axis", 2.0);
 		//control.setValue("Maximum for pressure axis", 2.0);
