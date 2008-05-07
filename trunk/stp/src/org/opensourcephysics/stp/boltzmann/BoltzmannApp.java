@@ -46,14 +46,14 @@ public class BoltzmannApp extends AbstractCalculation
 	public void calculate()
 	{
 		clearData();
-		temperature = control.getDouble("Temperature");
+		temperature = control.getDouble("temperature");
 		beta = 1.0 / temperature;
-		mcs = control.getInt("Number of MC steps");
+		mcs = control.getInt("number of MC steps");
 		nequil = mcs / 10;
-		velocity = control.getDouble("Initial Speed");
+		velocity = control.getDouble("initial speed");
 		energy = 0.5 * velocity * velocity;
-		delta = 4.0;//control.getDouble("Maximum change in velocity");
-		control.println(" running ... ");
+		delta = control.getDouble("delta");
+//		control.println(" running ... ");
 		for (int time = 1; time <= mcs; time++)
 		{ // equibrate system
 			metropolis();
@@ -77,15 +77,14 @@ public class BoltzmannApp extends AbstractCalculation
 
 	public void reset()
 	{
-		control.setValue("Temperature", 4.0);
-		control.setValue("Number of MC steps", 100000);
-		control.setValue("Initial Speed", 1.0);
+		control.setValue("temperature", 4.0);
+		control.setValue("number of MC steps", 100000);
+		control.setValue("initial speed", 1.0);
+		control.setValue("delta", 4.0);
 		//control.setValue("Maximum change in velocity", 4.0);
 		control.clearMessages();
 		clearData();
-		control.println("acceptance probability = 0");
-		control.println("mean velocity = 0");
-		control.println("<E> = 0");
+		
 	}
 
 	public void clearData()
