@@ -8,7 +8,7 @@ import org.opensourcephysics.stp.util.Rdf;
 
 public class HDMCApp extends AbstractSimulation {
 	HDMC mc = new HDMC();
-	DisplayFrame display = new DisplayFrame("x", "y", "Lennard-Jones system");
+	DisplayFrame display = new DisplayFrame("Hard Disks");
 	PlotFrame grFrame = new PlotFrame("r", "g(r)", "Radial distribution function");
 	Rdf gr = new Rdf();
 	int timestep=0;
@@ -44,6 +44,7 @@ public class HDMCApp extends AbstractSimulation {
 	   
 	   mc.initialize();
 	   gr.initialize(mc.Lx,mc.Ly,0.1);
+	   grFrame.setPreferredMinMaxX(0, 0.5*mc.Lx);
 	   display.addDrawable(mc);
 	   display.setPreferredMinMax(0, mc.Lx, 0, mc.Ly); 
 	}
