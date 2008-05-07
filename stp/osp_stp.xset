@@ -581,6 +581,45 @@ This work is part of the Open Source Physics project, and is freely available un
                     <property name="single_app" type="boolean">true</property>
                 </object>
                 </property>
+                <property name="item" type="object">
+                <object class="org.opensourcephysics.tools.LaunchNode">
+                    <property name="name" type="string">Hard Disk Monte Carlo</property>
+                    <property name="description" type="string">A Monte Carlo simulation of hard disks.</property>
+                    <property name="html" type="array" class="[[Ljava.lang.String;">
+                        <property name="[0]" type="array" class="[Ljava.lang.String;">
+                            <property name="[1]" type="string">html/diffusion/launcher.html</property>
+                        </property>
+                    </property>
+                    <property name="launch_class" type="string">org.opensourcephysics.stp.hdmc.HDMCApp</property>
+                    <property name="single_app" type="boolean">true</property>
+                </object>
+                </property>
+                <property name="item" type="object">
+                <object class="org.opensourcephysics.tools.LaunchNode">
+                    <property name="name" type="string">Lennard-Jones Monte Carlo</property>
+                    <property name="description" type="string">A Monte Carlo simulation of Lennard-Jones particles.</property>
+                    <property name="html" type="array" class="[[Ljava.lang.String;">
+                        <property name="[0]" type="array" class="[Ljava.lang.String;">
+                            <property name="[1]" type="string">html/diffusion/launcher.html</property>
+                        </property>
+                    </property>
+                    <property name="launch_class" type="string">org.opensourcephysics.stp.ljmc.LJMCApp</property>
+                    <property name="single_app" type="boolean">true</property>
+                </object>
+                </property>
+                <property name="item" type="object">
+                <object class="org.opensourcephysics.tools.LaunchNode">
+                    <property name="name" type="string">Second Virial Calculation</property>
+                    <property name="description" type="string">A calculation of the second virial coefficient.</property>
+                    <property name="html" type="array" class="[[Ljava.lang.String;">
+                        <property name="[0]" type="array" class="[Ljava.lang.String;">
+                            <property name="[1]" type="string">html/diffusion/launcher.html</property>
+                        </property>
+                    </property>
+                    <property name="launch_class" type="string">org.opensourcephysics.stp.secondvirial.SecondVirialApp</property>
+                    <property name="single_app" type="boolean">true</property>
+                </object>
+                </property>
             </property>
         </object>
         </property>
