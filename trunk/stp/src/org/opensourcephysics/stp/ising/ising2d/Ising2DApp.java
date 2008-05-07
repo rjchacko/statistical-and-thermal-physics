@@ -2,6 +2,7 @@ package org.opensourcephysics.stp.ising.ising2d;
 
 import java.text.NumberFormat;
 import org.opensourcephysics.controls.*;
+import org.opensourcephysics.display.Histogram;
 import org.opensourcephysics.frames.*;
 
 public class Ising2DApp extends AbstractSimulation
@@ -9,6 +10,8 @@ public class Ising2DApp extends AbstractSimulation
 	Ising2D ising;
 	DisplayFrame displayFrame = new DisplayFrame("Spin Configuration");
 	PlotFrame plotFrame = new PlotFrame("time", "E and M", "Thermodynamic Quantities");
+	HistogramFrame histogramFrame = new HistogramFrame("E", "P(E)","P(E) versus E");
+	Histogram energyHistogram = new Histogram();
 	NumberFormat nf;
 	double bondProbability;
 	boolean metropolis=true;
@@ -18,6 +21,9 @@ public class Ising2DApp extends AbstractSimulation
 		plotFrame.setAutoscaleX(true);
 		plotFrame.setAutoscaleY(true);
 		displayFrame.addDrawable(ising);
+		histogramFrame.setAutoscaleX(true);
+		histogramFrame.setAutoscaleY(true);
+		histogramFrame.addDrawable(energyHistogram);
 		nf = NumberFormat.getInstance();
 		nf.setMaximumFractionDigits(3);
 	}
@@ -51,9 +57,10 @@ public class Ising2DApp extends AbstractSimulation
 		
 		plotFrame.append(0, ising.mcs, (double) ising.M / ising.N);
 		plotFrame.append(1, ising.mcs, (double) ising.E / ising.N);
+		energyHistogram.append(ising.E);
 		plotFrame.repaint();
 		displayFrame.repaint();
-
+		histogramFrame.render();
 		double norm = 1.0 / (ising.mcs * ising.N);
 		control.println("mcs = " + ising.mcs);
 		control.println("<E> = " + nf.format(ising.E_acc * norm));
