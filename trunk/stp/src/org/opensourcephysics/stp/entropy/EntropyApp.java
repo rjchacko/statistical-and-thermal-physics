@@ -88,7 +88,7 @@ public class EntropyApp extends AbstractCalculation implements InteractiveMouseH
 		control.clearMessages();
 		control.println("Relative error due to keeping only the largest term\n in the total entropy: " + nf.format(Math.log(sum)/sm));
 	}
-	public static int factorial(int numerator, int denominator1,
+	public static double factorial(int numerator, int denominator1,
 			int denominator2)
 	{
 		if (numerator < Math.max(denominator1, denominator2))
@@ -108,7 +108,7 @@ public class EntropyApp extends AbstractCalculation implements InteractiveMouseH
 			maxDenominator = denominator2;
 			minDenominator = denominator1;
 		}
-		int total = numerator;
+		double total = numerator;
 		for (int i = numerator - 1; i > maxDenominator; i--)
 		{
 			total *= i;
