@@ -22,7 +22,7 @@ import org.opensourcephysics.stp.util.Rdf;
 
 public class LJMCApp extends AbstractSimulation {
   LJMC mc = new LJMC();
-  DisplayFrame display = new DisplayFrame("x", "y", "Lennard-Jones system");
+  DisplayFrame display = new DisplayFrame("Lennard-Jones system");
   PlotFrame grFrame = new PlotFrame("r", "g(r)", "Radial distribution function");
   Rdf gr = new Rdf();
   int timestep=0;
@@ -57,6 +57,7 @@ public class LJMCApp extends AbstractSimulation {
     mc.stepSize=control.getDouble("Step Size");
     mc.initialize();
     gr.initialize(mc.Lx,mc.Lx,0.1);
+    grFrame.setPreferredMinMaxX(0, 0.5*mc.Lx);
     display.addDrawable(mc);
     display.setPreferredMinMax(0, mc.Lx, 0, mc.Ly); 
  
