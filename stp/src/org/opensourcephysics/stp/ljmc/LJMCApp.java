@@ -31,35 +31,37 @@ public class LJMCApp extends AbstractSimulation {
    * Resets the LJ model to its default state.
    */
   public void reset() {
-    control.setValue("nx", 8);
-    control.setValue("ny", 8);
-    control.setAdjustableValue("Lx", 18);
-    control.setAdjustableValue("Ly", 18);
-    control.setValue("step size", 0.1);
-    control.setValue("T", 0.1);
-    OSPCombo combo = new OSPCombo(new String[] {"triangular","rectangular","random"},0);  // second argument is default
-    control.setValue("initial configuration", combo);
-    enableStepsPerDisplay(true);
-    super.setStepsPerDisplay(10);  // draw configurations every 10 steps
-    display.setSquareAspect(true); // so particles will appear as circular disks
-    gr.reset();
+	  OSPCombo combo = new OSPCombo(new String[] {"64","128","256"},0);  // second argument is default
+	  control.setValue("number of particles", combo);
+	  control.setAdjustableValue("L", 18);
+	  control.setAdjustableValue("step size", 0.1);
+	  OSPCombo combo2 = new OSPCombo(new String[] {"triangular","rectangular","random"},0);  // second argument is default
+	  control.setValue("initial configuration", combo2);
+	  enableStepsPerDisplay(true);
+	  super.setStepsPerDisplay(10);  // draw configurations every 10 steps
+	  display.setSquareAspect(true); // so particles will appear as circular disks
+	  gr.reset();
+	  mc.steps=0;
   }
   
   /**
    * Initializes the model by reading the number of particles.
    */
   public void initialize() {
-    mc.nx = control.getInt("nx"); // number of particles per row
-    mc.ny = control.getInt("ny"); // number of particles per column   
-    mc.Lx = control.getDouble("Lx");
-    mc.Ly = control.getDouble("Ly");
-    mc.initialConfiguration = control.getString("initial configuration");
-    mc.stepSize=control.getDouble("step size");
-    mc.initialize();
-    gr.initialize(mc.Lx,mc.Lx,0.1);
-    grFrame.setPreferredMinMaxX(0, 0.5*mc.Lx);
-    display.addDrawable(mc);
-    display.setPreferredMinMax(0, mc.Lx, 0, mc.Ly); 
+	   String number=control.getString("number of particles");
+	   if(number=="64") mc.N=64;
+	   else if(number=="128")mc.N=128;
+	   else mc.N=256;
+	    
+	   mc.L = control.getDouble("L");
+	   mc.initialConfiguration = control.getString("initial configuration");
+	   mc.stepSize=control.getDouble("step size");
+	   
+	   mc.initialize();
+	   gr.initialize(mc.L,mc.L,0.1);
+	   grFrame.setPreferredMinMaxX(0, 0.5*mc.L);
+	   display.addDrawable(mc);
+	   display.setPreferredMinMax(0, mc.L, 0, mc.L);
  
   }
 
@@ -67,14 +69,10 @@ public class LJMCApp extends AbstractSimulation {
    * Reads adjustable parameters before the program starts running.
    */
   public void startRunning() {
-    double Lx = control.getDouble("Lx");
-    double Ly = control.getDouble("Ly");
-    mc.T=control.getDouble("T");
-    if((Lx!=mc.Lx)||(Ly!=mc.Ly)) {
-      mc.Lx = Lx;
-      mc.Ly = Ly;
-      mc.computePE();
-      display.setPreferredMinMax(0, Lx, 0, Ly);
+	double L = control.getDouble("L");
+    if((L!=mc.L)) {
+      mc.L = L;
+      display.setPreferredMinMax(0, L, 0, L);
       resetData();
     }
   }
