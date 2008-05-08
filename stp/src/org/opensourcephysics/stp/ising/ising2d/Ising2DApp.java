@@ -8,9 +8,9 @@ import org.opensourcephysics.frames.*;
 public class Ising2DApp extends AbstractSimulation
 {
 	Ising2D ising;
-	DisplayFrame displayFrame = new DisplayFrame("spin configuration");
+	DisplayFrame displayFrame = new DisplayFrame("spin configurations");
 	PlotFrame plotFrame = new PlotFrame("time", "E and M", "Thermodynamic Quantities");
-	HistogramFrame histogramFrame = new HistogramFrame("E", "P(E)","P(E) versus E");
+	HistogramFrame histogramFrame = new HistogramFrame("E", "H(E)","H(E) versus E");
 	Histogram energyHistogram = new Histogram();
 	NumberFormat nf;
 	double bondProbability;
