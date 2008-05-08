@@ -45,14 +45,14 @@ public class LJfluidApp extends AbstractSimulation
 		displayFrame.addDrawable(lj);
 		displayFrame.setPreferredMinMax(-0.1 * lj.Lx, 1.1 * lj.Lx,
 				-0.1 * lj.Lx, 1.1 * lj.Lx);
-		temperatureFrame.setPreferredMinMaxX(0, 10);
-		temperatureFrame.setAutoscaleX(true);
-		temperatureFrame.setPreferredMinMaxY(0, 2);
-		temperatureFrame.setLocation(20, 300);
-		pressureFrame.setPreferredMinMaxX(0, 10);
-		pressureFrame.setAutoscaleX(true);
-		pressureFrame.setPreferredMinMaxY(0, 2);
-		pressureFrame.setLocation(20, 300);
+//		temperatureFrame.setPreferredMinMaxX(0, 10);
+//		temperatureFrame.setAutoscaleX(true);
+//		temperatureFrame.setPreferredMinMaxY(0, 2);
+//		temperatureFrame.setLocation(20, 300);
+//		pressureFrame.setPreferredMinMaxX(0, 10);
+//		pressureFrame.setAutoscaleX(true);
+//		pressureFrame.setPreferredMinMaxY(0, 2);
+//		pressureFrame.setLocation(20, 300);
 		histogramFrame.setAutoscaleX(true);
 		histogramFrame.setAutoscaleY(true);
 		histogramFrame.addDrawable(lj.getVelocityHistogram());
@@ -73,17 +73,13 @@ public class LJfluidApp extends AbstractSimulation
 		lj.dt = control.getDouble("dt");
 		double tmax = 2.0;//control.getDouble("Maximum for temperature axis");
 		double pmax = 2.0;//control.getDouble("Maximum for pressure axis");
-		temperatureFrame.setPreferredMinMaxY(0, tmax);
-		pressureFrame.setPreferredMinMaxY(0, pmax);
+//		temperatureFrame.setPreferredMinMaxY(0, tmax);
+//		pressureFrame.setPreferredMinMaxY(0, pmax);
 		lj.initialize();
 	    gr.initialize(lj.Lx,lj.Lx,0.1);
 	     
-		control.println("Initial kinetic energy = "
-				+ numberFormatFourDigits.format(lj
-						.getInstantanousKineticEnergy()));
-		control.println("Initial total energy = "
-				+ numberFormatFourDigits.format(lj
-						.getInstantaneousTotalEnergy()));
+		control.println("Initial kinetic energy = "+ numberFormatFourDigits.format(lj.getInstantanousKineticEnergy()));
+		control.println("Initial total energy = "+ numberFormatFourDigits.format(lj.getInstantaneousTotalEnergy()));
 		temperatureFrame.clearData();
 		pressureFrame.clearData();
 		renderPanels();
@@ -93,8 +89,8 @@ public class LJfluidApp extends AbstractSimulation
 	{
 		double tmax = 2.0;//control.getDouble("Maximum for temperature axis");
 		double pmax = 2.0;//control.getDouble("Maximum for pressure axis");
-		temperatureFrame.setPreferredMinMaxY(0, tmax);
-		pressureFrame.setPreferredMinMaxY(0, pmax);
+//		temperatureFrame.setPreferredMinMaxY(0, tmax);
+//		pressureFrame.setPreferredMinMaxY(0, pmax);
 		displayFrame.setPreferredMinMax(-0.1 * lj.Lx, 1.1 * lj.Lx,
 				-0.1 * lj.Lx, 1.1 * lj.Lx);
 		temperatureFrame.render();
@@ -159,7 +155,7 @@ public class LJfluidApp extends AbstractSimulation
 		//control.setValue("initial configuration", "crystal");
 		//control.setValue("Maximum for temperature axis", 2.0);
 		//control.setValue("Maximum for pressure axis", 2.0);
-		control.setAdjustableValue("Quench rate", 1.0);
+		control.setAdjustableValue("quench rate", 1.0);
 		lj.initialConfiguration = "crystal";
 		lj.initialize();
 		gr.reset();
