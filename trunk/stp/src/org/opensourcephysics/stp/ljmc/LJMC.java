@@ -18,9 +18,9 @@ public class LJMC implements Drawable{
   public double x[];
   public double y[];
   public double pe;
-  public int N, nx, ny; // number of particles, number per row, number per column
-  public double Lx, Ly;
-  public double rho = N/(Lx*Ly);
+  public int N; // number of particles, number per row, number per column
+  public double L;
+  public double rho = N/(L*L);
   public int steps = 0;
   public double t;
   public String initialConfiguration;
@@ -32,9 +32,8 @@ public class LJMC implements Drawable{
   Random r=new Random();
   
   public void initialize() {
-    N = nx*ny;
     t = 0;
-    rho = N/(Lx*Ly);
+    rho = N/(L*L);
     beta=1/T;
     x = new double[N];
     y = new double[N];
@@ -56,8 +55,8 @@ public class LJMC implements Drawable{
     for(int i = 0;i<N;++i) {
       do {
         overlap = false;
-        x[i] = Lx*Math.random();   // x
-        y[i] = Ly*Math.random(); // y
+        x[i] = L*Math.random();   // x
+        y[i] = L*Math.random(); // y
         int j = 0;
         while((j<i)&&!overlap) {
           double dx = x[i]-x[j];
@@ -73,41 +72,55 @@ public class LJMC implements Drawable{
 
  
   public void setRectangularLattice() { // place particles on a rectangular lattice
-    double dx = Lx/nx; // distance between columns
-    double dy = Ly/ny; // distance between rows
-    for(int ix = 0;ix<nx;++ix) {   // loop through particles in a row
-      for(int iy = 0;iy<ny;++iy) { // loop through rows
-        int i = ix+iy*ny;
-        x[i] = dx*(ix+0.5);
-        y[i] = dy*(iy+0.5);
-      }
-    }
-  }
+	    
+		int nx=(int)Math.sqrt(N);
+		int ny=nx;
+		double dx = L/nx; // distance between columns
+	    double dy=dx;
+	    for(int ix = 0;ix<nx;++ix) {   // loop through particles in a row
+	      for(int iy = 0;iy<ny;++iy) { // loop through rows
+	        int i = ix+iy*ny;
+	        x[i] = dx*(ix+0.5);
+	        y[i] = dy*(iy+0.5);
+	      }
+	    }
+	  }
 
- 
-  public void setTriangularLattice() { // place particles on triangular lattice
-    double dx = Lx/nx; // distance between particles on same row
-    double dy = Ly/ny; // distance between rows
-    for(int ix = 0;ix<nx;++ix) {
-      for(int iy = 0;iy<ny;++iy) {
-    	  	int i = ix+iy*ny;	
-        y[i] = dy*(iy+0.5);
-        if(iy%2==0) {
-          x[i] = dx*(ix+0.25);
-        } else {
-          x[i] = dx*(ix+0.75);
-        }
-      }
-    }
-  }
-
- 
+  public void setTriangularLattice(){
+		// place particles on triangular lattice
+		double dnx = Math.sqrt(N);
+		int ns = (int) dnx;
+		if (dnx - ns > 0.001)
+		{
+			ns++;
+		}
+		double ax = L / ns;
+		double ay = L / ns;
+		int i = 0;
+		int iy = 0;
+		while (i < N)
+		{
+			for (int ix = 0; ix < ns; ++ix)
+			{
+				if (i < N)
+				{
+					y[i] = ay * (iy + 0.5);
+					if (iy % 2 == 0)
+						x[i] = ax * (ix + 0.25);
+					else
+						x[i] = ax * (ix + 0.75);
+					i++;
+				}
+			}
+			iy++;
+		}
+	  }
 
   public void computePE() {
     for(int i = 0;i<N-1;i++) {
       for(int j = i+1;j<N;j++) {
-        double dx = pbcSeparation(x[i]-x[j], Lx);
-        double dy = pbcSeparation(y[i]-y[j], Ly);
+        double dx = pbcSeparation(x[i]-x[j], L);
+        double dy = pbcSeparation(y[i]-y[j], L);
         double r2 = dx*dx+dy*dy;
         double oneOverR2 = 1.0/r2;
         double oneOverR6 = oneOverR2*oneOverR2*oneOverR2;       
@@ -120,8 +133,8 @@ public class LJMC implements Drawable{
 	  double trialPE=0; 
 	  for(int i=0;i<N-1;i++){
 		  for(int j=i+1;j<N;j++){
-			 double dx = pbcSeparation(x[i]-x[j], Lx);
-			 double dy = pbcSeparation(y[i]-y[j], Ly);
+			 double dx = pbcSeparation(x[i]-x[j], L);
+			 double dy = pbcSeparation(y[i]-y[j], L);
 			 double r2 = dx*dx+dy*dy;
 			 double oneOverR2 = 1.0/r2;
 			 double oneOverR6 = oneOverR2*oneOverR2*oneOverR2;       
@@ -170,8 +183,8 @@ public class LJMC implements Drawable{
 	  tm.n = r.nextInt(N);
 	  tm.dx=2*stepSize*(Math.random()-0.5);
       tm.dy=2*stepSize*(Math.random()-0.5);
-	  x[tm.n]=pbcPosition(x[tm.n]+=tm.dx,Lx);
-	  y[tm.n]=pbcPosition(y[tm.n]+=tm.dy,Ly);
+	  x[tm.n]=pbcPosition(x[tm.n]+=tm.dx,L);
+	  y[tm.n]=pbcPosition(y[tm.n]+=tm.dy,L);
       tm.dE=computeTrialPE()-pe;
       return tm;
   }
@@ -205,9 +218,9 @@ public class LJMC implements Drawable{
     } // draw central cell boundary
     g.setColor(Color.black);
     int xpix = panel.xToPix(0);
-    int ypix = panel.yToPix(Ly);
-    int lx = panel.xToPix(Lx)-panel.xToPix(0);
-    int ly = panel.yToPix(0)-panel.yToPix(Ly);
+    int ypix = panel.yToPix(L);
+    int lx = panel.xToPix(L)-panel.xToPix(0);
+    int ly = panel.yToPix(0)-panel.yToPix(L);
     g.drawRect(xpix, ypix, lx, ly);
   }
  
