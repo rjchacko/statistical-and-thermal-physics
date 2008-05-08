@@ -21,7 +21,7 @@ public class ThermalContactApp extends AbstractSimulation
 		boardFrame.removeDrawable(board1);
 		boardFrame.removeDrawable(board2);
 
-		double Lx = control.getDouble("Length (x)");
+		double Lx = control.getDouble("length (x)");
 		double Ly = (Math.sqrt(3) / 2) * Lx;
 		int Na = control.getInt("# red particles");
 		int Nb = control.getInt("# green particles");
@@ -53,7 +53,7 @@ public class ThermalContactApp extends AbstractSimulation
 	public void reset()
 	{
 		double Lx = 12;
-		control.setValue("Length (x)", Lx);
+		control.setValue("length (x)", Lx);
 		control.setValue("# red particles", 81);
 		control.setValue("# green particles", 64);
 		control.setValue("\u2206t", 0.01);

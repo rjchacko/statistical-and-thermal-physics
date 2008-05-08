@@ -49,8 +49,8 @@ public class FlatApp extends AbstractSimulation {
    *   Gets parameters and initializes model
    */
   public void initialize() {
-    walkers.numberOfWalkers = control.getInt("Number of initial walkers");
-    maxStep = control.getInt("Number of steps");
+    walkers.numberOfWalkers = control.getInt("number of initial walkers");
+    maxStep = control.getInt("number of steps");
     OneWalker.s0 = (short)(maxStep/2);
     //walkers.L = control.getInt("Half lattice Size");
     walkers.initialize();
@@ -89,8 +89,8 @@ public class FlatApp extends AbstractSimulation {
    *  Resets to default values
    */
   public void reset() {
-    control.setValue("Number of initial walkers", 100);
-    control.setValue("Number of steps", 1024);
+    control.setValue("number of initial walkers", 100);
+    control.setValue("number of steps", 1024);
     //control.setAdjustableValue("steps per display", 100);
     //control.setValue("Half lattice Size", 100);
     //enableStepsPerDisplay(true);

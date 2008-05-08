@@ -52,7 +52,7 @@ public class HDApp
       hd.setNumberOfDisks(control.getInt("N"));
       hd.setLx(control.getDouble("Lx"));
       hd.setLy(control.getDouble("Ly"));
-      hd.setVelocityMax(control.getDouble("Temperature"));
+      hd.setVelocityMax(control.getDouble("temperature"));
       hd.initialConfiguration = control.getString("initial configuration");
       hd.initialize();
       temperatureFrame.clearData();
@@ -96,7 +96,7 @@ public class HDApp
     control.setValue("N", 64);
     control.setValue("Lx", 18.0);
     control.setValue("Ly", 18.0);
-    control.setValue("Temperature", 1.0);
+    control.setValue("temperature", 1.0);
     control.setAdjustableValue("dt", 0.01);
 	OSPCombo combo = new OSPCombo(new String[] {"crystal",  "random"},0);  // second argument is default
     control.setValue("initial configuration", combo);

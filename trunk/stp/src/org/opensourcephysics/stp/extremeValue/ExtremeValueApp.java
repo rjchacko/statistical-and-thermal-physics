@@ -30,8 +30,8 @@ public class ExtremeValueApp extends AbstractCalculation{
 	
 	public void calculate() {
 		
-		this.numberOfSamples=control.getInt("Number of Samples");
-		this.numberOfTrials=control.getInt("Number of Trials");
+		this.numberOfSamples=control.getInt("number of samples");
+		this.numberOfTrials=control.getInt("number of trials");
 		double sample[]=new double[numberOfSamples];
 		double sum=0;
 		clearData();
@@ -55,8 +55,8 @@ public class ExtremeValueApp extends AbstractCalculation{
 	
 	public void reset()
 	{
-		control.setValue("Number of Samples", 10);
-		control.setValue("Number of Trials", 1000000);
+		control.setValue("number of samples", 10);
+		control.setValue("number of trials", 1000000);
 		control.clearMessages();
 		clearData();
 	}

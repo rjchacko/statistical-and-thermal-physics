@@ -64,7 +64,7 @@ public class EinsteinApp extends AbstractSimulation
 	public void initialize()
 	{
 		N = control.getInt("N");
-		systemEnergy = control.getInt("System energy");
+		systemEnergy = control.getInt("system energy");
 
 		E = new int[N];
 		for (int i = 0; i < N; i++)
@@ -87,7 +87,7 @@ public class EinsteinApp extends AbstractSimulation
 	public void reset()
 	{
 		control.setValue("N", 40);
-		control.setValue("System energy", 200);
+		control.setValue("system energy", 200);
 		control.clearMessages();
 		histogramFrame.clearData();
 		histogramFrame.render();

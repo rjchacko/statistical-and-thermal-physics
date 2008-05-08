@@ -35,7 +35,7 @@ public class LJMCApp extends AbstractSimulation {
     control.setValue("ny", 8);
     control.setAdjustableValue("Lx", 18);
     control.setAdjustableValue("Ly", 18);
-    control.setValue("Step Size", 0.1);
+    control.setValue("step size", 0.1);
     control.setValue("T", 0.1);
     OSPCombo combo = new OSPCombo(new String[] {"triangular","rectangular","random"},0);  // second argument is default
     control.setValue("initial configuration", combo);
@@ -54,7 +54,7 @@ public class LJMCApp extends AbstractSimulation {
     mc.Lx = control.getDouble("Lx");
     mc.Ly = control.getDouble("Ly");
     mc.initialConfiguration = control.getString("initial configuration");
-    mc.stepSize=control.getDouble("Step Size");
+    mc.stepSize=control.getDouble("step size");
     mc.initialize();
     gr.initialize(mc.Lx,mc.Lx,0.1);
     grFrame.setPreferredMinMaxX(0, 0.5*mc.Lx);

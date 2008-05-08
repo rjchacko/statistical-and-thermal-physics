@@ -33,7 +33,7 @@ public class QMCApp extends AbstractSimulation {
    */
   public void initialize() {
   distribution.setConnected(1,true);
-    double p = control.getDouble("Momentum exponent p");  // 1 or 2 are physical 
+    double p = control.getDouble("momentum exponent p");  // 1 or 2 are physical 
     int kmax = control.getInt("maximum k");
     int dimension = control.getInt("dimension");  // 1 2 or 3
     //statistics = control.getInt("statistics:FD=1,BE=2,MB=3");
@@ -71,7 +71,7 @@ public class QMCApp extends AbstractSimulation {
    * Resets the simulation.
    */
   public void reset() {
-    control.setValue("Momentum exponent p", 2);
+    control.setValue("momentum exponent p", 2);
     control.setValue("maximum k", 10);
     control.setValue("dimension", 3);
     //control.setValue("statistics:FD=1,BE=2,MB=3", 1);

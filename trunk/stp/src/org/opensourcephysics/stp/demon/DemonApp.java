@@ -79,11 +79,11 @@ public class DemonApp extends AbstractSimulation
 	public void initialize()
 	{
 		N = control.getInt("N");
-		dimensions = Math.min(control.getInt("Dimension"), 3);
-		control.setValue("Dimension", dimensions);
-		systemEnergy = control.getDouble("System energy");
+		dimensions = Math.min(control.getInt("dimension"), 3);
+		control.setValue("dimension", dimensions);
+		systemEnergy = control.getDouble("system energy");
 		delta = 0.1;//control.getDouble("Delta");
-      	exponent = control.getDouble("Momentum exponent");
+      	exponent = control.getDouble("momentum exponent");
 
 		v = new double[N][dimensions];
 		double v0 = Math.pow(systemEnergy / N, 1.0/exponent);
@@ -106,9 +106,9 @@ public class DemonApp extends AbstractSimulation
 	public void reset()
 	{
 		control.setValue("N", 40);
-		control.setValue("Dimension", 1);
-		control.setValue("System energy", 40);
-		control.setValue("Momentum exponent", "2");
+		control.setValue("dimension", 1);
+		control.setValue("system energy", 40);
+		control.setValue("momentum exponent", "2");
 		control.clearMessages();
       	histogramFrame.clearData();
       	vhistogramFrame.clearData();

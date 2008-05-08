@@ -95,8 +95,8 @@ public class EinsteinSolidApp extends AbstractCalculation
 		Eb = 2;
 		Na = 4;
 		Nb = 4;
-		control.setValue("Initial Ea", Ea);
-		control.setValue("Initial Eb", Eb);
+		control.setValue("initial Ea", Ea);
+		control.setValue("initial Eb", Eb);
 		control.setValue("Na", Na);
 		control.setValue("Nb", Nb);
 		control.clearMessages();
@@ -104,8 +104,8 @@ public class EinsteinSolidApp extends AbstractCalculation
 
 	public void calculate()
 	{
-		Ea = control.getInt("Initial Ea");
-		Eb = control.getInt("Initial Eb");
+		Ea = control.getInt("initial Ea");
+		Eb = control.getInt("initial Eb");
 		Na = control.getInt("Na");
 		Nb = control.getInt("Nb");
 		addPoints();

@@ -25,8 +25,8 @@ public class Ising2DAntiApp extends AbstractSimulation
 	{
 		ising.J = -1.0;	//initialize to be anti-ferromagnetic
 		
-		ising.initialize(control.getInt("Length"), control
-				.getDouble("Temperature"), control.getDouble("External field"));
+		ising.initialize(control.getInt("length"), control
+				.getDouble("temperature"), control.getDouble("external field"));
 		displayFrame.setPreferredMinMax(-5, ising.L + 5, -5, ising.L + 5);
 		control.clearMessages();
 		plotFrame.clearData();
@@ -36,8 +36,8 @@ public class Ising2DAntiApp extends AbstractSimulation
 
 	public void doStep()
 	{
-		ising.setTemperature(control.getDouble("Temperature"));
-		ising.setExternalField(control.getDouble("External field"));
+		ising.setTemperature(control.getDouble("temperature"));
+		ising.setExternalField(control.getDouble("external field"));
 		ising.doOneMCStep();
 		plotFrame.append(0, ising.mcs, (double) ising.M / ising.N);
 		plotFrame.append(1, ising.mcs, (double) ising.E / ising.N);
@@ -58,9 +58,9 @@ public class Ising2DAntiApp extends AbstractSimulation
 
 	public void reset()
 	{
-		control.setAdjustableValue("Length", 32);
-		control.setAdjustableValue("Temperature", nf.format(Ising2D.criticalTemperature));
-		control.setAdjustableValue("External field", 0);
+		control.setAdjustableValue("length", 32);
+		control.setAdjustableValue("temperature", nf.format(Ising2D.criticalTemperature));
+		control.setAdjustableValue("external field", 0);
 	}
 
 	public void cleardata()
