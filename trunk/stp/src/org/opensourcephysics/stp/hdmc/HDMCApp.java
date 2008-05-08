@@ -19,13 +19,12 @@ public class HDMCApp extends AbstractSimulation {
 	}	
 	
 	public void reset(){
-	    control.setValue("nx", 8);
-	    control.setValue("ny", 8);
-	    control.setAdjustableValue("Lx", 18);
-	    control.setAdjustableValue("Ly", 18);
+		OSPCombo combo = new OSPCombo(new String[] {"64","128","256"},0);  // second argument is default
+	    control.setValue("number of particles", combo);
+	    control.setAdjustableValue("L", 18);
 	    control.setAdjustableValue("step size", 0.1);
-	    OSPCombo combo = new OSPCombo(new String[] {"triangular","rectangular","random"},0);  // second argument is default
-	    control.setValue("initial configuration", combo);
+	    OSPCombo combo2 = new OSPCombo(new String[] {"triangular","rectangular","random"},0);  // second argument is default
+	    control.setValue("initial configuration", combo2);
 	    control.setAdjustableValue("compression",1.0);
 	    enableStepsPerDisplay(true);
 	    super.setStepsPerDisplay(10);  // draw configurations every 10 steps
@@ -35,28 +34,28 @@ public class HDMCApp extends AbstractSimulation {
 	}
 	
 	public void initialize(){
-	   mc.nx = control.getInt("nx"); // number of particles per row
-	   mc.ny = control.getInt("ny"); // number of particles per column   
-	   mc.Lx = control.getDouble("Lx");
-	   mc.Ly = control.getDouble("Ly");
+	   String number=control.getString("number of particles");
+	   if(number=="64") mc.N=64;
+	   else if(number=="128")mc.N=128;
+	   else mc.N=256;
+	    
+	   mc.L = control.getDouble("L");
 	   mc.initialConfiguration = control.getString("initial configuration");
 	   mc.stepSize=control.getDouble("step size");
 	   
 	   mc.initialize();
-	   gr.initialize(mc.Lx,mc.Ly,0.1);
-	   grFrame.setPreferredMinMaxX(0, 0.5*mc.Lx);
+	   gr.initialize(mc.L,mc.L,0.1);
+	   grFrame.setPreferredMinMaxX(0, 0.5*mc.L);
 	   display.addDrawable(mc);
-	   display.setPreferredMinMax(0, mc.Lx, 0, mc.Ly); 
+	   display.setPreferredMinMax(0, mc.L, 0, mc.L); 
 	}
 	
 	public void startRunning() {
-	   double Lx = control.getDouble("Lx");
-	   double Ly = control.getDouble("Ly");
+	   double L = control.getDouble("L");
 	   mc.s=control.getDouble("compression");
-	   if((Lx!=mc.Lx)||(Ly!=mc.Ly)) {
-	     mc.Lx = Lx;
-	     mc.Ly = Ly;
-	     display.setPreferredMinMax(0, Lx, 0, Ly);
+	   if((L!=mc.L)) {
+	     mc.L = L;
+	     display.setPreferredMinMax(0, L, 0, L);
 	     resetData();
 	   }
 	 }
