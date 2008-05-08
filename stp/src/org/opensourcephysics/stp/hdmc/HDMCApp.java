@@ -23,10 +23,10 @@ public class HDMCApp extends AbstractSimulation {
 	    control.setValue("ny", 8);
 	    control.setAdjustableValue("Lx", 18);
 	    control.setAdjustableValue("Ly", 18);
-	    control.setAdjustableValue("Step Size", 0.1);
+	    control.setAdjustableValue("step size", 0.1);
 	    OSPCombo combo = new OSPCombo(new String[] {"triangular","rectangular","random"},0);  // second argument is default
 	    control.setValue("initial configuration", combo);
-	    control.setAdjustableValue("compression",0.9);
+	    control.setAdjustableValue("compression",1.0);
 	    enableStepsPerDisplay(true);
 	    super.setStepsPerDisplay(10);  // draw configurations every 10 steps
 	    display.setSquareAspect(true); // so particles will appear as circular disks
@@ -40,7 +40,7 @@ public class HDMCApp extends AbstractSimulation {
 	   mc.Lx = control.getDouble("Lx");
 	   mc.Ly = control.getDouble("Ly");
 	   mc.initialConfiguration = control.getString("initial configuration");
-	   mc.stepSize=control.getDouble("Step Size");
+	   mc.stepSize=control.getDouble("step size");
 	   
 	   mc.initialize();
 	   gr.initialize(mc.Lx,mc.Ly,0.1);

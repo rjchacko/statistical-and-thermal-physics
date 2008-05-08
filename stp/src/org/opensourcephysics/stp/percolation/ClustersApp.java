@@ -30,10 +30,10 @@ public class ClustersApp extends AbstractSimulation {
   int numberOfTrials;
 
   public void initialize() {
-    int L = control.getInt("Lattice size L");
+    int L = control.getInt("lattice size L");
     grid.resizeGrid(L, L);
     lattice = new Clusters(L);
-    pDisplay = control.getDouble("Display lattice at this value of p");
+    pDisplay = control.getDouble("display lattice at this value of p");
     grid.setMessage("p = "+pDisplay);
     plot4.setMessage("p = "+pDisplay);
     plot4.setLogScale(true, true);
@@ -91,8 +91,8 @@ public class ClustersApp extends AbstractSimulation {
   }
 
   public void reset() {
-    control.setValue("Lattice size L", 128);
-    control.setValue("Display lattice at this value of p", 0.5927);
+    control.setValue("lattice size L", 128);
+    control.setValue("display lattice at this value of p", 0.5927);
   }
 
   public static void main(String args[]) {

@@ -36,7 +36,7 @@ public class Ising1DApp extends AbstractSimulation
 	public void initialize()
 	{
 		ising.initialize(control.getInt("N"), control
-				.getDouble("Temperature"), control.getDouble("External field"));
+				.getDouble("temperature"), control.getDouble("external field"));
 		displayFrame.setPreferredMinMax(-2, ising.N + 2, -2, +3);
 		control.clearMessages();
 		eFrame.clearData();
@@ -49,8 +49,8 @@ public class Ising1DApp extends AbstractSimulation
 
 	public void doStep()
 	{
-		ising.setTemperature(control.getDouble("Temperature"));
-		ising.setExternalField(control.getDouble("External field"));
+		ising.setTemperature(control.getDouble("temperature"));
+		ising.setExternalField(control.getDouble("external field"));
 		ising.doOneMCStep();
 		mFrame.append(1, ising.mcs, (double) ising.M / ising.N);
 		eFrame.append(1, ising.mcs, (double) ising.E / ising.N);
@@ -71,8 +71,8 @@ public class Ising1DApp extends AbstractSimulation
 	public void reset()
 	{
 		control.setValue("N", 64);
-		control.setAdjustableValue("Temperature", 1);
-		control.setAdjustableValue("External field", 0);
+		control.setAdjustableValue("temperature", 1);
+		control.setAdjustableValue("external field", 0);
 	}
 
 	public void clearData()

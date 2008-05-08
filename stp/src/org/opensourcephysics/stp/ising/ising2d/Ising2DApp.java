@@ -8,7 +8,7 @@ import org.opensourcephysics.frames.*;
 public class Ising2DApp extends AbstractSimulation
 {
 	Ising2D ising;
-	DisplayFrame displayFrame = new DisplayFrame("Spin Configuration");
+	DisplayFrame displayFrame = new DisplayFrame("spin configuration");
 	PlotFrame plotFrame = new PlotFrame("time", "E and M", "Thermodynamic Quantities");
 	HistogramFrame histogramFrame = new HistogramFrame("E", "P(E)","P(E) versus E");
 	Histogram energyHistogram = new Histogram();
@@ -30,10 +30,10 @@ public class Ising2DApp extends AbstractSimulation
 
 	public void initialize()
 	{
-		ising.initialize(control.getInt("Length"), control
-				.getDouble("Temperature"), control.getDouble("External field"));
+		ising.initialize(control.getInt("length"), control
+				.getDouble("temperature"), control.getDouble("external field"));
 		this.bondProbability=bondProbability(ising.J, ising.T);
-		if(control.getString("Dynamics")=="Metropolis") metropolis=true;
+		if(control.getString("dynamics")=="Metropolis") metropolis=true;
 		else metropolis=false;
 		
 		displayFrame.setPreferredMinMax(-5, ising.L + 5, -5, ising.L + 5);
@@ -49,8 +49,8 @@ public class Ising2DApp extends AbstractSimulation
 	
 	public void doStep()
 	{
-		ising.setTemperature(control.getDouble("Temperature"));
-		ising.setExternalField(control.getDouble("External field"));
+		ising.setTemperature(control.getDouble("temperature"));
+		ising.setExternalField(control.getDouble("external field"));
 		
 		if(metropolis)ising.doOneMCStep();
 		else ising.doOneWolffStep(bondProbability);
@@ -77,11 +77,11 @@ public class Ising2DApp extends AbstractSimulation
 
 	public void reset()
 	{
-		control.setAdjustableValue("Length", 32);
-		control.setAdjustableValue("Temperature", nf.format(Ising2D.criticalTemperature));
-		control.setAdjustableValue("External field", 0);
+		control.setAdjustableValue("length", 32);
+		control.setAdjustableValue("temperature", nf.format(Ising2D.criticalTemperature));
+		control.setAdjustableValue("external field", 0);
 		OSPCombo combo = new OSPCombo(new String[] {"Metropolis",  "Wolff"},0);  // second argument is default
-	    control.setValue("Dynamics", combo);
+	    control.setValue("dynamics", combo);
 	}
 
 	public void cleardata()

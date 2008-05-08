@@ -46,7 +46,7 @@ public class LJgasApp extends AbstractSimulation
 
 		//control.setValue("N", gas.numberOfParticles);
 		control.setValue("cell length", gas.cellLength);
-		control.setValue("Perturbation strength", 1.00001);
+		control.setValue("perturbation strength", 1.00001);
 		
 		displayFrame.setPreferredMinMax(-0.2 * gas.cellLength,
 				1.2 * gas.cellLength, -0.2 * gas.cellLength,
@@ -56,7 +56,7 @@ public class LJgasApp extends AbstractSimulation
 
 	public void perturb()
 	{
-		double a = control.getDouble("Perturbation strength");
+		double a = control.getDouble("perturbation strength");
 		gas.perturb(a);
 		gas.zeroAverages();
 	}

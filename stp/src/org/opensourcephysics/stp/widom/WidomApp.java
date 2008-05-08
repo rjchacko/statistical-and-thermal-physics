@@ -28,11 +28,11 @@ public class WidomApp extends AbstractSimulation {
    * Initializes the model by reading the number of particles.
    */
   public void initialize() {
-    mc.temperature = control.getDouble("Temperature");
+    mc.temperature = control.getDouble("temperature");
     mc.ds = 2.0*control.getDouble("maximum change in position component");
     mc.Lx = control.getDouble("Lx");
     mc.Ly = control.getDouble("Ly");
-    mc.N = control.getInt("Number of Particles");
+    mc.N = control.getInt("number of Particles");
     mc.initialize();
     display.addDrawable(mc);
     display.setPreferredMinMax(0, mc.Lx, 0, mc.Ly); 
@@ -81,8 +81,8 @@ public class WidomApp extends AbstractSimulation {
   public void reset() {
     control.setAdjustableValue("Lx", 30.0);
     control.setAdjustableValue("Ly", 30.0);
-    control.setValue("Temperature", 1.0);
-    control.setValue("Number of Particles", 100);
+    control.setValue("temperature", 1.0);
+    control.setValue("number of Particles", 100);
     control.setValue("maximum change in position component", 0.2);
     enableStepsPerDisplay(true);
     setStepsPerDisplay(10);  // draw configurations every 10 steps

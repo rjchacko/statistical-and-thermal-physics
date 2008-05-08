@@ -106,13 +106,13 @@ public class IdealGasApp extends AbstractSimulation
 	public void initialize()
 	{
 		mcs = 0;
-		N = control.getInt("Num. particles")
-				* control.getInt("Num. dimensions");
+		N = control.getInt("num. particles")
+				* control.getInt("num. dimensions");
 		v = new double[N]; // Initialized to [0]
 		E = 0;
-		E_bins = control.getInt("Num. energy bins");
-		E_max = control.getDouble("Maximum energy");
-		vdel = control.getDouble("\u2206 Velocity");
+		E_bins = control.getInt("num. energy bins");
+		E_max = control.getDouble("maximum energy");
+		vdel = control.getDouble("\u2206 velocity");
 		control.clearMessages();
 		H = new int[E_bins]; // Initialized to [0]
 		g = new double[E_bins];
@@ -122,11 +122,11 @@ public class IdealGasApp extends AbstractSimulation
 
 	public void reset()
 	{
-		control.setValue("Num. particles", 4);
-		control.setValue("Num. dimensions", 1);
-		control.setValue("Num. energy bins", 128);
-		control.setValue("Maximum energy", 10);
-		control.setValue("\u2206 Velocity", 0.4);
+		control.setValue("num. particles", 4);
+		control.setValue("num. dimensions", 1);
+		control.setValue("num. energy bins", 128);
+		control.setValue("maximum energy", 10);
+		control.setValue("\u2206 velocity", 0.4);
 		densityPlot.clearDataAndRepaint();
 		histogramPlot.clearDataAndRepaint();
 	}

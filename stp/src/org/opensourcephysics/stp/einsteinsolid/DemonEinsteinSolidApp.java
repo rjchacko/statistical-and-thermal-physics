@@ -58,7 +58,7 @@ public class DemonEinsteinSolidApp extends AbstractSimulation
 	public void initialize()
 	{
 		N = control.getInt("N");
-		systemEnergy = control.getInt("System energy");
+		systemEnergy = control.getInt("system energy");
 		dist.setBinWidth(1);
 
       	e = new int[N];
@@ -79,7 +79,7 @@ public class DemonEinsteinSolidApp extends AbstractSimulation
 	public void reset()
 	{
 		control.setValue("N", 40);
-		control.setValue("System energy", 20);
+		control.setValue("system energy", 20);
 		control.clearMessages();
       	dist.clear();
       	panel.render();

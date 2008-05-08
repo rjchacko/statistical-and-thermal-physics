@@ -28,8 +28,8 @@ public class SecondVirialApp extends AbstractCalculation implements Function{
 	public void calculate() {
 		double x_low = 0.00001, x_high = 10, tolerance = 0.0001;
 		initialize();
-		for(int i=0;i<Tmax;i++){
-			T=i;
+		for(double temp=Tmin;temp<Tmax;temp+=0.25){
+			T=temp;
 			double B2=Integral.simpson(this, x_low, x_high, 20, tolerance);
 			pf.append(0, T, B2);
 		}
