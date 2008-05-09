@@ -75,7 +75,7 @@ public class TwoDimensionalWalkApp extends AbstractSimulation
 
 	public void initialize()
 	{
-		nwalkers = control.getInt("nwalkers");
+		nwalkers = control.getInt("number of walkers");
 		pLeft = control.getDouble("p left");
 		pRight = control.getDouble("p right");
 		pDown = control.getDouble("p down");
@@ -103,7 +103,7 @@ public class TwoDimensionalWalkApp extends AbstractSimulation
 		pRight = 0.25;
 		pDown = 0.25;
 		pLeft = 0.25;
-		control.setValue("nwalkers", 1000);
+		control.setValue("number of walkers", 1000);
 		control.setValue("p left", pLeft);
 		control.setValue("p right", pRight);
 		control.setValue("p down", pDown);

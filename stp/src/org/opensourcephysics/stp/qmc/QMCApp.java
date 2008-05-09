@@ -39,7 +39,7 @@ public class QMCApp extends AbstractSimulation {
     //statistics = control.getInt("statistics:FD=1,BE=2,MB=3");
   
     statistics = 1;
-    String st = control.getString("statistics:FD,BE,MB");
+    String st = control.getString("statistics:FD, BE, MB");
     if(st.equalsIgnoreCase("FD")){
     	statistics = 1;
     } else if(st.equalsIgnoreCase("BE")){
@@ -75,7 +75,7 @@ public class QMCApp extends AbstractSimulation {
     control.setValue("maximum k", 10);
     control.setValue("dimension", 3);
     //control.setValue("statistics:FD=1,BE=2,MB=3", 1);
-    control.setValue("statistics:FD,BE,MB", "FD");
+    control.setValue("statistics:FD, BE, MB", "FD");
     
     control.setValue("number of particles", 100);
     control.setValue("temperature", 10);

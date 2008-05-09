@@ -21,9 +21,9 @@ import org.opensourcephysics.numerics.*;
 public class LJParticlesDemon implements Drawable, ODE {
   public double state[];
   public double ax[], ay[];
-  public int N, nx, ny; // number of particles, number per row, number per column
-  public double Lx, Ly;
-  public double rho = N/(Lx*Ly);
+  public int N; // number of particles, number per row, number per column
+  public double L;
+  public double rho = N/(L*L);
   public double initialKineticEnergy;
   public int steps = 0;
   public double dt = 0.01;
@@ -42,9 +42,9 @@ public class LJParticlesDemon implements Drawable, ODE {
   public void initialize() {
     demonEnergy = 0;
     demonP = new double[100];
-    N = nx*ny;
+    
     t = 0;
-    rho = N/(Lx*Ly);
+    rho = N/(L*L);
     resetAverages();
     state = new double[1+4*N];
     ax = new double[N];
@@ -70,8 +70,8 @@ public class LJParticlesDemon implements Drawable, ODE {
     for(int i = 0;i<N;++i) {
       do {
         overlap = false;
-        state[4*i] = Lx*Math.random();   // x
-        state[4*i+2] = Ly*Math.random(); // y
+        state[4*i] = L*Math.random();   // x
+        state[4*i+2] = L*Math.random(); // y
         int j = 0;
         while((j<i)&&!overlap) {
           double dx = state[4*i]-state[4*j];
@@ -89,35 +89,49 @@ public class LJParticlesDemon implements Drawable, ODE {
   // start break
   // setRectangularLattice
   public void setRectangularLattice() { // place particles on a rectangular lattice
-    double dx = Lx/nx; // distance between columns
-    double dy = Ly/ny; // distance between rows
-    for(int ix = 0;ix<nx;++ix) {   // loop through particles in a row
-      for(int iy = 0;iy<ny;++iy) { // loop through rows
-        int i = ix+iy*ny;
-        state[4*i] = dx*(ix+0.5);
-        state[4*i+2] = dy*(iy+0.5);
-      }
-    }
-  }
+	    
+		int nx=(int)Math.sqrt(N);
+		int ny=nx;
+		double dx = L/nx; // distance between columns
+	    double dy=dx;
+	    for(int ix = 0;ix<nx;++ix) {   // loop through particles in a row
+	      for(int iy = 0;iy<ny;++iy) { // loop through rows
+	        int i = ix+iy*ny;
+	        state[4*i] = dx*(ix+0.5);
+	        state[4*i+2] = dy*(iy+0.5);
+	      }
+	    }
+	  }
 
-  // end break
-  // start break
-  // setTriangularLattice
-  public void setTriangularLattice() { // place particles on triangular lattice
-    double dx = Lx/nx; // distance between particles on same row
-    double dy = Ly/ny; // distance between rows
-    for(int ix = 0;ix<nx;++ix) {
-      for(int iy = 0;iy<ny;++iy) {
-        int i = ix+iy*ny;
-        state[4*i+2] = dy*(iy+0.5);
-        if(iy%2==0) {
-          state[4*i] = dx*(ix+0.25);
-        } else {
-          state[4*i] = dx*(ix+0.75);
-        }
-      }
-    }
-  }
+public void setTriangularLattice(){
+		// place particles on triangular lattice
+		double dnx = Math.sqrt(N);
+		int ns = (int) dnx;
+		if (dnx - ns > 0.001)
+		{
+			ns++;
+		}
+		double ax = L / ns;
+		double ay = L / ns;
+		int i = 0;
+		int iy = 0;
+		while (i < N)
+		{
+			for (int ix = 0; ix < ns; ++ix)
+			{
+				if (i < N)
+				{
+					state[4*i+2] = ay * (iy + 0.5);
+					if (iy % 2 == 0)
+						state[4*i] = ax * (ix + 0.25);
+					else
+						state[4*i] = ax * (ix + 0.75);
+					i++;
+				}
+			}
+			iy++;
+		}
+	  }
 
   // end break
   // start break
@@ -225,8 +239,8 @@ public class LJParticlesDemon implements Drawable, ODE {
     }
     for(int i = 0;i<N-1;i++) {
       for(int j = i+1;j<N;j++) {
-        double dx = pbcSeparation(state[4*i]-state[4*j], Lx);
-        double dy = pbcSeparation(state[4*i+2]-state[4*j+2], Ly);
+        double dx = pbcSeparation(state[4*i]-state[4*j], L);
+        double dy = pbcSeparation(state[4*i+2]-state[4*j+2], L);
         double r2 = dx*dx+dy*dy;
         double oneOverR2 = 1.0/r2;
         double oneOverR6 = oneOverR2*oneOverR2*oneOverR2;
@@ -306,8 +320,8 @@ public class LJParticlesDemon implements Drawable, ODE {
     for(int i = 0;i<N;i++) {
       totalKineticEnergy += (state[4*i+1]*state[4*i+1]+state[4*i+3]*state[4*i+3]);
       xVelocityHistogram.append(state[4*i+1]);
-      state[4*i] = pbcPosition(state[4*i], Lx);
-      state[4*i+2] = pbcPosition(state[4*i+2], Ly);
+      state[4*i] = pbcPosition(state[4*i], L);
+      state[4*i+2] = pbcPosition(state[4*i+2], L);
     }
     totalKineticEnergy *= 0.5;
     steps++;
@@ -333,9 +347,9 @@ public class LJParticlesDemon implements Drawable, ODE {
     } // draw central cell boundary
     g.setColor(Color.black);
     int xpix = panel.xToPix(0);
-    int ypix = panel.yToPix(Ly);
-    int lx = panel.xToPix(Lx)-panel.xToPix(0);
-    int ly = panel.yToPix(0)-panel.yToPix(Ly);
+    int ypix = panel.yToPix(L);
+    int lx = panel.xToPix(L)-panel.xToPix(0);
+    int ly = panel.yToPix(0)-panel.yToPix(L);
     g.drawRect(xpix, ypix, lx, ly);
   }
   // end break

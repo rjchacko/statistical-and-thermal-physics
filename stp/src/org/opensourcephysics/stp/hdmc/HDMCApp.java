@@ -71,8 +71,7 @@ public class HDMCApp extends AbstractSimulation {
 	}
 	
 	public void stop() {
-		 control.println("Density = "+decimalFormat.format(mc.rho));
-		 control.println("Number of time steps = "+mc.steps);
+		 control.println("Density = "+decimalFormat.format(mc.N/(mc.L*mc.L)));
 	}
 	
 	public void resetData() {

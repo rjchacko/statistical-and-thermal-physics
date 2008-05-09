@@ -9,12 +9,14 @@ import org.opensourcephysics.numerics.Integral;
 public class SecondVirialApp extends AbstractCalculation implements Function{
 	PlotFrame pf=new PlotFrame("T","B_2","Second Virial Coefficient");
 	double Tmin,Tmax,T;
+	int numberOfPoints=400;
+	
 	public static void main(String[] args) {
 		CalculationControl control = CalculationControl.createApp(new SecondVirialApp(),args);
 	}
     
 	public void reset() {
-	    control.setValue("Tmin", 0.0);	
+	    control.setValue("Tmin", 1.0);	
 	    control.setValue("Tmax", 100.0);   
 	    pf.clearData();
     }
@@ -26,9 +28,12 @@ public class SecondVirialApp extends AbstractCalculation implements Function{
 	}
 	
 	public void calculate() {
-		double x_low = 0.00001, x_high = 10, tolerance = 0.0001;
+		double x_low = 0.000001, x_high = 1000, tolerance = 0.0001;
+		
 		initialize();
-		for(double t=Tmin;t<Tmax;t+=0.25){
+		double deltaT=(Tmax-Tmin)/(double)numberOfPoints;
+		
+		for(double t=Tmin;t<Tmax;t+=deltaT){
 			T=t;
 			double B2=Integral.simpson(this, x_low, x_high, 20, tolerance);
 			pf.append(0, T, B2);

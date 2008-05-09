@@ -149,12 +149,9 @@ public class HDMC implements Drawable{
   }
   
   public void compress(){
-	  if(minSeparation<0)System.out.println("Negative separation!");
 	  double oldRadius=radius;
 	  radius=0.5*(1-s)*minSeparation+s*radius;
-	  if(radius<oldRadius){
-		  System.out.println("Decompressing!");
-	  }
+	  L=Math.sqrt(L*L+Math.PI*(oldRadius*oldRadius-radius*radius));
   }
   
   
