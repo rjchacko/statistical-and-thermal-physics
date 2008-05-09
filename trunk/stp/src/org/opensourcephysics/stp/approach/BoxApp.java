@@ -36,7 +36,6 @@ public class BoxApp extends AbstractSimulation {
 	{
 		control.clearMessages();
 		control.setValue("N", 64);
-		plotFrame.setPreferredMinMaxX(0,10);
 		plotFrame.setAutoscaleX(true);
 		plotFrame.repaint();
 		zeroAverages();
@@ -45,7 +44,7 @@ public class BoxApp extends AbstractSimulation {
 	public void initialize()
 	{
 		N = control.getInt("N");
-		plotFrame.setPreferredMinMaxY(0,N); //
+		 //
 		time = 0;
 		zeroedTime = 0;
 		nleft = N;// all particles initially on left side

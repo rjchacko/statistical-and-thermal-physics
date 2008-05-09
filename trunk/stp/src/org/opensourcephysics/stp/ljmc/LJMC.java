@@ -191,9 +191,10 @@ public class LJMC implements Drawable{
 
   public void step() {
 	TrialMove tm=makeTrialMove();
-	
-	if( tm.dE<0 || Math.exp(-tm.dE/T)>Math.random() ){
-		pe+=tm.dE;		
+	boolean lowersEnergy=tm.dE<0;
+	boolean acceptThermal=Math.exp(-tm.dE/T)>Math.random();
+	if(  lowersEnergy || acceptThermal ){		
+		pe=pe+tm.dE;
 	}
 	else{
 		x[tm.n]-=tm.dx;

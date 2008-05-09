@@ -34,6 +34,7 @@ public class LJMCApp extends AbstractSimulation {
 	  OSPCombo combo = new OSPCombo(new String[] {"64","128","256"},0);  // second argument is default
 	  control.setValue("number of particles", combo);
 	  control.setAdjustableValue("L", 18);
+	  control.setAdjustableValue("T", 1);
 	  control.setAdjustableValue("step size", 0.1);
 	  OSPCombo combo2 = new OSPCombo(new String[] {"triangular","rectangular","random"},0);  // second argument is default
 	  control.setValue("initial configuration", combo2);
@@ -55,6 +56,7 @@ public class LJMCApp extends AbstractSimulation {
 	    
 	   mc.L = control.getDouble("L");
 	   mc.initialConfiguration = control.getString("initial configuration");
+	   mc.T=control.getDouble("T");
 	   mc.stepSize=control.getDouble("step size");
 	   
 	   mc.initialize();
@@ -75,6 +77,8 @@ public class LJMCApp extends AbstractSimulation {
       display.setPreferredMinMax(0, L, 0, L);
       resetData();
     }
+    mc.T=control.getDouble("T");
+    mc.stepSize=control.getDouble("step size");
   }
   
   /**
@@ -94,7 +98,6 @@ public class LJMCApp extends AbstractSimulation {
    */
   public void stop() {
     control.println("Density = "+decimalFormat.format(mc.rho));
-    control.println("Number of time steps = "+mc.steps);
   }
 
   /**

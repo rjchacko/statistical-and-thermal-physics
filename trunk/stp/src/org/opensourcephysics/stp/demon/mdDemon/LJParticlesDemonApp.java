@@ -29,17 +29,18 @@ public class LJParticlesDemonApp extends AbstractSimulation {
    * Initializes the model by reading the number of particles.
    */
   public void initialize() {
-    md.nx = control.getInt("nx"); // number of particles per row
-    md.ny = control.getInt("ny"); // number of particles per column
+	String number=control.getString("number of particles");
+	if(number=="64") md.N=64;
+	else if(number=="128")md.N=128;
+	else md.N=256;
     md.initialKineticEnergy = control.getDouble("initial kinetic energy per particle");
     md.dv = 2.0*control.getDouble("maximum change in velocity component");
-    md.Lx = control.getDouble("Lx");
-    md.Ly = control.getDouble("Ly");
+    md.L = control.getDouble("L");
     md.initialConfiguration = control.getString("initial configuration");
     md.dt = control.getDouble("dt");
     md.initialize();
     display.addDrawable(md);
-    display.setPreferredMinMax(0, md.Lx, 0, md.Ly); // assumes vmax = 2*initalTemp and bin width = Vmax/N
+    display.setPreferredMinMax(0, md.L, 0, md.L); // assumes vmax = 2*initalTemp and bin width = Vmax/N
     xVelocityHistogram.setBinWidth(2*md.initialKineticEnergy/md.N);
   }
 
@@ -77,13 +78,11 @@ public class LJParticlesDemonApp extends AbstractSimulation {
    */
   public void startRunning() {
     md.dt = control.getDouble("dt");
-    double Lx = control.getDouble("Lx");
-    double Ly = control.getDouble("Ly");
-    if((Lx!=md.Lx)||(Ly!=md.Ly)) {
-      md.Lx = Lx;
-      md.Ly = Ly;
+    double L = control.getDouble("L");
+    if((L!=md.L)) {
+      md.L = L;
       md.computeAcceleration();
-      display.setPreferredMinMax(0, Lx, 0, Ly);
+      display.setPreferredMinMax(0, L, 0, L);
       resetData();
     }
   }
@@ -92,14 +91,13 @@ public class LJParticlesDemonApp extends AbstractSimulation {
    * Resets the LJ model to its default state.
    */
   public void reset() {
-    control.setValue("nx", 20);
-    control.setValue("ny", 20);
-    control.setAdjustableValue("Lx", 30.0);
-    control.setAdjustableValue("Ly", 30.0);
+	OSPCombo combo = new OSPCombo(new String[] {"64","128","256"},0);  // second argument is default
+	control.setValue("N", combo);
+	control.setAdjustableValue("L", 30);
     control.setValue("initial kinetic energy per particle", 1.0);
     control.setAdjustableValue("dt", 0.01);
-    OSPCombo combo = new OSPCombo(new String[] {"rectangular",  "triangular"},0);  // second argument is default
-	control.setValue("initial configuration", combo);
+    OSPCombo combo2 = new OSPCombo(new String[] {"rectangular",  "triangular"},0);  // second argument is default
+	control.setValue("initial configuration", combo2);
     
     control.setValue("maximum change in velocity component", 0.2);
     enableStepsPerDisplay(true);
