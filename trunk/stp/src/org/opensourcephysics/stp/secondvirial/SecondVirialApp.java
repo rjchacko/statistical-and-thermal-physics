@@ -28,7 +28,7 @@ public class SecondVirialApp extends AbstractCalculation implements Function{
 	}
 	
 	public void calculate() {
-		double x_low = 0.000001, x_high = 1000, tolerance = 0.0001;
+		double x_low = 0.000001, x_high = 10000, tolerance = 0.0001;
 		
 		initialize();
 		double deltaT=(Tmax-Tmin)/(double)numberOfPoints;
