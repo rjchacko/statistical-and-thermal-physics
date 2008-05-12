@@ -24,6 +24,8 @@ public class LJMCApp extends AbstractSimulation {
   LJMC mc = new LJMC();
   DisplayFrame display = new DisplayFrame("Lennard-Jones system");
   PlotFrame grFrame = new PlotFrame("r", "g(r)", "Radial distribution function");
+  PlotFrame pressure = new PlotFrame("t", "P", "Pressure");
+  PlotFrame heatCapacity= new PlotFrame("t", "C_V", "Heat Capacity");
   Rdf gr = new Rdf();
   int timestep=0;
   
@@ -35,7 +37,7 @@ public class LJMCApp extends AbstractSimulation {
 	  control.setValue("number of particles", combo);
 	  control.setAdjustableValue("L", 18);
 	  control.setAdjustableValue("T", 1);
-	  control.setAdjustableValue("step size", 0.1);
+	  control.setAdjustableValue("step size", 0.5);
 	  OSPCombo combo2 = new OSPCombo(new String[] {"triangular","rectangular","random"},0);  // second argument is default
 	  control.setValue("initial configuration", combo2);
 	  enableStepsPerDisplay(true);
@@ -86,19 +88,22 @@ public class LJMCApp extends AbstractSimulation {
    * Does a simulation step and appends data to the views.
    */
   public void doStep() {
-	  mc.step(); 
+	  mc.oneMCstep(); 
 	  gr.append(mc.x, mc.y);
 	  gr.normalize();
 	  grFrame.clearData();
 	  grFrame.append(2, gr.rx, gr.ngr);	   
 	  grFrame.render();
+	  pressure.append(0, mc.mcs, mc.pressure);
+	  heatCapacity.append(0,mc.mcs,mc.getHeatCapacity());
   }
 
   /**
    * Prints the LJ model's data after the simulation has stopped.
    */
   public void stop() {
-    control.println("Mean potential energy = "+decimalFormat.format((double)mc.N * mc.totalPotentialEnergyAccumulator/(double)(mc.steps)));
+    control.println("Mean potential energy = "+decimalFormat.format( mc.totalPotentialEnergyAccumulator/mc.mcs));
+    control.println("Heat capacity = " + mc.getHeatCapacity());
   }
 
   /**

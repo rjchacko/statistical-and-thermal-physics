@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+<title>Simulations for Statistical and Thermal Physics</title>
+
+<link href="../../default.css" type="text/css" rel="stylesheet">
+
+</head>
+
+<body>
+<h3 style="text-align:center;">Monte Carlo simulation of a system of Lennard-Jones particles</h3>
+
+<p class="header_title">Introduction</p>
+
+<p>Why use a Monte Carlo method to simulate a system of particles interacting by the Lennard-Jones potential when it is possible to use molecular dynamics methods? After all, molecular dynamics gives the same information about the static properties of the system such as the equation of state and gives dynamical properties in addition. The simple answer is that Monte Carlo methods are more flexible. In particular, the initial configuration can be chosen at random if Monte Carlo methods are used, but we have to be very careful that no particles are too close to each other if we are going to solve Newton's equations of motion. Another reason is that Monte Carlo methods can be used to simulate any desired ensemble. </p>
+
+<center>
+<applet
+ code="org.opensourcephysics.davidson.applets.ApplicationApplet.class"
+ archive="./stp.jar" codebase="../" align="top" height="40"
+ hspace="0" vspace="0" width="150"> <param name="target"
+ value="org.opensourcephysics.stp.ljmc.LJMCApp"> <param name="title"
+ value="Applet"> <param name="singleapp" value="true">
+</applet>
+</center>
+
+<p class="header_title">Algorithm</p>
+
+<p>The program uses the Metropolis algorithm which simulates a system of particles in equilibrium with a heat bath at temperature T. The algorithm for simulating the configurations of the particles can
+be summarized by the following steps:</p>
+
+<ol>
+
+<li>Establish an initial configuration. Because the velocities of the particles are irrelevant, we can ignore them and consider only the positions of the particles. The energy of the initial
+configuration is not important.</li>
+
+<li>Choose a particle at random and make a trial change in its position.</li>
+
+<li>Compute &#916;E, the
+change in the potential energy of the system due to the trial move.</li>
+
+<li>If &#916;E is less than or equal to zero, accept the new
+configuration and go to step 8.</li>
+
+<li>If &#916;E is positive, compute the quantity w = e<sup>-&#946;&#916;E</sup>.</li>
+
+<li> Generate a uniform random number r in the unit interval [0,1].</li>
+
+<li>If r &#8804; w, accept the trial move; otherwise retain
+the previous microstate.</li>
+
+<li> Determine the value of the desired physical quantities.</li>
+
+<li>Repeat steps (2) through (8) to obtain a sufficient number of
+microstates.</li>
+
+<li>Accumulate data for various averages.</li>
+
+</ol>
+
+<p class="header_title">Problems</p>
+
+<ol>
+
+<li>Determine the ratio PA/NkT for several different densities starting with L = 24 and N = 64. What should this ratio be for an ideal gas? How does the ratio change as the density is increased?</li>
+
+<li>Determine the temperature dependence of the mean potential energy and the heat capacity.</li>
+
+<li>Describe the qualitative behavior of the radial distribution function g(r).</li>
+
+<li>Use the default parameters and run the simulation until the system is more or less in equilibrium. Then decrease the temperature gradually. Is there evidence of a phase transition between 
+a solid and a liquid? If you increase the number of particles and increase the linear dimension of the system and choose different values of the temperature , you will be able to see a configuration where
+two phases coexist. Can you tell the difference between a liquid and a gas?</li>
+
+</ol>
+
+<p class="header_title">Java Classes</p>
+
+<ul>
+<li>LJFluid</li>
+<li>LJFluidMCApp</li>
+
+</ul>
+
+<p class = "small">Updated 8 May 2008.</p>
+
+</body>
+</html>

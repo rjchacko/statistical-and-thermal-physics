@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+<title>Simulations for Statistical and Thermal Physics</title>
+
+<link href="../default.css" type="text/css" rel="stylesheet">
+
+</head>
+
+<body>
+<h3 style="text-align:center;">Thermodynamics of the Ideal Fermi gas</h3>
+
+<p class="header_title">Introduction</p>
+
+<p>To find the chemical potential &#956; of an ideal Fermi gas for T > 0 , we need to find the
+value of &#956; that yields the desired number of particles. We have</p>
+<p class="center">
+<img src="nfermi.jpg" alt="" align="middle" >
+</p>
+<p>where g(&#949;) is the density of states for a system of electrons:</p>
+<p class="center">
+<img src="ge.jpg" alt="" align="middle" >
+</p><p>It is convenient to let &#949;
+= x&#949;<sub>F</sub>, &#956; = &#956;*&#949;, and T* = kT/&#949;<sub>F</sub>, where &#949;<sub>F</sub> is the usual Fermi energy.</p>
+<p class="center">
+<img src="fermienergy.jpg" alt="" align="middle" >
+</p>
+<p>Then we can rewrite the expression for N as</p>
+<p class="center">
+<img src="rhofermi.jpg" alt="" align="middle" >
+</p>
+<p>If we substitute the expression for &#949;<sub>F</sub>, we can rewrite the condition for &#956;* as</p>
+<p class="center">
+<img src="mucondition.jpg" alt="" align="middle" >
+</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Similarly, the mean energy E can be expressed as</p>
+<p class="center">
+<img src="eintegral.jpg" alt="" align="middle" >
+</p>
+<p>If we make the same substitutions as before, we find</p>
+<p class="center">
+<img src="estar2.jpg" alt="" align="middle" >
+</p>
+
+<p>The applet/application does the integrals for &#956;* and e* numerically.</p>
+<center>
+<applet
+ code="org.opensourcephysics.davidson.applets.ApplicationApplet.class"
+ archive="./stp.jar" codebase="../" align="top" height="40"
+ hspace="0" vspace="0" width="150"> <param name="target"
+ value="org.opensourcephysics.stp.idealgasintegrals.fermi.ComputeFermiIntegralApp"> <param name="title"
+ value="Applet"> <param name="singleapp" value="true">
+</applet>
+</center>
+
+<p class="header_title">Problems</p>
+
+<ol>
+
+<li>Start with T* = 0.2 and find &#956;* such that the first integral is
+satisfied. Click on the <tt>Accept Parameters</tt> button when you are satisfied that the value of &#956;* satisfies the integral condition. Does &#956;* initially increase or decrease as T* is increased
+from zero? What is the sign of &#956;* for T* &#62;&#62; 1?</li>
+
+<li>At what value of T* is &#956;* &#8773; 0?</li>
+
+<li>Each time you compute a satisfactory value of &#956;* for a given value of T*, the program plots the corresponding value of e* by evaluating the necessary  integral. How does e* vary with T* for T* &#60;&#60; 1 (T &#60;&#60; T<sub>F</sub>)? Use your results for the mean energy to determine the temperature dependence of the specific heat.</li>
+
+</ol>
+
+<p class="header_title">References</p>
+
+<p>The properties of the ideal Fermi gas are discussed in almost all texts on statistical mechanics.</p>
+
+<p class = "small">Updated 2 May 2007.</p>
+
+</body>
+</html>

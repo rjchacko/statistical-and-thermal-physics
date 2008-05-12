@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+<title>Simulations for Statistical and Thermal Physics</title>
+
+<link href="../../default.css" type="text/css" rel="stylesheet">
+
+</head>
+
+<body>
+<h3 style="text-align:center;">Monte Carlo simulation of hard disks</h3>
+
+<p class="header_title">Introduction</p>
+
+
+
+<center>
+<applet
+ code="org.opensourcephysics.davidson.applets.ApplicationApplet.class"
+ archive="./stp.jar" codebase="../" align="top" height="40"
+ hspace="0" vspace="0" width="150"> <param name="target"
+ value="org.opensourcephysics.stp.hdmc.HDMCApp"> <param name="title"
+ value="Applet"> <param name="singleapp" value="true">
+</applet>
+</center>
+
+<p>The application of the Metropolis algorithm for a system of hard disks can be stated very simply:</p>
+
+<p>1. Choose a particle at random and generate trial a change in its x and y coordinates:</p>
+<p class="center">
+x(i) = x(i) + (2r - 1)&#948;</p>
+<p class="center">
+y(i) = y(i) + (2r - 1)&#948;,
+</p>
+<p>where r is a uniform random number in the unit interval and &#948; is the maximum displacement.</p>
+
+<p>2. Accept the trial move if the trial position of the disk does not overlap another disk. Otherwise, the move is rejected and
+the old configuration is retained. A reasonable, although not necessarily optimum choice for &#948; is to choose its value
+such that approximately 20% of the trial moves are accepted.</p>
+
+<p>The program uses units such that the diameter &#963; = 1.</p>
+
+<p class="header_title">Problems</p>
+
+<p>1. The main quantity of interest is the radial distribution function g(r). Describe its qualitative r-dependence. How does g(r) change with increasing density?</p>
+
+<p>2. How does the form of g(r) compare to that a system of particles interacting with the lennard-Jones potential at the same density?</p>
+
+<p>3. The pressure P of a system of hard disks is related to the value of g(r) at contact by the expression</p>
+<p class="center">
+<img src="pressurehd.jpg" alt="" align="middle" >.
+</p>
+<p>Because the hard disks rarely touch, it is difficult to obtain good statistics for g(r) at contact. Fit the values of g(r) close to r = &#963; to a second-order polynomial in r and extrapolate the values of g(r) for r greater than r = &#963;<sup>+</sup>.</p>
+
+<p>4. What does the phase diagram of a system of hard disks look like? Does the system become a solid at high densities? One way to find out is to start the system at a low density and slowly compress the system. We compress the system by first determining the minimum distance between the centers of any two disks in the system. Because this distance cannot be less than &#963;, its value bounds the amount that we can compress the system. We multiply this distance by the parameter <tt>compression</tt> after every Monte Carlo step per particle. Choose the parameter <tt>compression = 0.99</tt>.</p>
+
+<p class="header_title">Java Classes</p>
+
+<ul>
+
+<li>HD</li>
+<li>HDMCApp</li>
+
+</ul>
+
+<p class = "small">Updated 10 May 2008.</p>
+
+</body>
+</html>

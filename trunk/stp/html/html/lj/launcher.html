@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+<title>Simulations for Statistical and Thermal Physics</title>
+
+<link href="../default.css" type="text/css" rel="stylesheet">
+
+</head>
+
+<body>
+<h3 style="text-align:center;">Simulation of a Lennard-Jones system of particles</h3>
+
+<p class="header_title">Introduction</p>
+
+<p>The exact form of the interparticle potential u(r) for electrically neutral molecules and atoms has to be determined by a first principles quantum mechanical
+calculation. Such a calculation is very difficult, and for many purposes it
+is sufficient to choose a simple phenomenological form for
+u(r). The most important features of
+u(r) are a strong repulsion for small r and a weak attraction
+at large r. The most common phenomenological form of u(r) is the Lennard-Jones or 6-12 proposed by John Edward Lennard-Jones in
+1924:</p>
+<p class="center">
+<img src="lj.jpg" alt="" align="middle" >,
+</p>
+<p>The values of &#963; and &#949; for argon are &#963; =3.4 &#215; 10<sup>-10</sup> m and &#949; = 1.65 &#215; 10<sup>-21</sup> J.</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;The attractive
+1/r<sup>6</sup> contribution to the Lennard-Jones potential is due to
+the induced dipole-dipole interaction of two atoms.
+Although each atom is electrically neutral, the instantaneous
+fluctuations in the charge distribution can have nonspherical
+symmetry. The resulting dipole in one atom can induce a dipole
+moment in the other atom. The
+resultant attractive potential is called the van der
+Waals potential.</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;The repulsive interaction for small r is a consequence of the
+Pauli exclusion principle. The electron wave functions of the
+two molecules must distort to avoid overlap, causing some of the
+electrons to be in different quantum states. The net effect is an
+increase in kinetic energy and an effective repulsive interaction
+between the electrons. The
+1/r<sup>12</sup> form of the repulsive potential is chosen only for
+convenience and is not derived from first principles.</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;The
+existence of many calculations and simulation results for the
+Lennard-Jones potential encourages us to consider it even though there
+are more accurate forms of the interparticle potential for real
+gas and liquids.</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;It is possible to simulate a system of Lennard-Jones particles using either molecular dynamics or Monte Carlo methods.</p>
+
+<p class="header_title">Problems</p>
+
+<ol>
+<li>Show that the minimum of the Lennard-Jones
+potential is at
+r<sub>min</sub> = 2<sup>1/6</sup> &#963; and that u(r<sub>min</sub>) = -&#949;.</li>
+
+<li>At what value of
+r is the force f(r) = du(r)/dr a minimum?</li>
+
+<li> What is the value of the Lennard-Jones potential at r = 2.3 &#963;?</li>
+
+</ol>
+
+<p class = "small">Updated 10 May 2008.</p>
+
+</body>
+</html>
