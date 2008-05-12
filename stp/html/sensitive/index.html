@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+<title>Simulations for Statistical and Thermal Physics</title>
+
+<link href="../default.css" type="text/css" rel="stylesheet">
+
+</head>
+
+<body>
+<h3 style="text-align:center;">Sensitivity to initial conditions</h3>
+
+<p class="header_title">Introduction</p>
+
+<p>The idea of this simulation is to show that the trajectory of a system of particles is very sensitive 
+to its initial conditions.</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;In general, an isolated system of many particles that is prepared in a nonrandom configuration 
+will change in time so as to approach its most random configuration where it is in equilibrium. What happens if we choose 
+the initial conditions in a very special way?</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;The default initial condition corresponds to N = 11 particles that are equally spaced vertically and all traveling with 
+the same velocity to the right. The program solves Newton's second law of motion  numerically for each of the particles assuming 
+the Lennard-Jones potential.</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;In the second part of the simulation, a small perturbation is applied to particle 6, the one in the middle of the display. Its velocity 
+in the horizontal direction is changed from 1.0 to 0.99 and its velocity in the vertical direction is changed from 0 to 
+0.01. In the questions we will explore what happens and why.</p>
+
+<center>
+<applet
+ code="org.opensourcephysics.davidson.applets.ApplicationApplet.class"
+ archive="./stp.jar" codebase="../" align="top" height="40"
+ hspace="0" vspace="0" width="150"> <param name="target"
+ value="org.opensourcephysics.stp.sensitive.LJgasApp"> <param name="title"
+ value="Applet"> <param name="singleapp" value="true">
+</applet>
+</center>
+
+<p class="header_title">Problems</p>
+
+<ol>
+
+<li>Run the program with the default initial condition and describe the motion of the particles.</li>
+
+<li>After the simulation proceeds for a while, click on the <tt>Perturb</tt> button. What happens to the motion of the particles? After the simulations proceeds for a while, say t = 0.02, stop the simulation and click the <tt>Reverse</tt> button, which 
+reverses the velocities of all particles. Does the system return to its initial special state? Is the motion reversible?</li>
+
+<li>Proceed as in Problem 2, but wait longer before 
+perturbing the system. Does the system return to its initial state. Why or why not?</li>
+
+</ol>
+
+<p class="header_title">Java Classes</p>
+<ul>
+<li>LJgas</li>
+<li>LJgasApp</li>
+</ul>
+
+<p class = "small">Updated 28 February 2007.</p>
+</body>
+
+</html>

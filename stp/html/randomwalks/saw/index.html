@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+<title>Simulations for Statistical and Thermal Physics</title>
+
+<link href="../../default.css" type="text/css" rel="stylesheet">
+
+</head>
+
+<body>
+<h3 style="text-align:center;">Self-avoiding walk</h3>
+
+<p class="header_title">Introduction</p>
+
+<p>Polymers are molecules with long strings of repeated units. When placed in a good solvent, the polymer can expand. One model of a polymer is
+a self-avoiding walk (SAW). In this model the walker steps at random, but cannot return to a site that has already been visited.</p>
+
+<center>
+<applet
+ code="org.opensourcephysics.davidson.applets.ApplicationApplet.class"
+ archive="./stp.jar" codebase="../" align="top" height="40"
+ hspace="0" vspace="0" width="150"> <param name="target"
+ value="org.opensourcephysics.stp.randomwalk.saw.FlatApp"> <param name="title"
+ value="Applet"> <param name="singleapp" value="true">
+</applet>
+</center>
+
+<p class="header_title">Algorithm</p>
+
+<p>One approach to simulating SAWs is to generate a random number at each step and choose one of the maximum of three possible steps. However, there soon would  be no allowable steps as the walker finds itself in a cul-de-sac of visited sites. There are a number of enrichment
+schemes that have been developed to improve the statistics. We will use the following algorithm which is an improvement of the Rosenbluth and Rosenbluth method due to  Prelberg and Krawczyk. We consider walks on a square lattice.</p>
+
+<ol>
+
+<li>Begin with a collection of n walkers labeled by the index i. Assign a weight w<sub>i</sub> = 1 to each walker. Place each walker at the origin. 
+Maintain a list of visited sites for each walker.</li>
+
+<li>At each step, N, determine for each walker how many available sites, m, there are for the next step. Move to one of these sites with equal 
+probability. Update the weight as
+<p class ="center">
+w<sub>i</sub>(N) = w<sub>i</sub>(N-1)(m/3).</p>
+Update the arrays corresponding to the visited sites.</li>
+
+<li> Compute the average w<sub>ave</sub> = &lt;w<sub>i</sub>(N)&gt; and the ratio r = w<sub>i</sub>/w<sub>ave</sub> for each walker. If r &gt; 1, then c = min((int)r,m), and make c copies of the walker each with weight w<sub>i</sub>/c. If r &lt; 1, then remove the walker with probability 1 - r. Repeat for all the walkers.</li>
+
+<li> Compute averages such as &lt;r<sup>2</sup>(N)&gt; = 
+&lt;w<sub>i</sub>(N)(x<sub>i</sub><sup>2</sup> + y<sub>i</sub><sup>2</sup>)&gt;. </li>
+
+<li>Go to step 2.</li>
+
+</ol>
+
+<p>In the program output the number of steps is equal to the time t. The input parameters are the
+number of initial walkers n and the 
+number of steps N.</p>
+
+<p class="header_title">Problems</p>
+
+<ol>
+
+<li>Run the program with the default input parameters. Discuss the values for the mean positions of x and y. Use the <tt>Data Table</tt> in the <tt>Views</tt> menu and copy the table of data for ln &lt;x<sup>2</sup>(t)&gt;, ln &lt;y<sup>2</sup>(t)&gt;, and ln &lt;r<sup>2</sup>(t)&gt; versus ln t. Plot these data and estimate the exponent &#957; assuming that &lt;r<sup>2</sup>(t)&gt; = Ct<sup>2&#957;</sup>. Use only the data that appears to be on a straight line. For large times you might not have enough walkers to obtain reliable data. What value of &#957; do you expect for a regular random walker? Explain why the value of &#957; for a self-avoiding walk is different.</li>
+
+<li>Based on your results what can you conclude about the mean displacement in the x and y directions? To make sure your answer is meaningful, do at least three independent trials. Discuss the meaning of your result. Is there a statistically significant difference between the results in the x and y directions?</li>
+
+<li> Increase the number of initial walkers to 1000, and repeat your analysis. Is there any significant differences. Repeat your simulations a few times to see how much your results vary with each trial.</li>
+
+<li> Increase the number of steps to 2048. Do your results improve significantly? Note that the program only takes data in increments of ln t. What does this increment mean about the ability to improve results by going to longer times?</li>
+
+</ol>
+
+<p class="header_title">Java Classes</p>
+
+<ul>
+
+<li>OneWalker</li>
+<li>Flat</li>
+<li>FlatApp</li>
+
+</ul>
+
+<p class = "small">Updated 27 February 2007.</p>
+</body>
+</html>
