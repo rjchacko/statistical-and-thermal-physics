@@ -43,6 +43,7 @@ public class LJMCApp extends AbstractSimulation {
 	  display.setSquareAspect(true); // so particles will appear as circular disks
 	  gr.reset();
 	  mc.steps=0;
+	  mc.totalPotentialEnergyAccumulator=0;
   }
   
   /**
@@ -97,7 +98,7 @@ public class LJMCApp extends AbstractSimulation {
    * Prints the LJ model's data after the simulation has stopped.
    */
   public void stop() {
-    control.println("Density = "+decimalFormat.format(mc.rho));
+    control.println("Mean potential energy = "+decimalFormat.format((double)mc.N * mc.totalPotentialEnergyAccumulator/(double)(mc.steps)));
   }
 
   /**
