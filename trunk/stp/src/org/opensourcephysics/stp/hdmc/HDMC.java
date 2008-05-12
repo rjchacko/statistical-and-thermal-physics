@@ -15,10 +15,11 @@ public class HDMC implements Drawable{
   public double x[];
   public double y[];
   public int N; // number of particles, number per row, number per column
-  public double L;
+  public double L,equivL;
   public double rho = N/(L*L);
   public int steps = 0;
-  public double t;
+  
+  public double mcs;
   public String initialConfiguration;
   public double radius = 0.5; // radius of particles on screen
 
@@ -29,11 +30,12 @@ public class HDMC implements Drawable{
   public double s;
   
   public void initialize() {
-    t = 0;
+    mcs = 0;
     rho = N/(L*L);
     x = new double[N];
     y = new double[N];
     minSeparation=L;
+    equivL=L;
     steps=0;
     radius=0.5;
     if(initialConfiguration.equals("triangular")) {
@@ -135,7 +137,7 @@ public class HDMC implements Drawable{
   public void compress(){
 	  double oldRadius=radius;
 	  radius=0.5*(1-s)*minSeparation+s*radius;
-	  L=Math.sqrt(L*L+Math.PI*(oldRadius*oldRadius-radius*radius));
+	  equivL=Math.sqrt(equivL*equivL+N*Math.PI*(oldRadius*oldRadius-radius*radius));
   }
   
   
@@ -197,9 +199,12 @@ public class HDMC implements Drawable{
 
   public void oneMCstep(){
 	  for(int i=0;i<N;i++){
-		  step();
+		  step();		  
 	  }
+	  mcs++;
+	  
 	  compress();
+	 
   }
   public void draw(DrawingPanel panel, Graphics g) {
     if(x==null||y==null) {
