@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+<title>Simulations for Statistical and Thermal Physics</title>
+
+<link href="../../default.css" type="text/css" rel="stylesheet">
+
+</head>
+
+<body>
+
+
+<h3 style="text-align:center;">Approach to equilibrium: A simple model</h3>
+
+<p class="header_title">Introduction</p>
+
+<p>Imagine a box that is divided into two parts of equal volume. The
+left half initially contains a gas of N identical particles and the right
+half is empty. We then make a small hole in the partition between
+the two halves. What happens? We expect that after some time, the
+system reaches equilibrium, and the average number of particles in
+each half of the box is N/2.</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;The purpose of this simulation is to gain insight into the tendency
+of macroscopic systems to approach a well defined equilibrium
+macrostate and the importance of fluctuations in equilibrium.</p>
+<center>
+<applet
+ code="org.opensourcephysics.davidson.applets.ApplicationApplet.class"
+ archive="./stp.jar" codebase="../" align="top" height="40"
+ hspace="0" vspace="0" width="150"> <param name="target"
+ value="org.opensourcephysics.stp.approach.BoxApp"> <param name="title"
+ value="Applet"> <param name="singleapp" value="true">
+</applet>
+</center>
+
+<p class="header_title">Methods/Algorithm</p>
+
+<p>Instead of simulating this system by solving Newton's equations
+for each particle (as is done in some of the other simulations), we consider a simpler model. Assume that the
+particles do not interact with one another, so
+that the probability per unit time that a particle passes through
+the hole in the partition is the same for all particles regardless of the number of
+particles in either half. We also assume that the size of the hole
+is such that only one particle passes through it in one unit of
+time. Each particle has an equal chance of passing through the hole at each time step.</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;One way to
+implement this model is to choose a particle at
+random and move it to the other side. However, this way
+is
+cumbersome because our only interest is the number of particles on
+each side. That is, we need to know only n, the number of
+particles on the left side; the number on the right side is
+N - n. Because each particle has the same chance to go through
+the hole, the probability per unit time that a particle moves from
+left to right equals the number of particles on the left side
+divided by the total number of particles, that is, the probability
+of a move from left to right is
+n/N. The algorithm for simulating the evolution of the model can
+be summarized by the following steps:</p>
+
+<ol>
+
+<li> Generate a random number r from a uniformly distributed set
+of random numbers in the interval 0 &#8804; r &lt; 1.</li>
+
+<li> Compare r to the current value of the fraction of particles
+n/N on the left side of the box.</li>
+
+<li>If r &lt; n/N, move a particle from left to right, that is,
+let n &#8594; n - 1; otherwise, move a particle from right to left.</li>
+
+<li> Increase the time by 1.</li>
+
+</ol>
+
+<p class="header_title">Problems</p>
+
+<ol>
+
+<li>Describe the behavior of n(t) for various values of N. What is the minimum value of N for which you can say that the system approaches equilibrium?
+How would you characterize
+equilibrium? In what sense is equilibrium better defined as N
+becomes larger? Does your definition of
+equilibrium depend on how the particles were initially distributed
+between the two halves of the box?</li>
+
+<li>When the system is in equilibrium, does the number
+of particles on the left-hand side remain a constant? If not, how
+would you describe the nature of equilibrium?</li>
+
+<li>If N &#8805; 32, does the system ever return to its initial
+state with all particles on the left-hand side of the box?</li>
+
+<li>What is the qualitative time-dependence of n(t) as the system
+approaches equilibrium for large N?</li>
+
+<li>How does &lt;n&gt;, the mean number of particles on the
+left-hand side, depend on N after the system has reached
+equilibrium? For simplicity, the program computes various averages
+from time t = 0. Why would such a calculation not yield the
+correct equilibrium values? Use the
+<tt>Zero averages</tt> button to start computing the averages after equilibrium has been established.</li>
+
+<li>The quantity &#963; is defined by the
+relation, &#963;<sup>2</sup> = &lt;(n - &lt;n&gt;)<sup>2</sup>&gt;. What
+does
+&#963; measure? What would be its value if n were constant?
+How does 
+&#963; depend on
+N? How does the ratio &#963;/&lt;n&gt; depend on N? In
+what sense is equilibrium better defined as N increases?</li>
+
+</ol>
+
+<p class="header_title">Java Classes</p>
+
+<ul>
+
+<li>BoxApp</li>
+</ul>
+
+<p class = "small">Updated 27 February 2007.</p>
+
+</body>
+</html>

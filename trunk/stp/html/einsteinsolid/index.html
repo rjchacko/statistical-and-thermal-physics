@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+<title>Simulations for Statistical and Thermal Physics</title>
+
+<link href="../default.css" type="text/css" rel="stylesheet">
+
+</head>
+
+<body>
+<h3 style="text-align:center;">Simple thermal interaction: Einstein solid</h3>
+
+
+<p class="header_title">Introduction</p>
+
+<p>Consider a simple system, commonly known as an Einstein or harmonic solid. The energy of each particle in an Einstein solid is restricted to the positive integers. That is, each particle may have energy 0, 1, 2, &#8230; The particles do not interact. These particles are equivalent to the
+quanta of the harmonic oscillator, which have energy
+&#949;<sub>n</sub> = (n + 1/2)h&#957;. If we measure the energies from the
+lowest energy state, h&#957;/2, and choose units
+such that
+h&#957; = 1, we have &#949;<sub>n</sub> = n.</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;The advantage of the Einstein solid is that it easy to calculate the number of microstates &#937;(E,N) for a given number of particles N and energy E.</p>
+<p class="center">
+<img src="omega.jpg" alt="" align="middle" >.
+</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Consider two Einstein solids A and B that can exchange energy with one another, but are isolated from their surroundings. That is, the two systems are  surrounded  by insulating, rigid, and
+impermeable outer walls and  are separated from each other by a conducting,
+rigid, and impermeable wall. The program counts the number 
+of ways that the energy can be distributed  between the two systems. N<sub>A</sub> represents the number of 
+oscillators in system A and N<sub>B</sub> the number in system B.</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;The total number of microstates &#937;(E<sub>A</sub>,E<sub>A</sub>) accessible to the composite system with subsystems A and N with  energy E<sub>A</sub> and E<sub>B</sub> (and fixed number of particles N<sub>A</sub> and N<sub>B</sub>) is</p>
+<p class="center">
+&#937;(E<sub>A</sub>, E<sub>B</sub>) = &#937;<sub>A</sub>(E<sub>A</sub>)&#937;<sub>B</sub>(E<sub>B</sub>).
+</p>
+<p>The total energy E = E<sub>A</sub> + E<sub>B</sub> is fixed. Because the composite system is isolated, its accessible
+microstates are equally probable. Hence, the probability P<sub>A</sub>(E<sub>A</sub>) that subsystem A has energy E<sub>A</sub> is
+</p>
+<p class="center">
+P<sub>A</sub>(E<sub>A</sub>) = &#937;<sub>A</sub>(E<sub>A</sub>)&#937;<sub>B</sub>(E - E<sub>A</sub>)/&#937;.
+</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;The output of the program is the mean energy of system A and the probability P(E<sub>A</sub>) that system A 
+has energy E<sub>A</sub>.</p>
+<center>
+<applet
+ code="org.opensourcephysics.davidson.applets.ApplicationApplet.class"
+ archive="./stp.jar" codebase="../" align="top" height="40"
+ hspace="0" vspace="0" width="150"> <param name="target"
+ value="org.opensourcephysics.stp.einsteinsolid.EinsteinSolidApp"> <param name="title"
+ value="Applet"> <param name="singleapp" value="true">
+</applet>
+</center>
+
+<p class="header_title">Problems</p>
+
+<ol>
+
+<li>Suppose that N<sub>A</sub> = 2, N<sub>B</sub> = 2 and initially E<sub>A</sub> = 5 and E<sub>B</sub> = 1. What is the initial number of microstates for the composite system? The internal constraint is then removed so that the two subsystems can exchange energy. Determine
+the probability
+P(E<sub>A</sub>) that system
+A has energy
+E<sub>A</sub>, and the
+most probable energy of system A. What is the total number of microstates after the internal constraint has been removed? Discuss the qualitative  dependence of 
+P(E<sub>A</sub>) on the energy E<sub>A</sub>. The corresponding data can be obtained by choosing  <tt>DataTable</tt> from the <tt>Views</tt> menu. Use this data to calculate 
+the mean and variance of the energy of each subsystem.</li>
+
+<li>Answer the same questions as in Problem 1 with N<sub>A</sub> = 20, N<sub>B</sub> = 20, E<sub>A</sub> = 100, and E<sub>B</sub> = 20.</li>
+
+<li>Answer the same questions as in Problem 1 with N<sub>A</sub> = 20, N<sub>B</sub> = 40, E<sub>A</sub> = 100, and E<sub>B</sub> = 20.</li>
+
+<li>If the two subsystems have equal numbers of particles, it is reasonable to conclude that the "hotter" system has higher energy. What is the probability that energy goes from the hotter to the colder system after the internal constraint is has been removed?</li>
+
+<li>Consider
+successively larger systems until you have satisfied yourself that
+you understand the qualitative behavior of the various quantities. Discuss your general conclusions.</li>
+
+<li>Consider a special subsystem with only one particle, N<sub>A</sub> = 1. Suppose that N<sub>B</sub> = 5, E<sub>A</sub> = 0, and E<sub>B</sub> = 12. If we assume that the subsystem A can exchange with the much larger system B, what is the probability that system A has energy E<sub>A</sub>? What is the probability that system A is in a particular microstate with energy n where n is an integer? The probability in this case is called the <i>Boltzmann probability</i>. Why is the form of this probability different than the probability that you found in the other problems.</li>
+
+</ol>
+
+<p class="header_title">References</p>
+
+<ul>
+
+<li>Harvey Gould and Jan Tobochnik, <i>Statistical and Thermal Physics,</i> Chapter 4, online notes.</li>
+
+<li>Thomas A. Moore and Daniel V. Schroeder, "A different 
+approach to introducing statistical mechanics," Am. J. Phys. <b>65</b>, 26&#8211;36 (1997).</li>
+
+<li>Daniel V. Schroeder, <i>An
+Introduction to Thermal Physics,</i> Addison-Wesley (1999).</li>
+
+</ul>
+
+<p class="header_title">Java Classes</p>
+
+<ul>
+
+<li>EinsteinSolid</li>
+
+<li>EinsteinSolidApp</li>
+
+</ul>
+
+<p class = "small">Updated 27 February 2007.</p>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+<title>Simulations for Statistical and Thermal Physics</title>
+
+<link href="../default.css" type="text/css" rel="stylesheet">
+
+</head>
+
+<body>
+<h3 style="text-align:center;">Boltzmann distribution</h3>
+
+<p class="header_title">Introduction</p>
+
+<p>A Monte Carlo simulation of a classical particle in one dimension in
+equilibrium with a heat bath.</p>
+<center>
+<applet
+ code="org.opensourcephysics.davidson.applets.ApplicationApplet.class"
+ archive="./stp.jar" codebase="../" align="top" height="40"
+ hspace="0" vspace="0" width="150"> <param name="target"
+ value="org.opensourcephysics.stp.boltzmann.BoltzmannApp"> <param name="title"
+ value="Applet"> <param name="singleapp" value="true">
+</applet>
+</center>
+
+
+<p class="header_title">Algorithm</p>
+
+<p>The Metropolis algorithm for sampling the states of the system can be summarized by the following steps:</p>
+
+<ol>
+
+<li>Make a random trial change in the velocity of the particle by adding or
+subtracting an amount equal to a random number times the input parameter equal to the maximum change in velocity, v &#8594; v + (2r - 1)&#948;.</li>
+
+<li>Compute the change in energy &#916;E.</li>
+
+<li>If &#916;E &#8804; 0, accept the change. If &#916;E &gt; 0, then compute exp(- &#916;E/kT. If r &lt; exp(- &#916;E/kT, where r is a random number between 0 and 1, then the trial change is accepted. Otherwise, do not accept the trial change. We will choose units such that Boltzmann's constant k = 1.</li>
+
+<li>Compute the quantities of interest.</li>
+
+<li>Repeat for many Monte Carlo steps (mcs).</li>
+
+</ol>
+
+<p class="header_title">Questions</p>
+
+<ol>
+
+<li>Show that the results for the mean energy and mean velocity of the particle are insensitive to the values of the initial speed and the 
+maximum change in velocity.</li>
+
+<li>What is the form of the probability distribution of the velocity?
+Show that the width of the distribution is proportional to the
+temperature by doing simulations at different temperatures.</li>
+
+<li>Describe the shape of the probability distribution of the energy. Confirm that the form is an exponential and show that the 
+energy distribution is proportional to exp(-E/T). Explain why you would expect this result.</li>
+
+</ol>
+
+<p class="header_title">Java Classes</p>
+
+<ul>
+
+<li>BoltzmannApp</li>
+
+</ul>
+
+<p class = "small">Updated 27 February 2007.</p>
+</body>
+</html>
