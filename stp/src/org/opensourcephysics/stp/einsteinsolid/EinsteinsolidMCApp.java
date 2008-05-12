@@ -75,7 +75,8 @@ import java.util.*;
 		control.clearMessages();
 		ETFrame.setPreferredMinMaxX(0, 10);
 		CTFrame.setPreferredMinMaxX(0, 10);
-		
+		ETFrame.setAutoscaleX(true);
+		CTFrame.setAutoscaleX(true);
 		this.delayTime = 0;
 		
 	}

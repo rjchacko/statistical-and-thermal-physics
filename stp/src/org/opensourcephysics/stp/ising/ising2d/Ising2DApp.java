@@ -41,6 +41,8 @@ public class Ising2DApp extends AbstractSimulation
 		plotFrame.clearData();
 		plotFrame.repaint();
 		displayFrame.repaint();
+		energyHistogram.clear();
+		histogramFrame.clearDataAndRepaint();
 	}
 	
 	public double bondProbability(double J, double T) {

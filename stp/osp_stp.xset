@@ -5,6 +5,7 @@
     <property name="height" type="int">720</property>
     <property name="divider" type="int">248</property>
     <property name="default_look_and_feel" type="boolean">true</property>
+    <property name="editor_enabled" type="boolean">true</property>
     <property name="launch_nodes" type="collection" class="java.util.ArrayList">
         <property name="item" type="object">
         <object class="org.opensourcephysics.tools.LaunchNode">
@@ -43,7 +44,7 @@ This work is part of the Open Source Physics project, and is freely available un
                             <property name="name" type="string">Particles in a box</property>
                             <property name="html" type="array" class="[[Ljava.lang.String;">
                                 <property name="[0]" type="array" class="[Ljava.lang.String;">
-                                    <property name="[1]" type="string">html/approachtoequilibrium/box.html</property>
+                                    <property name="[1]" type="string">html/approachtoequilibrium/box/launcher.html</property>
                                 </property>
                             </property>
                             <property name="launch_class" type="string">org.opensourcephysics.stp.approach.BoxApp</property>
@@ -54,7 +55,7 @@ This work is part of the Open Source Physics project, and is freely available un
                             <property name="name" type="string">Three partitions</property>
                             <property name="html" type="array" class="[[Ljava.lang.String;">
                                 <property name="[0]" type="array" class="[Ljava.lang.String;">
-                                    <property name="[1]" type="string">html/approachtoequilibrium/md3.html</property>
+                                    <property name="[1]" type="string">html/approachtoequilibrium/md3/launcher.html</property>
                                 </property>
                             </property>
                             <property name="launch_class" type="string">org.opensourcephysics.stp.approach.LJgasApp</property>
@@ -65,7 +66,7 @@ This work is part of the Open Source Physics project, and is freely available un
                             <property name="name" type="string">Two partitions</property>
                             <property name="html" type="array" class="[[Ljava.lang.String;">
                                 <property name="[0]" type="array" class="[Ljava.lang.String;">
-                                    <property name="[1]" type="string">html/approachtoequilibrium/md2.html</property>
+                                    <property name="[1]" type="string">html/approachtoequilibrium/md2/launcher.html</property>
                                 </property>
                             </property>
                             <property name="launch_class" type="string">org.opensourcephysics.stp.approach.LJgas2boxApp</property>
@@ -88,7 +89,7 @@ This work is part of the Open Source Physics project, and is freely available un
                             <property name="name" type="string">Ideal gas</property>
                             <property name="html" type="array" class="[[Ljava.lang.String;">
                                 <property name="[0]" type="array" class="[Ljava.lang.String;">
-                                    <property name="[1]" type="string">html/demon/idealgas.html</property>
+                                    <property name="[1]" type="string">html/demon/idealgas/launcher.html</property>
                                 </property>
                             </property>
                             <property name="launch_class" type="string">org.opensourcephysics.stp.demon.DemonApp</property>
@@ -99,7 +100,7 @@ This work is part of the Open Source Physics project, and is freely available un
                             <property name="name" type="string">Einstein solid</property>
                             <property name="html" type="array" class="[[Ljava.lang.String;">
                                 <property name="[0]" type="array" class="[Ljava.lang.String;">
-                                    <property name="[1]" type="string">html/demon/einsteinsolid.html</property>
+                                    <property name="[1]" type="string">html/demon/einsteinsolid/launcher.html</property>
                                 </property>
                             </property>
                             <property name="launch_class" type="string">org.opensourcephysics.stp.demon.extra.EinsteinApp</property>
@@ -144,7 +145,7 @@ This work is part of the Open Source Physics project, and is freely available un
                             <property name="name" type="string">1D</property>
                             <property name="html" type="array" class="[[Ljava.lang.String;">
                                 <property name="[0]" type="array" class="[Ljava.lang.String;">
-                                    <property name="[1]" type="string">html/randomwalks/fixedlength1d.html</property>
+                                    <property name="[1]" type="string">html/randomwalks/fixedlength1d/launcher.html</property>
                                 </property>
                             </property>
                             <property name="launch_class" type="string">org.opensourcephysics.stp.randomwalk.randomwalk1.OneDimensionalWalkApp</property>
@@ -155,7 +156,7 @@ This work is part of the Open Source Physics project, and is freely available un
                             <property name="name" type="string">1D continuous</property>
                             <property name="html" type="array" class="[[Ljava.lang.String;">
                                 <property name="[0]" type="array" class="[Ljava.lang.String;">
-                                    <property name="[1]" type="string">html/randomwalks/continuous1d.html</property>
+                                    <property name="[1]" type="string">html/randomwalks/continuous1d/launcher.html</property>
                                 </property>
                             </property>
                             <property name="launch_class" type="string">org.opensourcephysics.stp.randomwalk.randomwalkcontinuous.VariableStepLengthWalkApp</property>
@@ -166,7 +167,7 @@ This work is part of the Open Source Physics project, and is freely available un
                             <property name="name" type="string">2D</property>
                             <property name="html" type="array" class="[[Ljava.lang.String;">
                                 <property name="[0]" type="array" class="[Ljava.lang.String;">
-                                    <property name="[1]" type="string">html/randomwalks/fixedlength2d.html</property>
+                                    <property name="[1]" type="string">html/randomwalks/fixedlength2d/launcher.html</property>
                                 </property>
                             </property>
                             <property name="launch_class" type="string">org.opensourcephysics.stp.randomwalk.randomwalk2.TwoDimensionalWalkApp</property>
@@ -177,26 +178,13 @@ This work is part of the Open Source Physics project, and is freely available un
                             <property name="name" type="string">SAW</property>
                             <property name="html" type="array" class="[[Ljava.lang.String;">
                                 <property name="[0]" type="array" class="[Ljava.lang.String;">
-                                    <property name="[1]" type="string">html/randomwalks/saw.html</property>
+                                    <property name="[1]" type="string">html/randomwalks/saw/launcher.html</property>
                                 </property>
                             </property>
                             <property name="launch_class" type="string">org.opensourcephysics.stp.randomwalk.saw.FlatApp</property>
                         </object>
                         </property>
                     </property>
-                </object>
-                </property>
-                <property name="item" type="object">
-                <object class="org.opensourcephysics.tools.LaunchNode">
-                    <property name="name" type="string">Number of states of ideal gas</property>
-                    <property name="description" type="string">Number of states of classical ideal gas.</property>
-                    <property name="html" type="array" class="[[Ljava.lang.String;">
-                        <property name="[0]" type="array" class="[Ljava.lang.String;">
-                            <property name="[1]" type="string">html/numberofstates/launcher.html</property>
-                        </property>
-                    </property>
-                    <property name="launch_class" type="string">org.opensourcephysics.stp.numOfStates.NumOfStatesApp</property>
-                    <property name="single_app" type="boolean">true</property>
                 </object>
                 </property>
                 <property name="item" type="object">
@@ -329,15 +317,39 @@ This work is part of the Open Source Physics project, and is freely available un
                 </property>
                 <property name="item" type="object">
                 <object class="org.opensourcephysics.tools.LaunchNode">
-                    <property name="name" type="string">Lennard-Jones fluid</property>
+                    <property name="name" type="string">Lennard-Jones potential</property>
                     <property name="description" type="string">A molecular dynamics simulation of a liquid in two dimensions. Output includes the mean pressure, temperature, and heat capacity.</property>
                     <property name="html" type="array" class="[[Ljava.lang.String;">
                         <property name="[0]" type="array" class="[Ljava.lang.String;">
-                            <property name="[1]" type="string">html/ljfluid/launcher.html</property>
+                            <property name="[1]" type="string">html/lj/launcher.html</property>
                         </property>
                     </property>
                     <property name="launch_class" type="string">org.opensourcephysics.stp.lj.LJfluidApp</property>
                     <property name="single_app" type="boolean">true</property>
+                    <property name="child_nodes" type="collection" class="java.util.ArrayList">
+                        <property name="item" type="object">
+                        <object class="org.opensourcephysics.tools.LaunchNode">
+                            <property name="name" type="string">Molecular dynamics</property>
+                            <property name="html" type="array" class="[[Ljava.lang.String;">
+                                <property name="[0]" type="array" class="[Ljava.lang.String;">
+                                    <property name="[1]" type="string">html/lj/md/launcher.html</property>
+                                </property>
+                            </property>
+                            <property name="launch_class" type="string">org.opensourcephysics.stp.lj.LJfluidApp</property>
+                        </object>
+                        </property>
+                        <property name="item" type="object">
+                        <object class="org.opensourcephysics.tools.LaunchNode">
+                            <property name="name" type="string">Metropolis</property>
+                            <property name="html" type="array" class="[[Ljava.lang.String;">
+                                <property name="[0]" type="array" class="[Ljava.lang.String;">
+                                    <property name="[1]" type="string">html/lj/mc/launcher.html</property>
+                                </property>
+                            </property>
+                            <property name="launch_class" type="string">org.opensourcephysics.stp.ljmc.LJMCApp</property>
+                        </object>
+                        </property>
+                    </property>
                 </object>
                 </property>
                 <property name="item" type="object">
@@ -351,6 +363,30 @@ This work is part of the Open Source Physics project, and is freely available un
                     </property>
                     <property name="launch_class" type="string">org.opensourcephysics.stp.harddisk.HDApp</property>
                     <property name="single_app" type="boolean">true</property>
+                    <property name="child_nodes" type="collection" class="java.util.ArrayList">
+                        <property name="item" type="object">
+                        <object class="org.opensourcephysics.tools.LaunchNode">
+                            <property name="name" type="string">Molecular dynamics</property>
+                            <property name="html" type="array" class="[[Ljava.lang.String;">
+                                <property name="[0]" type="array" class="[Ljava.lang.String;">
+                                    <property name="[1]" type="string">html/harddisks/dynamics/launcher.html</property>
+                                </property>
+                            </property>
+                            <property name="launch_class" type="string">org.opensourcephysics.stp.harddisk.HDApp</property>
+                        </object>
+                        </property>
+                        <property name="item" type="object">
+                        <object class="org.opensourcephysics.tools.LaunchNode">
+                            <property name="name" type="string">Metropolis</property>
+                            <property name="html" type="array" class="[[Ljava.lang.String;">
+                                <property name="[0]" type="array" class="[Ljava.lang.String;">
+                                    <property name="[1]" type="string">html/harddisks/metropolis/launcher.html</property>
+                                </property>
+                            </property>
+                            <property name="launch_class" type="string">org.opensourcephysics.stp.hdmc.HDMCApp</property>
+                        </object>
+                        </property>
+                    </property>
                 </object>
                 </property>
                 <property name="item" type="object">
@@ -481,6 +517,32 @@ This work is part of the Open Source Physics project, and is freely available un
                 </property>
                 <property name="item" type="object">
                 <object class="org.opensourcephysics.tools.LaunchNode">
+                    <property name="name" type="string">Number of states of ideal gas</property>
+                    <property name="description" type="string">Number of states of classical ideal gas.</property>
+                    <property name="html" type="array" class="[[Ljava.lang.String;">
+                        <property name="[0]" type="array" class="[Ljava.lang.String;">
+                            <property name="[1]" type="string">html/numberofstates/launcher.html</property>
+                        </property>
+                    </property>
+                    <property name="launch_class" type="string">org.opensourcephysics.stp.numOfStates.NumOfStatesApp</property>
+                    <property name="single_app" type="boolean">true</property>
+                </object>
+                </property>
+                <property name="item" type="object">
+                <object class="org.opensourcephysics.tools.LaunchNode">
+                    <property name="name" type="string">Second virial coefficient</property>
+                    <property name="description" type="string">A calculation of the second virial coefficient.</property>
+                    <property name="html" type="array" class="[[Ljava.lang.String;">
+                        <property name="[0]" type="array" class="[Ljava.lang.String;">
+                            <property name="[1]" type="string">html/virial/launcher.html</property>
+                        </property>
+                    </property>
+                    <property name="launch_class" type="string">org.opensourcephysics.stp.secondvirial.SecondVirialApp</property>
+                    <property name="single_app" type="boolean">true</property>
+                </object>
+                </property>
+                <property name="item" type="object">
+                <object class="org.opensourcephysics.tools.LaunchNode">
                     <property name="name" type="string">Generalized demon</property>
                     <property name="description" type="string">xxx.</property>
                     <property name="html" type="array" class="[[Ljava.lang.String;">
@@ -581,48 +643,8 @@ This work is part of the Open Source Physics project, and is freely available un
                     <property name="single_app" type="boolean">true</property>
                 </object>
                 </property>
-                <property name="item" type="object">
-                <object class="org.opensourcephysics.tools.LaunchNode">
-                    <property name="name" type="string">Hard Disk Monte Carlo</property>
-                    <property name="description" type="string">A Monte Carlo simulation of hard disks.</property>
-                    <property name="html" type="array" class="[[Ljava.lang.String;">
-                        <property name="[0]" type="array" class="[Ljava.lang.String;">
-                            <property name="[1]" type="string">html/diffusion/launcher.html</property>
-                        </property>
-                    </property>
-                    <property name="launch_class" type="string">org.opensourcephysics.stp.hdmc.HDMCApp</property>
-                    <property name="single_app" type="boolean">true</property>
-                </object>
-                </property>
-                <property name="item" type="object">
-                <object class="org.opensourcephysics.tools.LaunchNode">
-                    <property name="name" type="string">Lennard-Jones Monte Carlo</property>
-                    <property name="description" type="string">A Monte Carlo simulation of Lennard-Jones particles.</property>
-                    <property name="html" type="array" class="[[Ljava.lang.String;">
-                        <property name="[0]" type="array" class="[Ljava.lang.String;">
-                            <property name="[1]" type="string">html/diffusion/launcher.html</property>
-                        </property>
-                    </property>
-                    <property name="launch_class" type="string">org.opensourcephysics.stp.ljmc.LJMCApp</property>
-                    <property name="single_app" type="boolean">true</property>
-                </object>
-                </property>
-                <property name="item" type="object">
-                <object class="org.opensourcephysics.tools.LaunchNode">
-                    <property name="name" type="string">Second Virial Calculation</property>
-                    <property name="description" type="string">A calculation of the second virial coefficient.</property>
-                    <property name="html" type="array" class="[[Ljava.lang.String;">
-                        <property name="[0]" type="array" class="[Ljava.lang.String;">
-                            <property name="[1]" type="string">html/diffusion/launcher.html</property>
-                        </property>
-                    </property>
-                    <property name="launch_class" type="string">org.opensourcephysics.stp.secondvirial.SecondVirialApp</property>
-                    <property name="single_app" type="boolean">true</property>
-                </object>
-                </property>
             </property>
         </object>
         </property>
     </property>
-    <property name="editor_enabled" type="boolean">true</property>
 </object>

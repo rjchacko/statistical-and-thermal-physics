@@ -22,17 +22,18 @@ public class LJMC implements Drawable{
   public double L;
   public double rho = N/(L*L);
   public int steps = 0;
-  public double t;
+  public double mcs=0;
   public String initialConfiguration;
   public double radius = 0.5; // radius of particles on screen
   public double T;
   public double beta;
   public double stepSize;
-  public double totalPotentialEnergyAccumulator=0;
+  public double totalPotentialEnergyAccumulator=0, virialAccumulator=0, totalPotentialEnergyAccumulator2=0;
+  double pressure;
   Random r=new Random();
   
   public void initialize() {
-    t = 0;
+    mcs=0;
     rho = N/(L*L);
     beta=1/T;
     x = new double[N];
@@ -46,8 +47,11 @@ public class LJMC implements Drawable{
     } else {
       setRandomPositions();
     }
+    pe=0;
     computePE();
     totalPotentialEnergyAccumulator=pe;
+    totalPotentialEnergyAccumulator2=pe*pe;
+    virialAccumulator=0;
   }
 
   public void setRandomPositions() { // particles placed at random, but not closer than rMinimumSquared
@@ -130,19 +134,26 @@ public class LJMC implements Drawable{
     }
   }
   
-  public double computeTrialPE() {
+  public void computeTrialPE(TrialMove tm) {
 	  double trialPE=0; 
+	  double virial=0;
 	  for(int i=0;i<N-1;i++){
 		  for(int j=i+1;j<N;j++){
 			 double dx = pbcSeparation(x[i]-x[j], L);
 			 double dy = pbcSeparation(y[i]-y[j], L);
 			 double r2 = dx*dx+dy*dy;
 			 double oneOverR2 = 1.0/r2;
-			 double oneOverR6 = oneOverR2*oneOverR2*oneOverR2;       
+			 double oneOverR6 = oneOverR2*oneOverR2*oneOverR2; 
+			 double fOverR = 48.0 * oneOverR6 * (oneOverR6 - 0.5) * oneOverR2;
+			 double fx = fOverR * dx;
+			 double fy = fOverR * dy;
 			 trialPE+=4.0*(oneOverR6*oneOverR6-oneOverR6); 
+			 virial += dx * fx + dy * fy;
 		  }
 	  }
-	  return trialPE;
+	  tm.virial=virial;
+	  tm.dE=trialPE-pe;
+	  return;
   }
 
   private double pbcSeparation(double ds, double L) {
@@ -175,7 +186,8 @@ public class LJMC implements Drawable{
   public class TrialMove{
 	  int n;
 	  double dx, dy;  
-	  double dE;  
+	  double dE;
+	  double virial;
   }
   
   public TrialMove makeTrialMove(){
@@ -186,7 +198,7 @@ public class LJMC implements Drawable{
       tm.dy=2*stepSize*(Math.random()-0.5);
 	  x[tm.n]=pbcPosition(x[tm.n]+=tm.dx,L);
 	  y[tm.n]=pbcPosition(y[tm.n]+=tm.dy,L);
-      tm.dE=computeTrialPE()-pe;
+	  computeTrialPE(tm);
       return tm;
   }
 
@@ -194,8 +206,10 @@ public class LJMC implements Drawable{
 	TrialMove tm=makeTrialMove();
 	boolean lowersEnergy=tm.dE<0;
 	boolean acceptThermal=Math.exp(-tm.dE/T)>Math.random();
-	if(  lowersEnergy || acceptThermal ){		
+	if( lowersEnergy || acceptThermal ){		
 		pe=pe+tm.dE;
+		virialAccumulator+=tm.virial;
+		pressure=getMeanPressure();
 	}
 	else{
 		x[tm.n]-=tm.dx;
@@ -203,9 +217,31 @@ public class LJMC implements Drawable{
 	}
     
     steps++; 
-    if(steps%N==0)totalPotentialEnergyAccumulator+=pe;
+    if(steps%N==0){
+    	totalPotentialEnergyAccumulator+=pe;
+    	totalPotentialEnergyAccumulator2+=pe*pe;
+    	mcs++;
+    }
   }
-
+  
+  public void oneMCstep(){
+	  for(int i=0;i<N;i++){
+		  step();
+	  }
+  }
+  
+  public double getMeanPressure(){
+	  double meanVirial=virialAccumulator/steps;
+	  
+	  return 1.0 + 0.5 * meanVirial / (N*T); // quantity PV/NkT
+  }
+  
+  public double getHeatCapacity(){
+	  double avgPE=totalPotentialEnergyAccumulator/mcs;
+	  double avgPE2=totalPotentialEnergyAccumulator2/mcs;
+	  return (avgPE2-avgPE*avgPE)/(T*T*N);
+  }
+  
   public void draw(DrawingPanel panel, Graphics g) {
     if(x==null||y==null) {
       return;

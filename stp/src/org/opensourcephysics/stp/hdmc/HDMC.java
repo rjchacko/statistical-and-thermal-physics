@@ -35,7 +35,7 @@ public class HDMC implements Drawable{
     y = new double[N];
     minSeparation=L;
     steps=0;
-    
+    radius=0.5;
     if(initialConfiguration.equals("triangular")) {
       setTriangularLattice();
     } else if(initialConfiguration.equals("rectangular")) {
@@ -112,25 +112,9 @@ public class HDMC implements Drawable{
 		iy++;
 	}
   }
-//  public void setTriangularLattice() { // place particles on triangular lattice
-//    double dx = Lx/nx; // distance between particles on same row
-//    double dy = Ly/ny; // distance between rows
-//    for(int ix = 0;ix<nx;++ix) {
-//      for(int iy = 0;iy<ny;++iy) {
-//    	  	int i = ix+iy*ny;	
-//        y[i] = dy*(iy+0.5);
-//        if(iy%2==0) {
-//          x[i] = dx*(ix+0.25);
-//        } else {
-//          x[i] = dx*(ix+0.75);
-//        }
-//      }
-//    }
-//  }
 
   public boolean checkOverlap(){
-	boolean overlap = false;
-	double tol = .00001;		
+	boolean overlap = false;		
 	for (int i = 0; i < N - 1; i++){
 		for (int j = i + 1; j < N; j++){
 			double dx = pbcSeparation(x[i] - x[j], L);
@@ -207,10 +191,16 @@ public class HDMC implements Drawable{
 		x[tm.n]-=tm.dx;
 		y[tm.n]-=tm.dy;	
 	}
-	else if(steps%(1*N)==0) compress();
+	
     steps++; 
   }
 
+  public void oneMCstep(){
+	  for(int i=0;i<N;i++){
+		  step();
+	  }
+	  compress();
+  }
   public void draw(DrawingPanel panel, Graphics g) {
     if(x==null||y==null) {
       return;

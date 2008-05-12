@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+<title>Simulations for Statistical and Thermal Physics</title>
+
+<link href="../default.css" type="text/css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<h3 style="text-align:center;">Direct Monte Carlo Computation of the Partition Function</h3>
+
+<p class="header_title">Introduction</p>
+
+<p>The Wang-Landau algorithm computes the density of states directly by doing a biased random walk. The idea is to make changes at random, but to sample energies that are more probable less often so that all states are sampled equally. An algorithm due to Zhang and Ma allows us to compute the partition function directly using an algorithm similar to the Wang-Landau algorithm. The modified algorithm uses two types of trial moves: a standard Metropolis Monte Carlo move such as a flip of a spin which changes the energy at fixed temperature, and a move to change the temperature at fixed energy. The idea is that the random temperature changes will range over low and high temperatures so that rare energy states can be sampled more efficiently. We will discuss the algorithm in the context of the two-dimensional Ising model.</p>
+
+<center>
+<applet
+ code="org.opensourcephysics.davidson.applets.ApplicationApplet.class"
+ archive="./stp.jar" codebase="../" align="top" height="40"
+ hspace="0" vspace="0" width="150"> <param name="target"
+ value="org.opensourcephysics.stp.partfunccalc.PartFuncCalcApp"> <param name="title"
+ value="Applet"> <param name="singleapp" value="true">
+</applet>
+</center>
+
+
+<p class="header_title">Algorithm</p>
+
+<p>The algorithm can be summarized by the following steps:</p>
+
+<ol>
+
+<li>Set up an array of temperatures T. In the simulation we chose values of T from T = 0.1 to T = 8 with 218 temperature bins; the bin width was reduced for temperatures near the critical value. Set the estimate of the logarithm of the partition function in each bin to zero. We use the logarithm because the partition function grows very rapidly with energy.</li>
+
+<li>Choose an initial value of the modification parameter f as in the Wang-Landau algorithm. We take f<sub>0</sub> = e &#8773; 2.71. The number of Monte Carlo moves per spin for a given f is chosen to be (100)/&#8730;(ln f).</li>
+
+<li>Choose the probability p of a trial temperature change. For a 32 &#215; 32 lattice we chose p = 0.01. Otherwise make a standard Monte Carlo step.</li>
+
+<li>Begin with a random starting configuration and an initial temperature T<sub>i</sub>.</li>
+
+<li>Compute the total energy of the current state.</li>
+
+<li>If an energy move is chosen, flip a spin and accept the trial change with the usual Metropolis probability at the current temperature.</li>
+
+<li>If a temperature move is chosen, randomly choose a temperature T<sub>j</sub>. Accept the new temperature with the probability
+<p class="center">
+<img src="probz.jpg" alt="" align="middle" >,
+</p>
+where &#946; = 1/T is the inverse temperature. If the new temperature is accepted, then T<sub>i</sub> &#8594; T<sub>j</sub>.</li>
+
+<li>Regardless of which type of change was chosen, update the partition function by
+<p class="center">
+ln Z(T<sub>i</sub>) &#8594; ln Z(T<sub>i</sub>) + ln f.</p>
+</li>
+
+<li>After the fixed number of Monte Carlo moves chosen in step 2, reduce f as in the Wang-Landau algorithm; that is, f &#8594; &#8730;(f).</li>
+
+<li>Stop the simulation when ln f &lt; 10<sup>-9</sup>.</li>
+
+</ol>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;The algorithm yields the log of the partition function up to a constant. We will display values of ln Z relative to its value at the lowest temperature T = 0.1.</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;The acceptance rule in step 7 is consistent with detailed balance with a probability distribution given by the Boltzmann distribution. If the current estimate of the partition function for a particular temperature is too low, the algorithm will favor moves toward that temperature, thus eventually approaching the correct value for the partition function. Sometimes the simulation does not accurately compute the low temperature values for Z because not enough time was spent there. One way to tell is to check if ln Z is a monotonically increasing function of temperature. Thus, it is important to do several independent runs. </p>
+
+<p class="header_title">Problems</p>
+
+<p>Note that if the <tt>display delay</tt> is set to the default value, there will be a delay when you stop the program. However, the program will run much faster. The optimum value of <tt>display delay</tt> depends on the speed of your computer.</p>
+
+<ol>
+
+<li>Run the simulation for a small system (2 &#215; 2) and compare your results with the exact value for Z which you can calculate analytically. Describe the qualitative temperature dependence of the partition function.</li>
+
+<li>Run the simulation for a larger system. How does
+the partition function for the larger system compare to that of the smaller one? Explore various size lattices. Are the estimated results for the partition function always a monotonic increasing function of the temperature as they should be?</li>
+
+<li>Describe the qualitative nature of the changing spin configurations.</li>
+
+<li>Increase the probability of choosing a temperature move. Are your results different? If so, why?</li>
+
+<li>Why do we set the probability for choosing a temperature move so much less then the probability of choosing an energy move?</li>
+
+</ol>
+
+<p class="header_title">References</p>
+
+<ul>
+
+<li>J. Kim, J. E. Straub, and T. Keyes, &#8220;Statistical temperature Monte Carlo and molecular dynamics algorithms,&#8221; Phys. Rev. Lett. <b>97</b>, 050601-1&#8211;4 (2006).</li>
+
+<li> F. Wang and D. P. Landau, &#8220;Efficient, multiple-range random walk algorithm to calculate the density of states,&#8221; Phys. Rev. Lett. <b>86</b>, 2050&#8211;2053 
+(2001), and &#8220;Determining the density of states for classical statistical models: A random walk algorithm to produce a flat histogram,&#8221; Phys. Rev. E <b>64</b>, 
+056101-1&#8211;16 (2001).</li>
+
+<li>Cheng Zhang and Jianpeng Ma, &#8220;Simulation via direct computation of partition functions,&#8221; Phys. Rev. E <b>76</b>, 036708-1&#8211;5 (2007).</li>
+
+</ul>
+
+<p class="header_title">Java Classes</p>
+
+<ul>
+
+<li> PartFuncCalc </li>
+<li> PartFuncCalcApp </li>
+
+</ul>
+
+
+<p class = "small">Modified 13 January 2008.</p>
+
+</body>
+</html>

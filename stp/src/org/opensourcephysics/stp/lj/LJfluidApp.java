@@ -99,7 +99,7 @@ public class LJfluidApp extends AbstractSimulation
 
 	public void doStep()
 	{
-		quenchRate = control.getDouble("Quench rate");
+		quenchRate = control.getDouble("quench rate");
 		for (int i = 0; i < 20; i++)
 		{
 			lj.step();

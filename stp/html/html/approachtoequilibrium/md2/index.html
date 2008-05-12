@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+
+<title>Simulations for Statistical and Thermal Physics</title>
+
+<link href="../../default.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+
+<h3 style="text-align: center;">Approach to equilibrium: Two partitions</h3>
+
+<p class="header_title">Introduction</p>
+
+<p>This program is similar to the molecular dynamics of a gas initially confined to the center of three partitions. In this simulation  the particles are initially confinedto the left half of the box. Because of the use of periodic boundary conditions, the visualization of the trajectories of the particles might be confusing because it looks like particles are moving into the right half of the box from two directions.</p>
+
+<center>
+<applet
+ code="org.opensourcephysics.davidson.applets.ApplicationApplet.class"
+ archive="./stp.jar" codebase="../" align="top" height="40"
+ hspace="0" vspace="0" width="150"> <param name="target"
+ value="org.opensourcephysics.stp.approach.LJgasApp"> <param name="title"
+ value="Applet"> <param name="singleapp" value="true">
+</applet>
+</center>
+
+<p class="header_title">Problems</p>
+<ol>
+
+<li>Run the simulation with the default initial values. How long
+does it take before the system appears to be in equilibrium? What is
+your criterion for equilibrium?</li>
+
+<li>Explain the use of periodic boundary conditions.</li>
+
+<li>*Run the system with N = 270 until t = 5. Then press the <tt>Reverse</tt> button, which reverse all the velocities, and continue the simulation. Does the system return to its initial state? Repeat for other times. Is there a time at which the system does not  return to its initial state? Repeat for N = 27. What can you conclude about the N dependence of reversibility?</li>
+
+</ol>
+<p class="header_title">Java Classes Used</p>
+
+<ul>
+
+<li>LJgas</li>
+
+<li>LJgas2boxApp</li>
+
+</ul>
+
+<p class="small">Updated 27 February 2006.</p>
+
+</body>
+</html>

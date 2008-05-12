@@ -1,0 +1,250 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+<title>Simulations for Statistical and Thermal Physics</title>
+
+<link href="../default.css" type="text/css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<h3 style="text-align:center;">Density of States of the 2D Ising Model</h3>
+
+<p class="header_title">Introduction</p>
+
+<p>The probability that a system in equilibrium with a heat bath at temperature T has energy E is given by</p>
+<p class="center">
+P(E,&#946;) = g(E) e<sup>-&#946;E</sup>/Z,
+</p>
+<p>where Z is the partition function and g(E) is the number of states with energy E. If
+g(E) is known, we can calculate the mean
+energy and other thermodynamic quantities at any temperature from
+the relation</p>
+<p class="center">
+&lt;E&gt; = (1/Z) &#8721;<sub>E</sub> Eg(E)e<sup>&#946; E</sup>.
+</p>
+<p>
+Hence, the quantity g(E) is of much interest.</p>
+
+<p>&#160;&#160;&#160;&#160;In the following we discuss an algorithm for directly computing g(E). To be concrete we apply the algorithm to the two-dimensional Ising model. In this model, the energy is a discrete variable and hence the quantity we wish to compute is the number of spin configurations with the same energy. If we were to apply the algorithm to a system for which the energy is continuous, we would compute the number of states with energy between E and E + &#916;E, that is g(E)&#916;E. In this case, g(E) would be the <i>density of states.</i> It is common to refer to g(E) as the density of states even when we really mean the number of states.</p>
+
+<p>&#160;&#160;&#160;&#160;Suppose that we were to try to compute g(E) by doing a random walk
+in
+energy space by flipping the spins at random and accepting all
+configurations that we obtain in this way. The histogram of the energy,
+H(E),
+the number of visits to each possible energy E of
+the system, would converge to g(E) if the walk visited all possible
+configurations. In practice, it would be impossible to realize such
+a long random walk given the extremely large number of configurations.
+For
+example, the Ising model on a L = 10
+square lattice has
+2<sup>100 </sup> &#8773; 1.3 &#215; 10<sup>30</sup> spin configurations.</p>
+
+<p>&#160;&#160;&#160;&#160;The main difficulty of doing a simple random walk to determine g(E)
+is
+that the walk would spend most of its time visiting the same energy
+values
+over and over again and would not reach the values of E that are less
+probable. The idea of the <i>Wang-Landau</i> algorithm is to do a
+random
+walk in energy space by flipping single spins at random and accepting the
+changes with a probability that is proportional to the reciprocal of
+the
+density of states. In this way energy values that would be visited often
+using
+a simple random walk would be visited less often because they have a
+larger
+density of states. There is only one problem -- we don't know the
+density of
+states. We will see that the Wang-Landau algorithm estimates the
+density of
+states at the same time that it does a random walk in phase space.</p>
+
+<center>
+<applet
+ code="org.opensourcephysics.davidson.applets.ApplicationApplet.class"
+ archive="./stp.jar" codebase="../" align="top" height="40"
+ hspace="0" vspace="0" width="150"> <param name="target"
+ value="org.opensourcephysics.stp.ising.wanglandau.WangLandauApp"> <param name="title"
+ value="Applet"> <param name="singleapp" value="true">
+</applet>
+</center>
+
+<p class="header_title">Algorithm</p>
+
+<ol>
+
+<li>Start with an initial arbitrary configuration of spins and a
+guess
+for the density of states. The simplest guess is to set g(E) = 1
+for all possible energies E. (We should really use a different symbol for the density of states &#8211; one for the exact result and one for the approximate density of states that we will estimate while implementing the Wang-Landau algorithm.)</li>
+
+<li>Choose a spin at random and make a trial flip. Compute the
+energy
+before, E<sub>1</sub>, and after the flip, E<sub>2</sub>, and accept the
+change with
+probability
+<p class="center">
+p(E<sub>1</sub> &#8594; E<sub>2</sub>) = min(g(E<sub>1</sub>)/g(E<sub>2</sub>),
+1),
+</p>
+This equation implies that if g(E<sub>2</sub>) &#8804; g(E<sub>1</sub>), the
+state with energy
+E<sub>2</sub> is always accepted; otherwise, it is accepted with
+probability
+g(E<sub>1</sub>)/g(E<sub>2</sub>). That is, the state with energy E<sub>2</sub>
+is
+accepted if a random number r &#8804; g(E<sub>1</sub>)/g(E<sub>2</sub>).</li>
+
+<li>After step 2 the energy of the system is
+E. (E is E<sub>2</sub> if the change is accepted or remains at E<sub>1</sub>
+if
+the change is not accepted.)</li>
+
+<li>The other part of the Wang-Landau algorithm is to multiply the current value of g(E) by the modification
+factor f &gt; 1
+<p class="center">
+g(E) = fg(E).
+</p>
+We also update the existing entry for
+H(E) in the energy histogram.:
+<p class="center">
+H(E) = H(E) + 1.
+</p>
+Because g(E) becomes very large, in
+practice we must work with the logarithm of the density of states, so
+that
+ln(g(E)) will fit into double precision numbers. Therefore, each update
+of the density of states is implemented as
+<p class="center">
+ln(g(E)) &#8594; ln(g(E)) + ln(f),
+</p>
+and the ratio of the density of
+states is computed as
+exp[ln(g(E<sub>1</sub>)) - ln(g(E<sub>2</sub>))].</li>
+
+<li>A reasonable choice of the initial modification factor is
+f = f<sub>0</sub> = e &#8773; 2.71828 ... If f<sub>0</sub> is too small, the
+random walk will
+need a very long time to reach all possible energies. Too
+large a
+choice of f<sub>0</sub> will lead to large statistical errors.</li>
+
+<li>Proceed with the random walk in energy space until a "flat"
+histogram H(E) is obtained, that is, until all the possible energy
+values
+are visited an approximately equal number of times. Of course, it is impossible to obtain a perfectly flat
+histogram, and we will say that
+H(E) is "flat" when
+H(E) for all possible E is not less than p of the average histogram
+&lt;H(E)&gt;; p is chosen according to the size and the complexity of
+the
+system and the desired accuracy of the density of states. For the
+two-dimensional Ising model on small
+lattices, p can be chosen to be as high as 0.95, but for large systems
+the
+criterion for flatness may never be satisfied if p is too
+close to unity.</li>
+
+<li>Once the flatness criterion has been satisfied, reduce the
+modification factor f using a function such as f<sub>1</sub> = (f<sub>0</sub>)<sup>1/2</sup>,
+reset the
+histogram to H(E) = 0 for all values of E, and begin the next iteration
+of
+the random walk during which the density of states is modified by
+f<sub>1</sub> at each trial flip. The density of
+states is not reset during the simulation. We continue performing the
+random walk until the histogram H(E) is again flat.</li>
+
+<li>Reduce the modification factor,
+f<sub>{i+1}</sub> = (f<sub>i</sub>)<sup>1/2</sup>, reset the histogram to H(E) = 0 for all
+values of E,
+and continue the random walk. Stop the simulation when f
+is smaller than a predefined value (such as
+f<sub>final</sub> = exp(10<sup>-8</sup>) &#8773; 1.00000001). The
+modification factor
+acts as a control parameter for the accuracy of the density of states
+during
+the simulation and also determines how many Monte Carlo sweeps are
+necessary
+for the entire simulation.</li>
+
+</ol>
+
+<p>At the end of the simulation, the algorithm provides only a relative
+density of states. To determine the normalized density of states
+ we can either use the fact that the total number of
+states for
+the Ising model is</p>
+<p class="center">
+&#8721;<sub>E</sub> g(E) = 2<sup>N</sup>,
+</p>
+<p>or that the number of ground states
+(for which E = -2N)
+is 2. The latter normalization guarantees the accuracy of the density
+of
+states at low energies which is important in the calculation of
+thermodynamic quantities at low temperature. If we apply the former
+condition, we cannot guarantee the accuracy of g(E) for energies at or
+near the ground state, because the rescaling factor is dominated by the
+maximum density of states. We can use one of these two normalization
+conditions to obtain the absolute density of states, and use the other
+normalization condition to check the accuracy of our result.</p>
+
+<p class="header_title">Problems</p>
+
+<ol>
+
+<li>First choose L = 2. How many states are there for each value of E? Run the simulation and verify that the computed density of states is close to your exact answer.</li>
+
+<li>Choose larger values of L, for example, L = 16. Describe the qualitative energy dependence of g(E).</li>
+
+<li>Compute
+the specific heat as a function of temperature and describe its qualitative temperature dependence. Is there any evidence of a phase transition?</li>
+
+<li>*Determine the value of the specific heat C at T = T<sub>c</sub> = 2/ln(1 + &#8730;2) = 2.269 as a function of L and make a log-log plot of C versus L. If your data for C is
+sufficiently accurate, you will find that the log-log plot of C
+versus L is not a straight line but shows curvature. The reason
+is that the critical exponent &#945; 
+equals zero for the two-dimensional Ising
+model, and hence 
+<p class="center">
+C &#8773; C<sub>0</sub> ln L.
+</p>
+Is your data for C consistent with this form? The
+constant
+C<sub>0</sub> is approximately 0.4995.</li>
+
+</ol>
+
+<p class="header_title">References</p>
+
+<ul>
+
+<li>D. P. Landau, Shan-Ho Tsai, and M. Exler, "A new approach to Monte Carlo simulations in statistical physics: Wang-Landau sampling," Am. J. Phys. <b>72</b>, 1294&#8211;1302 (2004).</li>
+
+<li>F. Wang and D. P. Landau, "Efficient, multiple-range random walk algorithm to calculate the density of states," Phys. Rev. Lett. <b>86</b>, 2050&#8211;2053 
+(2001) and ibid., "Determining the density of states for classical statistical models: A random walk algorithm to produce a flat histogram," Phys. Rev. E <b>64</b>, 
+056101-1&#8211;16 (2001).</li>
+
+<li>J. Kim, J. E. Straub, and T. Keyes, "Statistical-temperature Monte Carlo and molecular dynamics algorithms," Phys. Rev. Lett. <b>97</b>, 050601-1&#8211;4 (2006). The authors discuss a novel Monte Carlo algorithm that samples the temperature as a function of the energy.</li>
+
+</ul>
+
+<p class="header_title">Java Classes</p>
+
+<ul>
+
+<li>WangLandauApp</li>
+<li>Thermodynamics</li>
+
+</ul>
+
+<p class = "small">Updated 28 February 2007.</p>
+</body>
+</html>
