@@ -28,7 +28,7 @@ public class LJMC implements Drawable{
   public double T;
   public double beta;
   public double stepSize;
-  
+  public double totalPotentialEnergyAccumulator=0;
   Random r=new Random();
   
   public void initialize() {
@@ -47,6 +47,7 @@ public class LJMC implements Drawable{
       setRandomPositions();
     }
     computePE();
+    totalPotentialEnergyAccumulator=pe;
   }
 
   public void setRandomPositions() { // particles placed at random, but not closer than rMinimumSquared
@@ -202,6 +203,7 @@ public class LJMC implements Drawable{
 	}
     
     steps++; 
+    if(steps%N==0)totalPotentialEnergyAccumulator+=pe;
   }
 
   public void draw(DrawingPanel panel, Graphics g) {
