@@ -50,17 +50,18 @@ public class HDMCApp extends AbstractSimulation {
 	   display.setPreferredMinMax(0, mc.L, 0, mc.L); 
 	}
 	
-	public void startRunning() {
-	   double L = control.getDouble("L");
-	   mc.s=control.getDouble("scale lengths");
-	   if((L!=mc.L)) {
-	     mc.L = L;
-	     display.setPreferredMinMax(0, L, 0, L);
-	     resetData();
-	   }
-	 }
+//	public void startRunning() {
+//	   double L = control.getDouble("L");
+//	   mc.s=control.getDouble("scale lengths");
+//	   if((L!=mc.L)) {
+//	     mc.L = L;
+//	     display.setPreferredMinMax(0, L, 0, L);
+//	     resetData();
+//	   }
+//	 }
 	  
 	protected void doStep() {
+		 mc.s=control.getDouble("scale lengths");
 		 mc.oneMCstep(); 
 		 if(mc.steps%mc.N==0)control.println(mc.steps/mc.N + " mcs");
 		 gr.append(mc.x, mc.y);
@@ -71,7 +72,7 @@ public class HDMCApp extends AbstractSimulation {
 	}
 	
 	public void stop() {
-		 control.println("Density = "+decimalFormat.format(mc.N/(mc.L*mc.L)));
+		 control.println("Density = "+ decimalFormat.format(mc.N/(mc.equivL*mc.equivL)));
 	}
 	
 	public void resetData() {
