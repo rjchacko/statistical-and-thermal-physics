@@ -135,9 +135,8 @@ public class HDMC implements Drawable{
   }
   
   public void compress(){
-	  double oldRadius=radius;
 	  radius=0.5*(1-s)*minSeparation+s*radius;
-	  equivL=Math.sqrt(equivL*equivL+N*Math.PI*(oldRadius*oldRadius-radius*radius));
+	  equivL=L*Math.sqrt(0.25/(radius*radius));
   }
   
   
