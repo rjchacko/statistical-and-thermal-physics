@@ -16,8 +16,8 @@ public class SecondVirialApp extends AbstractCalculation implements Function{
 	}
     
 	public void reset() {
-	    control.setValue("Tmin", 1.0);	
-	    control.setValue("Tmax", 100.0);   
+	    control.setValue("Tmin", 0.5);	
+	    control.setValue("Tmax", 5);   
 	    pf.clearData();
     }
 	
