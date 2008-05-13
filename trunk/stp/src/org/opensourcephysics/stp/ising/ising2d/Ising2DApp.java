@@ -18,6 +18,7 @@ public class Ising2DApp extends AbstractSimulation
 	public Ising2DApp()
 	{
 		ising = new Ising2D();
+		plotFrame.setPreferredMinMaxX(0,10);
 		plotFrame.setAutoscaleX(true);
 		plotFrame.setAutoscaleY(true);
 		displayFrame.addDrawable(ising);

@@ -44,8 +44,9 @@ public class VariableStepLengthWalkApp extends AbstractSimulation
 		x = 0;
 		xcum = 0;
 		x2cum = 0;
-		histogramFrame.setPreferredMinMaxX(x - N, x + N);
+		histogramFrame.setPreferredMinMax(x - N, x + N,0,10);
 		histogramFrame.setBinWidth(control.getDouble("bin width"));
+		histogramFrame.setAutoscaleY(true);
 		
 		random.setSeed(System.currentTimeMillis());
 	}

@@ -13,7 +13,12 @@ public int displayDelay = 100;
 public int n = 0;
 
 public PartFuncCalcApp() {
-	
+	plotFrame.setPreferredMinMaxX(0, 10);
+	plotFrame.setAutoscaleX(true);
+	plotFrame.setAutoscaleY(true);
+	plotFrame2.setPreferredMinMax(0,10,0,10);
+	plotFrame2.setAutoscaleX(true);
+	plotFrame2.setAutoscaleY(true);
 }
 
 public void initialize() {

@@ -25,6 +25,9 @@ public class IsingLG2App extends AbstractSimulation {
     plotFrame.setXYColumnNames(0, "mcs", "nLeft");
     plotFrame.setXYColumnNames(1, "mcs", "nRight");
     plotFrame.setMarkerColor(0, Color.green);
+    plotFrame.setPreferredMinMax(0,10,0,10);
+    plotFrame.setAutoscaleX(true);
+    plotFrame.setAutoscaleY(true);
   }
 
   public void initialize() {

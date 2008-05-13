@@ -26,6 +26,8 @@ public class ComputeBoseIntegralApp extends AbstractCalculation implements Funct
 	ComputeBoseIntegralApp(){
 		mua = new double[nmaxTrials];
 		Ta = new double[nmaxTrials];
+		plotFrame.setPreferredMinMaxX(0, 10);
+		plotFrame.setAutoscaleX(true);
 	}
    public void reset() {
 	   control.setValue("\u03c1*", 1.0);	//rho

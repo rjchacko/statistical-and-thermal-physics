@@ -28,6 +28,12 @@ public class ComputeFermiIntegralApp extends AbstractCalculation implements Func
 		mua = new double[nmaxTrials];
 		Ta = new double[nmaxTrials];
 		Ea = new double[nmaxTrials];
+		plotFrame.setPreferredMinMax(0, 10, 0, 10);
+		plotFrame.setAutoscaleX(true);
+		plotFrame.setAutoscaleY(true);
+		energyFrame.setPreferredMinMax(0, 10, 0, 10);
+		energyFrame.setAutoscaleX(true);
+		energyFrame.setAutoscaleY(true);
 	}
    public void reset() {
 	   control.setValue("T*", 1.0);   

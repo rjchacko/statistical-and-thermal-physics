@@ -30,6 +30,9 @@ public class OscillatorApp extends AbstractSimulation {
 	  osci.Q = control.getDouble("Q");
 	  energyFrame.setAutoscaleX(true);
 	  this.delayTime = 0;
+	  energyFrame.setPreferredMinMax(0, 10, 0, 10);
+	  energyFrame.setAutoscaleX(true);
+	  energyFrame.setAutoscaleY(true);
   }
 
   public void reset() {

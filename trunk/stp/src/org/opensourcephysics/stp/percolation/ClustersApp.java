@@ -20,7 +20,7 @@ public class ClustersApp extends AbstractSimulation {
   PlotFrame plot1 = new PlotFrame("p", "Mean Cluster Size", "Mean cluster size");
   PlotFrame plot2 = new PlotFrame("p", "P_\u221e", "P\u221e");
   PlotFrame plot3 = new PlotFrame("p", "P_span", "P_span");
-  PlotFrame plot4 = new PlotFrame("s", "<n_s>", "Cluster size distribution");
+  PlotFrame plot4 = new PlotFrame("s", "      <n_{s}>", "Cluster size distribution");
   Clusters lattice;
   double pDisplay;
   double[] meanClusterSize;
@@ -35,6 +35,10 @@ public class ClustersApp extends AbstractSimulation {
     lattice = new Clusters(L);
     pDisplay = control.getDouble("display lattice at this value of p");
     grid.setMessage("p = "+pDisplay);
+    plot1.setPreferredMinMaxX(0,1);
+    plot2.setPreferredMinMax(0,1,0,1);
+    plot3.setPreferredMinMax(0,1,0,1);
+    plot4.setPreferredMinMaxY(1, L);
     plot4.setMessage("p = "+pDisplay);
     plot4.setLogScale(true, true);
     meanClusterSize = new double[L*L];

@@ -36,6 +36,18 @@ public class WidomApp extends AbstractSimulation {
     mc.initialize();
     display.addDrawable(mc);
     display.setPreferredMinMax(0, mc.Lx, 0, mc.Ly); 
+    pressureData.setPreferredMinMax(0, 10, 0, 10);
+    pressureData.setAutoscaleX(true);
+    pressureData.setAutoscaleY(true);
+    
+    energyData.setPreferredMinMax(0, 10, 0, 10);
+    energyData.setAutoscaleX(true);
+    energyData.setAutoscaleY(true);
+    
+    cpData.setPreferredMinMax(0, 10, 0, 10);
+    cpData.setAutoscaleX(true);
+    cpData.setAutoscaleY(true);
+    
   }
 
   /**

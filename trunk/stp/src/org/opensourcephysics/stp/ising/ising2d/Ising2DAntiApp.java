@@ -14,6 +14,7 @@ public class Ising2DAntiApp extends AbstractSimulation
 	public Ising2DAntiApp()
 	{
 		ising = new Ising2DAnti();
+		plotFrame.setPreferredMinMaxX(0, 10);
 		plotFrame.setAutoscaleX(true);
 		plotFrame.setAutoscaleY(true);
 		displayFrame.addDrawable(ising);
