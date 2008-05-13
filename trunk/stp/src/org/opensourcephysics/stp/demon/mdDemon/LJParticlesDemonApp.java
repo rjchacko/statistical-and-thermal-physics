@@ -48,6 +48,14 @@ public class LJParticlesDemonApp extends AbstractSimulation {
     demonPlot.setPreferredMinMaxY(0, 10);
     demonPlot.setAutoscaleX(true);
     demonPlot.setAutoscaleY(true);
+    temperatureData.setPreferredMinMaxX(0,10);
+    temperatureData.setPreferredMinMaxY(0, 10);
+    temperatureData.setAutoscaleX(true);
+    temperatureData.setAutoscaleY(true);
+    pressureData.setPreferredMinMaxX(0,10);
+    pressureData.setPreferredMinMaxY(0, 10);
+    pressureData.setAutoscaleX(true);
+    pressureData.setAutoscaleY(true);
   }
 
   /**

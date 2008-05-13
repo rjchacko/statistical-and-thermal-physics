@@ -20,8 +20,8 @@ public class HDApp
   PlotFrame pressureFrame = new PlotFrame("time", "pressure",
                                           "Pressure versus time");
   DisplayFrame displayFrame = new DisplayFrame("HD Display");
-  HistogramFrame histogramFrame = new HistogramFrame("v_x", "P(v_x)",
-	"P(v_x) versus v_x");
+  HistogramFrame histogramFrame = new HistogramFrame("v_x", "H(v_x)",
+	"H(v_x) versus v_x");
   
   Rdf gr = new Rdf();
   PlotFrame grFrame = new PlotFrame("r", "g(r)", "Radial distribution function");
