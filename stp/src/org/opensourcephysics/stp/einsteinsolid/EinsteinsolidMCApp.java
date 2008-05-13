@@ -73,10 +73,17 @@ import java.util.*;
 		mcs = 0;
 		acceptedMoves = 0;
 		control.clearMessages();
+		plotFrame.setPreferredMinMax(0, 10, 0, 10);
+		plotFrame.setAutoscaleX(true);
+		plotFrame.setAutoscaleY(true);
 		ETFrame.setPreferredMinMaxX(0, 10);
 		CTFrame.setPreferredMinMaxX(0, 10);
 		ETFrame.setAutoscaleX(true);
 		CTFrame.setAutoscaleX(true);
+		ETFrame.setPreferredMinMaxY(0, 10);
+		CTFrame.setPreferredMinMaxY(0, 10);
+		ETFrame.setAutoscaleY(true);
+		CTFrame.setAutoscaleY(true);
 		this.delayTime = 0;
 		
 	}

@@ -19,10 +19,12 @@ public class Ising1DApp extends AbstractSimulation
 	public Ising1DApp()
 	{
 		ising = new Ising1D();
+		eFrame.setPreferredMinMaxX(0, 10);
 		eFrame.setAutoscaleX(true);
 		eFrame.setAutoscaleY(true);
 		eFrame.setMarkerColor(0, Color.black);
 		
+		mFrame.setPreferredMinMaxX(0,10);
 		mFrame.setAutoscaleX(true);
 		mFrame.setAutoscaleY(true);
 		mFrame.setMarkerColor(0, Color.black);

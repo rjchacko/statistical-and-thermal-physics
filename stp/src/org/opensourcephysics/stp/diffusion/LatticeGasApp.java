@@ -53,6 +53,10 @@ public class LatticeGasApp extends AbstractSimulation
 		// plottingPanel.addDrawable(dataset);
 		displayFrame.setSquareAspect(true);
 		displayFrame.addDrawable(latticegas);
+		plotFrame.setPreferredMinMaxX(0, 10);
+		plotFrame.setAutoscaleX(true);
+		plotFrame.setPreferredMinMaxY(0, 10);
+		plotFrame.setAutoscaleY(true);
 	}
 
 	public void initialize()

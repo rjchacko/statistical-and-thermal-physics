@@ -42,7 +42,7 @@ public class TwoDimensionalWalkApp extends AbstractSimulation
 		random = new Random();
 		histogramFrame.setBinWidth(.01);
 
-		histogramFrame.setPreferredMinMaxX(0,10);
+		histogramFrame.setPreferredMinMax(0,10,0,10);
 		histogramFrame.setAutoscaleX(true);
 		histogramFrame.setAutoscaleY(true);
 		// histogramFrame.setBinOffset(.005);

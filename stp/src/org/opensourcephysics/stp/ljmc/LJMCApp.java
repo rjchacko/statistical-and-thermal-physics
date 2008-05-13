@@ -67,6 +67,9 @@ public class LJMCApp extends AbstractSimulation {
 	   grFrame.setPreferredMinMaxX(0, 0.5*mc.L);
 	   display.addDrawable(mc);
 	   display.setPreferredMinMax(0, mc.L, 0, mc.L);
+	   pressure.setPreferredMinMax(0,10,0, 10);
+	   pressure.setAutoscaleX(true);
+	   pressure.setAutoscaleY(true);
  
   }
 

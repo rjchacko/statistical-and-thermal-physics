@@ -22,7 +22,7 @@ public class QMCApp extends AbstractSimulation {
   QMC qmc = new QMC();
   PlotFrame distribution = new PlotFrame("energy", "n(E)", "distribution");
   PlotFrame energyDistribution = new PlotFrame("energy", "E n(E) D(E)", "energy distribution");
-  PlotFrame dos = new PlotFrame("energy", "D(E)", "Density of States(number of states per unit energy)");
+  PlotFrame dos = new PlotFrame("energy", "D(E)", "Density of States (number of states per unit energy)");
   PlotFrame particleState = new PlotFrame("particle label", "energy", "energy level diagram");
   int statistics;
   ElementEllipsoid[] sites;
@@ -32,7 +32,16 @@ public class QMCApp extends AbstractSimulation {
    * Initializes the simulation.
    */
   public void initialize() {
-  distribution.setConnected(1,true);
+    distribution.setPreferredMinMax(0, 1, 0, 1);
+    distribution.setAutoscaleX(true);
+    distribution.setAutoscaleY(true);
+    distribution.setConnected(1,true);
+    
+    energyDistribution.setPreferredMinMax(0, 1, 0, 1);
+    energyDistribution.setAutoscaleX(true);
+    energyDistribution.setAutoscaleY(true);
+	
+    
     double p = control.getDouble("momentum exponent p");  // 1 or 2 are physical 
     int kmax = control.getInt("maximum k");
     int dimension = control.getInt("dimension");  // 1 2 or 3
@@ -51,6 +60,11 @@ public class QMCApp extends AbstractSimulation {
     int np = control.getInt("number of particles");
     dE = control.getDouble("dE");
     qmc.beta = 1.0/control.getDouble("temperature");
+ 
+    particleState.setPreferredMinMax(0, np, 0, 1);
+    particleState.setAutoscaleX(true);
+    particleState.setAutoscaleY(true);
+    
     qmc.initial(dimension,kmax,p,np,statistics,dE);
     sites = new ElementEllipsoid[np];
     frame.getDrawingPanel3D().removeAllElements();

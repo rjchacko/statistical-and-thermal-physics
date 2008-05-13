@@ -24,6 +24,7 @@ public class IsingTriangularAntiApp extends AbstractSimulation {
    public IsingTriangularAntiApp() {
       ising = new IsingTriangularAnti();
       plottingPanel = new PlottingPanel("time", "E and M", null);
+      plottingPanel.setPreferredMinMaxX(0, 10);
       plottingPanel.setAutoscaleX(true);
       plottingPanel.setAutoscaleY(true);
       plottingPanel.addDrawable(datasetManager);

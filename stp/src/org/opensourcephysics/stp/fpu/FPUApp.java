@@ -87,8 +87,10 @@ public class FPUApp extends AbstractSimulation {
 	energyFrame.setMarkerColor(1, Color.green);
 	energyFrame.setMarkerColor(2, Color.blue);
 	energyFrame.setMarkerColor(3, Color.red);
-	//energyFrame.setConnected(true);
+	energyFrame.setPreferredMinMax(0, 10, 0, 10);
+	metricFrame.setPreferredMinMax(0, 10, 0, 10);
 	energyFrame.setAutoscaleX(true);
+	energyFrame.setAutoscaleY(true);
 	metricFrame.setAutoscaleX(true);
 	metricFrame.setAutoscaleY(true);
 	this.delayTime = 0;
