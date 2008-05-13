@@ -22,6 +22,7 @@ public class Ising2DApp extends AbstractSimulation
 		plotFrame.setAutoscaleX(true);
 		plotFrame.setAutoscaleY(true);
 		displayFrame.addDrawable(ising);
+		histogramFrame.setPreferredMinMaxY(0, 10);
 		histogramFrame.setAutoscaleX(true);
 		histogramFrame.setAutoscaleY(true);
 		histogramFrame.addDrawable(energyHistogram);

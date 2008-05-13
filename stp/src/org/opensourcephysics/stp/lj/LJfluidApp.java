@@ -18,8 +18,8 @@ public class LJfluidApp extends AbstractSimulation
 	double quenchRate;
 	
 	DisplayFrame displayFrame = new DisplayFrame("LJ Display");
-	HistogramFrame histogramFrame = new HistogramFrame("v_x", "P(v_x)",
-			"P(v_x) versus v_x");
+	HistogramFrame histogramFrame = new HistogramFrame("v_x", "H(v_x)",
+			"H(v_x) versus v_x");
 	PlotFrame temperatureFrame = new PlotFrame("time", "T", "T versus time");
 	PlotFrame pressureFrame = new PlotFrame("time", "pressure",
 			"Pressure versus time");

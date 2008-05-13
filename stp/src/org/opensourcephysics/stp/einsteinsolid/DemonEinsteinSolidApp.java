@@ -121,7 +121,7 @@ public class DemonEinsteinSolidApp extends AbstractSimulation
 		dist = new Histogram();
       	dist.setNormalizedToOne(true);
       	dist.adjustForWidth = true;
-      	panel = new PlottingPanel("Ed", "P(Ed)", "");
+      	panel = new PlottingPanel("E_d", "H(E_d)", "");
       	panel.setPreferredMinMax(0.0, 5, 0, 1);
       	panel.addDrawable(dist);      
       	panel.setAutoscaleX(true);
