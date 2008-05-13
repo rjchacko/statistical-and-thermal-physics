@@ -28,8 +28,10 @@ public class HDMC implements Drawable{
   public double minSeparation;
   Random r=new Random();
   public double s;
+  public int accept=0;
   
   public void initialize() {
+	accept=0;
     mcs = 0;
     rho = N/(L*L);
     x = new double[N];
@@ -187,10 +189,11 @@ public class HDMC implements Drawable{
 
   public void step() {
 	TrialMove tm=makeTrialMove();
-	
+	accept++;
 	if(tm.overlap){
 		x[tm.n]-=tm.dx;
 		y[tm.n]-=tm.dy;	
+		accept--;
 	}
 	
     steps++; 

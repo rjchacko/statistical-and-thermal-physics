@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+<title>Simulations for Statistical and Thermal Physics</title>
+
+<link href="../default.css" type="text/css" rel="stylesheet" >
+
+</head>
+
+<body>
+
+<h3 style="text-align:center;">Using a demon to determine the temperature and the chemical potential</h3>
+
+<p class="header_title">Introduction</p>
+
+<p>We have already considered an extra degree of freedom called the <i>demon</i> and found it to be an ideal thermometer. In this applet/application we generalize the demon so that it can give us information about the temperature <i>and</i> the chemical potential.</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;We can picture the usual demon as carrying a sack of energy. The demon makes a trial change in the system and computes the resultant change in energy &#916;E of the system. If &#916;E &#8804; 0, the change is accepted and the demon takes the extra energy. If &#916;E &#62; 0, the change is accepted if the demon has sufficient energy to give to the system. The only constraint is that the demon cannot go into debt, that is, E<sub>d</sub> &#8805; 0. The energy of the system plus that of the demon is a constant. The probability P(E<sub>d</sub>) of finding the demon 
+with energy E<sub>d</sub> is given by</p>
+<p class="center">
+P(E<sub>d</sub>) &#8733; exp(-&#946;E<sub>d</sub>),
+</p>
+<p>where &#946; = 1/kT. Hence, the demon measures the temperature T, and because it is only one degree of freedom, it does not significantly disturb the system of interest.</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;We now generalize the demon algorithm so that it carries two sacks, one for energy and one for particles. The idea is to use this generalized demon algorithm to determine the chemical potential &#956;. Consider a demon that exchanges energy and particles with a system of particles. 
+For simplicity, the  particles are located on a one-dimensional lattice. We also take the momentum degrees of freedom to be discrete. Thus, the phase space of this system is two-dimensional, with position in one dimension and momentum in the other. The demon exchanges energy and particles with the system as described below. From the probability distribution of the demon energy and particle number, we can extract the temperature and chemical potential, which is given by the Gibbs distribution:</p>
+<p class="center">
+P(E<sub>d</sub>, N<sub>d</sub>) &#8733; exp[-&#946;(E<sub>d</sub> - &#956;N<sub>d</sub>)].
+</p>
+
+<p class="header_title">Algorithm</p>
+
+<ol>
+
+<li>Set up an initial microstate of the system with the desired energy E and number of particles N. The N particles are randomly placed on the phase space lattice with no more than one particle on a lattice site. Initially the demon energy and particle number is set to zero (for convenience).</li>
+
+<li>Choose a random site in the phase space lattice. If there is no particle at that site, take a particle from the demon and add it to the site if the demon has sufficient energy to do so and at least one particle. The energy for adding to a site may include an infinite hard core if two particles are at the same location in position space or a negative unit of energy if there is an occupied nearest neighbor site in position space.
+<br></br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;If there is a particle at the random site, remove the particle and give it to the demon if the system energy is lowered or if the demon has sufficient energy to give to the system. Removing a particle can lower the energy of the system because particles have positive kinetic energy or can raise the energy if there is an attractive interaction with a neighboring particle.</br></li>
+
+<li>Repeat step 2 many times.</li>
+
+<li>Compute the probability of the demon having energy E<sub>d</sub> and particle number N<sub>d</sub> once the system and the demon have reached equilibrium.</li>
+
+</ol>
+
+<p>Note that the total energy of the demon plus
+the system is fixed, and the total number of particles is fixed. The demon is a facilitator and allows the system's energy and particle number to change by exchanging particles. We could consider a separate Monte Carlo move to  move a particle from one phase space lattice site to another, but this move is equivalent to removing and adding a particle in two steps and thus is not necessary.</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;We expect the demon to act like a system in equilibrium with a heat bath and a particle reservoir and the demon energy and particle number to be distributed according to the Gibbs
+distribution.</p>
+
+<center>
+<applet
+ code="org.opensourcephysics.davidson.applets.ApplicationApplet.class"
+ archive="./stp.jar" codebase="../" align="top" height="40"
+ hspace="0" vspace="0" width="150"> <param name="target"
+ value="org.opensourcephysics.stp.demon.demonlattice.DemonLatticeApp"> <param name="title"
+ value="Applet"> <param name="singleapp" value="true">
+</applet>
+</center>
+
+<p class="header_title">Problems</p>
+
+<ol>
+
+<li>Run the simulation with number of particles N = 100, energy E = 200, position space dimension L = 100, and maximum momentum p<sub>max</sub> = 10. Begin with no hard core or attractive nearest neighbor potential so that the particles do not interact. We have chosen the mass m of a particle to be m = 1/2 and units such that Boltzmann's constant k = 1, and lattice spacings so that &#916;x&#916;p = 1. In this way momentum and energy are integers. Discuss the phase space plot. Is p<sub>max</sub> large enough so that particles do not reach the edge of the lattice? Are there particles that have the same position? Where are most of the particles located? Rerun the simulation for different values of E but the same values for the other parameters. Do the phase space plots show what you expect? Explain.</li>
+
+<li>Explain why the simulation in Problem 1 is identical to a simulation of an ideal gas in the semiclassical limit. Show that the chemical potential is given by
+<p class="center">
+&#956; = -T ln[(L/N)(&#960;T)<sup>1/2</sup>].
+</p>
+In our units &#916;x&#916;p = 1. Use the default parameters in Problem 1, and run for about 200 Monte Carlo steps per particle (mcs) for equilibration. Then click <tt>Zero Averages</tt> and average over at least 1000 mcs. (You can speed up the simulation by increasing the steps per display to 10 or  100.) After stopping the simulation press <tt>Calculate</tt> to compute the demon energy and particle number distributions. The plot of ln P(E<sub>d</sub>, N<sub>d</sub> = 1) versus 
+E<sub>d</sub> should be approximately linear for small E<sub>d</sub>. The inverse slope is related to the temperature. The plot of ln P(E<sub>d</sub> = 1, N<sub>d</sub>) versus N<sub>d</sub> should give a slope equal to &#956;/T. Compare  your results with the exact result. Are there any aspects of the simulation that are not assumed in the usual textbook derivations? What does a negative chemical potential mean?</li>
+
+<li>Repeat your simulations in Problem 2 for L = 1000. For this value of L the phase space visualization will be blank because the particle size is too small. Calculate the distributions. Are the results closer to the exact result? The default setting computes the distributions P(E<sub>d</sub>,1) and P(1,N<sub>d</sub>). Use other values for the energy for P(E<sub>d</sub>, N<sub>d</sub>) versus N<sub>d</sub> and the particle number for P(E<sub>d</sub>, N<sub>d</sub>) versus E<sub>d</sub>. Do you obtain approximately the same values for temperature and chemical potential? Should you? Vary the values of E and compare with exact results for other sets of parameters.</li>
+
+<li>Repeat Problem 1 with an added hard core. Thus, no two particles can be at the same location in position space. How can you tell this condition is satisfied by looking at the phase space plot? Repeat the hard core simulation with the other parameters as given in Problem 2. How does the chemical potential change? Vary the total energy until the temperature is about the same as in Problem 2. Is the chemical potential greater or less than that found for no hard core. Explain your results.</li>
+
+<li> Repeat Problem 4 but with an attractive well in addition to the hard core.</li>
+
+<li>Because no two particles are allowed to be in the same state (at the same time), the particles actually obey Fermi-Dirac statistics. If the system is dense enough, then it should show the properties of a low temperature gas of fermions for which the chemical potential is positive. Choose L = N = 200 and E = 50. Do the simulation and determine the distributions. Are both curves linear? Compute the slope of the linear part of the curve if such a part exists. If the plot is not linear, what shape is it? Why does it have this shape? The value of &#956;/T could be defined as the slope of the ln P(N) curve in the limit as N vanishes. Is this limiting slope positive or negative?</li>
+
+</ol>
+
+<p class="header_title">References</p>
+
+<ul>
+
+<li>Jan Tobochnik, 
+Harvey Gould, and 
+Jonathan Machta, "Understanding temperature and chemical potential using computer 
+simulations," Am. J. Phys. <b>73</b>, 708&#8211;716 (2005).</li>
+
+</ul>
+
+<p class="header_title">Java Classes Used</p>
+
+<ul>
+
+<li>DemonLatticeApp</li>
+<li>DemonLattice</li>
+
+</ul>
+
+<p class = "small">Updated 27 February 2007.</p>
+</body>
+</html>
