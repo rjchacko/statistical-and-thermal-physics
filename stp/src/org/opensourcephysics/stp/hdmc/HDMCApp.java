@@ -25,7 +25,7 @@ public class HDMCApp extends AbstractSimulation {
 	    control.setAdjustableValue("step size", 0.02);
 	    OSPCombo combo2 = new OSPCombo(new String[] {"triangular","rectangular","random"},1);  // second argument is default
 	    control.setValue("initial configuration", combo2);
-	    control.setAdjustableValue("scale lengths",0.999);
+	    control.setAdjustableValue("scale lengths",1);
 	    enableStepsPerDisplay(true);
 	    super.setStepsPerDisplay(100);  // draw configurations every 10 steps
 	    display.setSquareAspect(true); // so particles will appear as circular disks
@@ -50,15 +50,6 @@ public class HDMCApp extends AbstractSimulation {
 	   display.setPreferredMinMax(0, mc.L, 0, mc.L); 
 	}
 	
-//	public void startRunning() {
-//	   double L = control.getDouble("L");
-//	   mc.s=control.getDouble("scale lengths");
-//	   if((L!=mc.L)) {
-//	     mc.L = L;
-//	     display.setPreferredMinMax(0, L, 0, L);
-//	     resetData();
-//	   }
-//	 }
 	  
 	protected void doStep() {
 		 mc.s=control.getDouble("scale lengths");
@@ -72,7 +63,8 @@ public class HDMCApp extends AbstractSimulation {
 	}
 	
 	public void stop() {
-		 control.println("Density = "+ decimalFormat.format(mc.N/(mc.equivL*mc.equivL)));
+		 String s=String.format("Density = %f4", mc.N/(mc.equivL*mc.equivL) );
+		 control.println(s);
 	}
 	
 	public void resetData() {
