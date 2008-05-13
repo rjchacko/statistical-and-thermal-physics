@@ -15,7 +15,7 @@ public class DemonApp extends AbstractSimulation
 			demonEnergyAccumulator = 0, delta, exponent;
 	JButton logButton;
 	NumberFormat nf;
-    HistogramFrame histogramFrame = new HistogramFrame("Ed", "P(Ed)","Demon Energy Distribution");;
+    HistogramFrame histogramFrame = new HistogramFrame("Ed", "H(Ed)","Demon Energy Histogram");;
     HistogramFrame vhistogramFrame = new HistogramFrame("Vx", "Histogram","Histogram of vx");;
     
 	double[] offsetVelocity(double[] vel)
@@ -127,7 +127,10 @@ public class DemonApp extends AbstractSimulation
 		vhistogramFrame.setPreferredMinMaxX(-5, 5);
 		
 		histogramFrame.setBinWidth(0.5);
+		histogramFrame.setPreferredMinMaxY(0, 10);
+		histogramFrame.setAutoscaleY(true);
 		histogramFrame.setPreferredMinMaxX(0, 10);
+		histogramFrame.setAutoscaleX(true);
 		nf = NumberFormat.getInstance();
 		nf.setMaximumFractionDigits(3);
 	}

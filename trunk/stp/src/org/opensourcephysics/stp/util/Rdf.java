@@ -24,7 +24,7 @@ public class Rdf {
 		Ly = ly;
 		rmax = Lx > Ly?0.5*Lx:0.5*Ly;
 		bin = _bin;
-		nbins = (int)(rmax/bin);
+		nbins = (int)Math.ceil(rmax/bin);
 		gr = new double[nbins];
 		ngr = new double[nbins];
 		rx = new double[nbins];

@@ -45,17 +45,22 @@ public class LJfluidApp extends AbstractSimulation
 		displayFrame.addDrawable(lj);
 		displayFrame.setPreferredMinMax(-0.1 * lj.Lx, 1.1 * lj.Lx,
 				-0.1 * lj.Lx, 1.1 * lj.Lx);
-//		temperatureFrame.setPreferredMinMaxX(0, 10);
-//		temperatureFrame.setAutoscaleX(true);
-//		temperatureFrame.setPreferredMinMaxY(0, 2);
-//		temperatureFrame.setLocation(20, 300);
-//		pressureFrame.setPreferredMinMaxX(0, 10);
-//		pressureFrame.setAutoscaleX(true);
-//		pressureFrame.setPreferredMinMaxY(0, 2);
-//		pressureFrame.setLocation(20, 300);
+		temperatureFrame.setPreferredMinMaxX(0, 10);
+		temperatureFrame.setAutoscaleX(true);
+		temperatureFrame.setPreferredMinMaxY(0, 2);
+		
+		pressureFrame.setPreferredMinMaxX(0, 10);
+		pressureFrame.setAutoscaleX(true);
+		pressureFrame.setPreferredMinMaxY(0, 2);
+		
 		histogramFrame.setAutoscaleX(true);
 		histogramFrame.setAutoscaleY(true);
 		histogramFrame.addDrawable(lj.getVelocityHistogram());
+		
+		grFrame.setPreferredMinMaxX(0, 10);
+		grFrame.setAutoscaleX(true);
+		grFrame.setPreferredMinMaxY(0, 10);
+		grFrame.setAutoscaleY(true);
 	}
 
 	public void initialize()

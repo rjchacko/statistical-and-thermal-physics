@@ -78,6 +78,7 @@ This work is part of the Open Source Physics project, and is freely available un
                 <property name="item" type="object">
                 <object class="org.opensourcephysics.tools.LaunchNode">
                     <property name="name" type="string">An ideal thermometer</property>
+                    <property name="tooltip" type="string">demon algorithm</property>
                     <property name="html" type="array" class="[[Ljava.lang.String;">
                         <property name="[0]" type="array" class="[Ljava.lang.String;">
                             <property name="[1]" type="string">html/demon/launcher.html</property>
@@ -403,7 +404,7 @@ This work is part of the Open Source Physics project, and is freely available un
                             <property name="name" type="string">1D Ising model</property>
                             <property name="html" type="array" class="[[Ljava.lang.String;">
                                 <property name="[0]" type="array" class="[Ljava.lang.String;">
-                                    <property name="[1]" type="string">html/ising/ising1d.html</property>
+                                    <property name="[1]" type="string">html/ising/ising1d/launcher.html</property>
                                 </property>
                             </property>
                             <property name="launch_class" type="string">org.opensourcephysics.stp.ising.ising1d.Ising1DApp</property>
@@ -415,7 +416,7 @@ This work is part of the Open Source Physics project, and is freely available un
                             <property name="tooltip" type="string">Metropolis and Wolff algorithms</property>
                             <property name="html" type="array" class="[[Ljava.lang.String;">
                                 <property name="[0]" type="array" class="[Ljava.lang.String;">
-                                    <property name="[1]" type="string">html/ising/ising2d.html</property>
+                                    <property name="[1]" type="string">html/ising/ising2d/launcher.html</property>
                                 </property>
                             </property>
                             <property name="launch_class" type="string">org.opensourcephysics.stp.ising.ising2d.Ising2DApp</property>
@@ -426,7 +427,7 @@ This work is part of the Open Source Physics project, and is freely available un
                             <property name="name" type="string">Square antiferromagnet</property>
                             <property name="html" type="array" class="[[Ljava.lang.String;">
                                 <property name="[0]" type="array" class="[Ljava.lang.String;">
-                                    <property name="[1]" type="string">html/ising/antiferromagnet.html</property>
+                                    <property name="[1]" type="string">html/ising/antiferromagnet/launcher.html</property>
                                 </property>
                             </property>
                             <property name="launch_class" type="string">org.opensourcephysics.stp.ising.ising2d.Ising2DAntiApp</property>
@@ -437,7 +438,7 @@ This work is part of the Open Source Physics project, and is freely available un
                             <property name="name" type="string">Triangular antiferromagnet</property>
                             <property name="html" type="array" class="[[Ljava.lang.String;">
                                 <property name="[0]" type="array" class="[Ljava.lang.String;">
-                                    <property name="[1]" type="string">html/ising/triangularlattice.html</property>
+                                    <property name="[1]" type="string">html/ising/triangularlattice/launcher.html</property>
                                 </property>
                             </property>
                             <property name="launch_class" type="string">org.opensourcephysics.stp.ising.ising2d.IsingTriangularAntiApp</property>
@@ -448,7 +449,7 @@ This work is part of the Open Source Physics project, and is freely available un
                             <property name="name" type="string">Mean-field solution</property>
                             <property name="html" type="array" class="[[Ljava.lang.String;">
                                 <property name="[0]" type="array" class="[Ljava.lang.String;">
-                                    <property name="[1]" type="string">html/ising/meanFieldSolution.html</property>
+                                    <property name="[1]" type="string">html/ising/meanfield/launcher.html</property>
                                 </property>
                             </property>
                             <property name="launch_class" type="string">org.opensourcephysics.stp.ising.meanfieldequation.MeanFieldApp</property>
@@ -460,7 +461,7 @@ This work is part of the Open Source Physics project, and is freely available un
                             <property name="tooltip" type="string">Wang-Landau algorithm</property>
                             <property name="html" type="array" class="[[Ljava.lang.String;">
                                 <property name="[0]" type="array" class="[Ljava.lang.String;">
-                                    <property name="[1]" type="string">html/ising/wanglandau.html</property>
+                                    <property name="[1]" type="string">html/ising/wanglandau/launcher.html</property>
                                 </property>
                             </property>
                             <property name="launch_class" type="string">org.opensourcephysics.stp.ising.wanglandau.WangLandauApp</property>
@@ -472,7 +473,7 @@ This work is part of the Open Source Physics project, and is freely available un
                             <property name="tooltip" type="string">direct simulation</property>
                             <property name="html" type="array" class="[[Ljava.lang.String;">
                                 <property name="[0]" type="array" class="[Ljava.lang.String;">
-                                    <property name="[1]" type="string">html/ising/partitionFunction.html</property>
+                                    <property name="[1]" type="string">html/ising/partitionFunction/launcher.html</property>
                                 </property>
                             </property>
                             <property name="launch_class" type="string">org.opensourcephysics.stp.partfunccalc.PartFuncCalcApp</property>
@@ -534,7 +535,7 @@ This work is part of the Open Source Physics project, and is freely available un
                     <property name="description" type="string">A calculation of the second virial coefficient.</property>
                     <property name="html" type="array" class="[[Ljava.lang.String;">
                         <property name="[0]" type="array" class="[Ljava.lang.String;">
-                            <property name="[1]" type="string">html/virial/launcher.html</property>
+                            <property name="[1]" type="string">html/virial2/launcher.html</property>
                         </property>
                     </property>
                     <property name="launch_class" type="string">org.opensourcephysics.stp.secondvirial.SecondVirialApp</property>

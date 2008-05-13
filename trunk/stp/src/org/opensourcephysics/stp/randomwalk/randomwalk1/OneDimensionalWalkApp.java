@@ -43,6 +43,8 @@ public class OneDimensionalWalkApp extends AbstractSimulation
 		xcum = 0;
 		x2cum = 0;
 		histogramFrame.setPreferredMinMaxX(x - N, x + N);
+		histogramFrame.setPreferredMinMaxY(0, 10);
+		histogramFrame.setAutoscaleY(true);
 		random.setSeed(System.currentTimeMillis());
 	}
 

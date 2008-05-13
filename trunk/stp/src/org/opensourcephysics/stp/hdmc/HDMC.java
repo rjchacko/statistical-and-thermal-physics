@@ -181,7 +181,7 @@ public class HDMC implements Drawable{
       tm.dy=2*stepSize*(Math.random()-0.5);
 	  x[tm.n]=pbcPosition(x[tm.n]+=tm.dx,L);
 	  y[tm.n]=pbcPosition(y[tm.n]+=tm.dy,L);
-      tm.overlap=checkOverlap();;
+      tm.overlap=checkOverlap();
       return tm;
   }
 

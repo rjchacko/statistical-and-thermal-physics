@@ -42,6 +42,12 @@ public class LJParticlesDemonApp extends AbstractSimulation {
     display.addDrawable(md);
     display.setPreferredMinMax(0, md.L, 0, md.L); // assumes vmax = 2*initalTemp and bin width = Vmax/N
     xVelocityHistogram.setBinWidth(2*md.initialKineticEnergy/md.N);
+    xVelocityHistogram.setPreferredMinMaxY(0, 10);
+    xVelocityHistogram.setAutoscaleY(true);
+    demonPlot.setPreferredMinMaxX(0,10);
+    demonPlot.setPreferredMinMaxY(0, 10);
+    demonPlot.setAutoscaleX(true);
+    demonPlot.setAutoscaleY(true);
   }
 
   /**

@@ -39,13 +39,25 @@ public class HDApp
     displayFrame.setPreferredMinMax( -0.1 * hd.Lx, 1.1 * hd.Lx,
                                     -0.1 * hd.Lx, 1.1 * hd.Lx);
     displayFrame.addDrawable(hd);
+    
+    temperatureFrame.setPreferredMinMaxX(0,10);
     temperatureFrame.setAutoscaleX(true);
-   // temperatureFrame.setPreferredMinMaxY(0, 2);
-   // pressureFrame.setPreferredMinMaxY(0, 2);
+    temperatureFrame.setPreferredMinMaxY(0, 10);
+    temperatureFrame.setAutoscaleY(true);
+    
+    pressureFrame.setPreferredMinMaxX(0,10);
+    pressureFrame.setAutoscaleX(true);
+    pressureFrame.setPreferredMinMaxY(0, 2);
     
     histogramFrame.setAutoscaleX(true);
+    histogramFrame.setPreferredMinMaxY(0, 10);
 	histogramFrame.setAutoscaleY(true);
 	histogramFrame.addDrawable(hd.getVelocityHistogram());
+	
+	grFrame.setPreferredMinMaxX(0, 10);
+	grFrame.setAutoscaleX(true);
+	grFrame.setPreferredMinMaxY(0,10);
+	grFrame.setAutoscaleY(true);
   }
 
   public void initialize() {
@@ -59,21 +71,14 @@ public class HDApp
       pressureFrame.clearData();
       
       gr.initialize(hd.Lx,hd.Ly,0.1);
-      
-     //double tmax = control.getDouble("Maximum for temperature axis");
-    //double pmax = control.getDouble("Maximum for pressure axis");
-    //temperatureFrame.setPreferredMinMaxY(0, tmax);
-    //pressureFrame.setPreferredMinMaxY(0, pmax);
-    renderPanels();
+      displayFrame.setPreferredMinMax( -0.1 * hd.Lx, 1.1 * hd.Lx,
+              -0.1 * hd.Lx, 1.1 * hd.Lx);
+//      renderPanels();
   }
 
   public void renderPanels() {
-    //double tmax = control.getDouble("Maximum for temperature axis");
-    //double pmax = control.getDouble("Maximum for pressure axis");
     temperatureFrame.append(0, hd.getTime(), hd.getInstantaneousTemperature());
     pressureFrame.append(0, hd.getTime(), hd.getInstantanousPressure());
-    //temperatureFrame.setPreferredMinMaxY(0, tmax);
-    //pressureFrame.setPreferredMinMaxY(0, pmax);
     displayFrame.setPreferredMinMax( -0.1 * hd.Lx, 1.1 * hd.Lx,
                                     -0.1 * hd.Lx, 1.1 * hd.Lx);
     histogramFrame.render();    
@@ -97,13 +102,9 @@ public class HDApp
     control.setValue("Lx", 18.0);
     control.setValue("Ly", 18.0);
     control.setValue("temperature", 1.0);
-    control.setAdjustableValue("dt", 0.01);
 	OSPCombo combo = new OSPCombo(new String[] {"crystal",  "random"},0);  // second argument is default
     control.setValue("initial configuration", combo);
     gr.reset();
-	
-    //control.setValue("Maximum for temperature axis", 2.0);
-    //control.setValue("Maximum for pressure axis", 2.0);
     this.delayTime = 0;
   }
 

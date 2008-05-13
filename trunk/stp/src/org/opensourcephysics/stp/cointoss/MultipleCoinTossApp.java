@@ -41,6 +41,8 @@ public class MultipleCoinTossApp extends AbstractSimulation
 		coinsToFlip = control.getInt("coins to flip");
 		random.setSeed(System.currentTimeMillis());
 		histogramFrame.setPreferredMinMaxX(0, coinsToFlip);
+		histogramFrame.setPreferredMinMaxY(0, 10);
+		histogramFrame.setAutoscaleY(true);
 		histogramFrame.clearData();
 		histogramFrame.repaint();
 		totalFlips = 0;
