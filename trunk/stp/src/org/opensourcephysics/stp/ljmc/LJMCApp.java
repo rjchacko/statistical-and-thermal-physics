@@ -25,7 +25,7 @@ public class LJMCApp extends AbstractSimulation {
   DisplayFrame display = new DisplayFrame("Lennard-Jones system");
   PlotFrame grFrame = new PlotFrame("r", "g(r)", "Radial distribution function");
   PlotFrame pressure = new PlotFrame("t", "P", "Pressure");
-  PlotFrame heatCapacity= new PlotFrame("t", "C_V", "Heat Capacity");
+  
   Rdf gr = new Rdf();
   int timestep=0;
   
@@ -95,7 +95,6 @@ public class LJMCApp extends AbstractSimulation {
 	  grFrame.append(2, gr.rx, gr.ngr);	   
 	  grFrame.render();
 	  pressure.append(0, mc.mcs, mc.pressure);
-	  heatCapacity.append(0,mc.mcs,mc.getHeatCapacity());
   }
 
   /**
