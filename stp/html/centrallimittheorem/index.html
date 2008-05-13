@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+<title>Simulations for Statistical and Thermal Physics</title>
+
+<link href="../default.css" type="text/css" rel="stylesheet">
+
+</head>
+
+<body>
+<h3 style="text-align:center;">Central limit theorem</h3>
+
+
+<p class="header_title">Introduction</p>
+
+<p>The central limit theorem states
+that the average of of a sum of N random variables tends to a Gaussian distribution as N approaches
+infinity. The only requirement is that the variance of the probability distribution for the random variables be finite.</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;To be specific, consider a continuous random variable x with probability density f(x). That is, f(x)&#916;x is the probability that x has a value between x and x + &#916;x. The mean value of x is defined as
+</p>
+<p class="center">
+&lt;x&gt; = &#8747;x f(x) dx.
+</p>
+<p>Similarly the mean value of x<sup>2</sup> is given by</p>
+<p class="center">
+&lt;x<sup>2</sup>&gt; = &#8747;x<sup>2</sup>f(x) dx.
+</p>
+<p>The variance &#963;<sub>x</sub><sup>2</sup> of f(x) is</p>
+<p class="center">
+&#963;<sub>x</sub><sup>2</sup> = &lt;x<sup>2</sup>&gt; - &lt;x&gt;<sup>2</sup>.
+</p>
+
+<p>Now consider the sum y<sub>N</sub> of N values of x:</p>
+<p class="center">
+y = y<sub>N</sub> = (1/N)(x<sub>1</sub> + x<sub>2</sub> + &#8230; + x<sub>N</sub>).
+</p>
+<p>We generate the N values of x from the probability density f(x) and determine the sum y. The quantity y is an example of a <i>random additive process</i>. We know that the values of y will not be identical, but will be distributed according to a probability density p(y), where p(y)&#916;y is the probability that the value of y is in the range y to y + &#916;y. The main question of interest is what is the form of the probability density f(y)?</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;As we will find by doing the simulation, the form of p(y) is <i>universal</i> if &#963;<sub>x</sub> is finite and N is sufficiently large.</p>
+
+<center>
+<applet
+ code="org.opensourcephysics.davidson.applets.ApplicationApplet.class"
+ archive="./stp.jar" codebase="../" align="top" height="40"
+ hspace="0" vspace="0" width="150"> <param name="target"
+ value="org.opensourcephysics.stp.centralLimit.CentralApp"> <param name="title"
+ value="Applet"> <param name="singleapp" value="true">
+</applet>
+</center>
+
+
+<p class="header_title">Method</p>
+
+<ol>
+
+<li>Generate N random variables x<sub>i</sub> that satisfy a given probability
+density f(x), sum them, and divide by N.</li>
+
+<li>Repeat step 1 many times.</li>
+
+<li>Plot the histogram of the values of the sum y.</li>
+
+</ol>
+
+<p class="header_title">Problems</p>
+
+<ol>
+
+<li>First consider the uniform distribution f(x) = 1 in the interval [0,1]. Calculate &lt;x&gt; and &#963;<sub>x</sub>.</li>
+
+<li>Use the default value of N and describe the qualitative form of p(y). Does the qualitative form of p(y) change as the number of measurements of y is increased for a given value of N?</li>
+
+<li>What is the approximate width of p(y) for N = 12? Describe the changes, if any, of the form and width of p(y) as N is increased. Increase N by at least a factor of 4.</li>
+
+<li>To determine the generality of your results, consider the probability density f(x) = 2e<sup>-2x</sup> for x &#8805; 0. Verify that f(x) is properly normalized. (We have chosen f(x) so that its mean is the same as the mean for the uniform distribution in Problem 1.)</li>
+
+<li>Consider the Lorentz distribution
+<p class="center">
+f(x) = (1/&#960;)(1/(x<sup>2</sup> + 1),
+</p>
+<p>where -&#8734; &#8804; x &#8804; &#8734;. Use symmetry arguments to show that &lt;x&gt; = 0. What is the variance &#963;<sub>x</sub>? Do you obtain a Gaussian distribution for this case? If not, why not?</p></li>
+
+<li>Each value of y can be considered to be a measurement. The <i>sample variance</i> s<sup>2</sup> is a measure of the square of the difference in the result of each measurement and is given by
+<p class="center">
+<img src="sample.jpg" alt="" align="middle" >
+</p>
+The reason for the factor of N - 1 rather than N in
+the definition of s<sup>2</sup> is that to compute
+it, we need to use the N values of x to compute the
+mean of y, and thus, loosely speaking, we have only N - 1 independent values
+of x remaining to calculate s<sup>2</sup>. Show that if N >> 1, then
+s &#8773; 
+&#963;<sub>y</sub>, where the standard deviation &#963;<sub>y</sub> is given by
+<p class="center">
+&#963;<sub>y</sub><sup>2</sup> = &lt;y<sup>2</sup>&gt; - &lt;y&gt;<sup>2</sup>.
+</p></li>
+
+<li>The quantity s is known as the <i>standard deviation
+of the means</i>. That is, s gives a measure of how much
+variation we expect to find if we make repeated measurements of y. How does the value of s compare to your estimated width of the
+probability density p(y)?</li>
+
+</ol>
+
+<p class="header_title">References</p>
+
+<ul>
+<li>H. Gould, J. Tobochnik, and Wolfgang Christian, <i>An Introduction to Computer Simulation Methods</i> (Addison-Wesley, 2006), 3rd ed., pp. 213-214.</li>
+
+</ul>
+
+<p class="header_title">Java Classes</p>
+
+<ul>
+
+<li>CentralApp</li>
+
+</ul>
+
+<p class = "small">Updated 2 May 2007.</p>
+</body>
+</html>

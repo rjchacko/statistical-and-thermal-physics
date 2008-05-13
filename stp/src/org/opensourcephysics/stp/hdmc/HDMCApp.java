@@ -54,7 +54,9 @@ public class HDMCApp extends AbstractSimulation {
 	protected void doStep() {
 		 mc.s=control.getDouble("scale lengths");
 		 mc.oneMCstep(); 
-		 if(mc.steps%mc.N==0)control.println(mc.steps/mc.N + " mcs");
+		 
+		 control.println(mc.steps/mc.N + " mcs");
+		 
 		 gr.append(mc.x, mc.y);
 		 gr.normalize();
 		 grFrame.clearData();
@@ -65,6 +67,7 @@ public class HDMCApp extends AbstractSimulation {
 	public void stop() {
 		 String s=String.format("Density = %f4", mc.N/(mc.equivL*mc.equivL) );
 		 control.println(s);
+		 control.println("acceptance ratio = " + (double)mc.accept/(double)mc.steps);
 	}
 	
 	public void resetData() {
