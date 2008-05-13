@@ -45,6 +45,8 @@ public class ThermalContactApp extends AbstractSimulation
 		boardFrame.repaint();
 
 		kinFrame.clearData();
+		kinFrame.setPreferredMinMaxY(0, 10);
+		kinFrame.setAutoscaleY(true);
 		kinFrame.repaint();
 		potFrame.clearData();
 		potFrame.repaint();
