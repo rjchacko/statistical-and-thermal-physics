@@ -1,0 +1,1 @@
+The following programs were written for the Statistical and Thermal Physics curriculum development project and are part of the Open Source Physics project. The programs are released under the GNU General Public License.
